@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Web app 2</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="author" content="Scthe" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+
+	<!-- Style sheets -->
+	<link href="main.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" />
+</head>
+
+<!--
+	background-color: hsl(170, 52%, 54%);
+
+	1. log
+		var printf = function(s) {console.log(s); alert(s);};
+		printf("Hello World");
+
+
+	2. translate
+		 $('[data-translate]').each(function(){
+			var $el = $(this);
+			var key = $el.data('translate');
+
+			if( $el.is('input') ) {
+				$el.attr('placeholder', i18n.__(key));
+			} else {
+				$el.text(i18n.__(key));
+			}
+		});
+
+	3. task importance as 4 dots: each dot different level, after hover the level name ( {bug, critical, normal, quick-fix}) is shown as tooltip below
+-->
+
+<body id="page-background">
+	<div id="page-content">
+
+		<!-- navbar -->
+		<div id="navigation-bar" class="ui-mid-gray">
+			<span id="navigation-bar-logout" class="glyphicon glyphicon-remove navigation-bar-icon hoverable"></span>
+			<span id="navigation-bar-settings" class="glyphicon glyphicon-cog navigation-bar-icon hoverable"></span>
+			<div id="navigation-avatar" class="navigation-bar-icon"></div>
+			<span id="brand" class="left-panel-size">YouTube</span>
+		</div>
+
+		<!-- the left panel with navigation buttons -->
+		<div id="navigation-panel" class="left-panel-size ui-content-min-h">
+			<div id="search-bar">
+				<input type="text" placeholder="Search..." />
+				<span id="search-input-icon" class="glyphicon glyphicon-search"></span>
+				<span id="search-loading">&nbsp;</span>
+			</div>
+
+			<div id="channels-panel">
+				<!--				<label>Channels</label>-->
+
+				<div class="navigation-panel-button">
+					<div>
+						<div id="navigation-avatar" class="navigation-panel-btn-icon"></div>
+						<label>A's Channel</label>
+						<p class="black-overlay">3</p>
+					</div>
+				</div>
+				<div class="navigation-panel-button active">
+					<div>
+						<div id="navigation-avatar" class="navigation-panel-btn-icon"></div>
+						<label>A's Channel</label>
+						<p class="black-overlay">3</p>
+					</div>
+				</div>
+				<div class="navigation-panel-button">
+					<div>
+						<div id="navigation-avatar" class="navigation-panel-btn-icon"></div>
+						<label>A's Channel</label>
+						<p class="black-overlay">3</p>
+					</div>
+				</div>
+				<div class="navigation-panel-button">
+					<div>
+						<div id="navigation-avatar" class="navigation-panel-btn-icon"></div>
+						<label>A's Channel</label>
+						<p class="black-overlay">3</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- main content panel f.e. timeline, images, search etc. -->
+		<div id="main-panel" class="ui-content-min-h">
+			<header id="main-panel-header-strip"></header>
+			<p id="view-title" class="text-big">
+				<span class="glyphicon glyphicon-list-alt"></span>
+				A's Channel
+			</p>
+		</div>
+		<div class="clear"></div>
+	</div>
+
+</body>
+
+</html>
