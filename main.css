@@ -292,3 +292,98 @@ body {
 	background-position: center center;
 	border-radius: 22%; 
 }
+
+.video-card {
+	border: 1px solid #aaa;
+/*	min-width: 200px;*/
+	display: inline-block;
+	position: relative;
+	padding: 5px;
+	background-color: #f7f6f2;
+}
+
+.video-card img {
+	width: auto;
+	max-height: 150px;
+}
+
+#main-panel-content {
+	padding: 5px 15px;
+}
+
+.video-select-play {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	cursor: pointer;
+	color: white;
+}
+.video-select-play > p{
+	background-color: hsl(170, 52%, 54%);
+	padding: 5px 15px;
+	position: relative;
+	left: -50%;
+	top: -14px;
+	cursor: pointer;
+}
+
+.video-card-title {
+	display: block;
+	overflow-wrap: break-word;
+	font-size: 13px;
+	color: #2793E6;
+	cursor: pointer;
+}
+.video-card-title:hover {
+	text-decoration: underline;
+}
+
+.video-card-thumb {
+	position: relative;
+}
+
+.video-card-thumb>div {
+	opacity: 0;
+	transition: opacity 0.5s;
+}
+.video-card-thumb:hover>div {
+	opacity: 1;
+}
+
+.video-card-time {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	background-color: rgba(50,50,50,0.2);
+	padding: 0px 3px;
+}
+
+.video-card-overlay {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	cursor: pointer;
+}
+
+.video-card-text {
+	padding: 10px;
+	margin: 0px;
+}
+
+
+
+.video-card-text ul {
+	list-style: none;
+	padding: 0px;
+	margin: 0px !important;
+	color: #555555;
+	font-size: 11px;
+}
+
+.video-card-autor:hover{
+	text-decoration: underline;
+	color: #2793E6;
+	cursor: pointer;
+}

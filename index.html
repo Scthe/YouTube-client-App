@@ -20,7 +20,6 @@
 		var printf = function(s) {console.log(s); alert(s);};
 		printf("Hello World");
 
-
 	2. translate
 		 $('[data-translate]').each(function(){
 			var $el = $(this);
@@ -32,8 +31,6 @@
 				$el.text(i18n.__(key));
 			}
 		});
-
-	3. task importance as 4 dots: each dot different level, after hover the level name ( {bug, critical, normal, quick-fix}) is shown as tooltip below
 -->
 
 <body id="page-background">
@@ -56,8 +53,6 @@
 			</div>
 
 			<div id="channels-panel">
-				<!--				<label>Channels</label>-->
-
 				<div class="navigation-panel-button">
 					<div>
 						<div id="navigation-avatar" class="navigation-panel-btn-icon"></div>
@@ -96,6 +91,36 @@
 				<span class="glyphicon glyphicon-list-alt"></span>
 				A's Channel
 			</p>
+			<div id="main-panel-content">
+
+				<article class="video-card">
+					<section class="video-card-thumb">
+						<img src="imgs/img6.jpg" />
+						<span class="video-card-time">1:43</span>
+
+						<!--overlay	-->
+						<div class="black-overlay video-card-overlay"></div>
+						<div class="video-select-play">
+							<p>play</p>
+						</div>
+					</section>
+					<section class="video-card-text">
+						<span class="video-card-title">This Week in Android Development</span>
+						<ul>
+							<li >
+								Author:
+								<span class="video-card-autor">Android Developers</span>
+							</li>
+							<li>
+								10 224 views
+							</li>
+						</ul>
+					</section>
+					<!--<span class="video-card-ago">5 days ago</span>-->
+
+				</article>
+			</div>
+
 		</div>
 		<div class="clear"></div>
 	</div>
