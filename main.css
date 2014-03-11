@@ -293,7 +293,7 @@ body {
 	border-radius: 22%; 
 }
 
-.video-card {
+.card {
 	border: 1px solid #aaa;
 /*	min-width: 200px;*/
 	display: inline-block;
@@ -302,7 +302,7 @@ body {
 	background-color: #f7f6f2;
 }
 
-.video-card img {
+.card img {
 	width: auto;
 	max-height: 150px;
 }
@@ -382,8 +382,104 @@ body {
 	font-size: 11px;
 }
 
-.video-card-autor:hover{
+.on-hover-link:hover{
 	text-decoration: underline;
 	color: #2793E6;
 	cursor: pointer;
+}
+
+#video {
+	max-width: 600px;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+	margin-bottom: 15px;
+}
+
+#video-info div {
+	padding: 15px 10px 15px 55px;
+}
+
+#video-info {
+	width: 170px;
+/*	background-color: #484848;*/
+/*	color: white;*/
+/*	display: inline-block;*/
+	float:left;
+}
+
+#video-date {
+	display: inline-block;
+	margin-right: 35px;
+	line-height: 16px;
+}
+#video-date span:first-child{
+	display: block;
+}
+#video-date span:last-child {
+	text-transform: uppercase;
+}
+
+#video-bookmark-icon {
+	color: hsl(0, 91%, 70%);
+	display:inline-block;
+	vertical-align:super;
+		
+}
+
+#video-info ul {
+	list-style: none;
+	padding: 5px 10px;
+	margin: 0px !important;
+	line-height: 2.4em;
+/*	color: #555555;*/
+}
+
+#video-comments {
+	list-style: none;
+/*	margin: 0px !important;*/
+	color: #555555;
+	font-size: 0.9em;
+	padding: 5px 10px;
+	line-height: 2.0em;
+	overflow: hidden;
+/*	border: 1px solid red;	*/
+}
+
+#video-comments li {
+	margin-bottom: 15px;
+}
+
+.video-comment-avatar {
+	height: 80px;
+	float: left;
+}
+
+
+.video-comment-name {
+	display: inline;
+	font-size: 1.3em;
+}
+
+
+
+.video-comment-text {
+	overflow: hidden;
+	padding-left: 15px;
+	line-height: 1.6em;
+}
+
+
+
+.video-comment-date {
+	color:#aaa;
+}
+
+.card-bg {
+/*	border: 1px solid #aaa;*/
+/*	min-width: 200px;*/
+/*	display: inline-block;*/
+/*	position: relative;*/
+	padding: 5px;
+	background-color: #f7f6f2;
 }

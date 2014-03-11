@@ -14,6 +14,7 @@
 </head>
 
 <!--
+	background-color: hsl(0, 91%, 70%);
 	background-color: hsl(170, 52%, 54%);
 
 	1. log
@@ -77,6 +78,7 @@
 				<div class="navigation-panel-button">
 					<div>
 						<div id="navigation-avatar" class="navigation-panel-btn-icon"></div>
+						<!--TODO id's ?!-->
 						<label>A's Channel</label>
 						<p class="black-overlay">3</p>
 					</div>
@@ -93,7 +95,7 @@
 			</p>
 			<div id="main-panel-content">
 
-				<article class="video-card">
+				<article class="card" style="display:none">
 					<section class="video-card-thumb">
 						<img src="imgs/img6.jpg" />
 						<span class="video-card-time">1:43</span>
@@ -107,19 +109,85 @@
 					<section class="video-card-text">
 						<span class="video-card-title">This Week in Android Development</span>
 						<ul>
-							<li >
+							<li>
 								Author:
-								<span class="video-card-autor">Android Developers</span>
+								<span class="on-hover-link">Android Developers</span>
 							</li>
 							<li>
 								10 224 views
 							</li>
+							<!--<span class="video-card-ago">5 days ago</span>-->
 						</ul>
 					</section>
-					<!--<span class="video-card-ago">5 days ago</span>-->
-
 				</article>
+
+				<!--video-->
+				<img src="imgs/img6.jpg" id="video" />
+				<section id="video-info" class="card">
+					<div>
+						<p id="video-date">
+							<span>17th</span>
+							<span>dec</span>
+						</p>
+						<span id="video-bookmark-icon" class="glyphicon glyphicon-bookmark"></span>
+					</div>
+					<ul class="text-small">
+						<li>
+							<span class="glyphicon glyphicon-user"></span>
+							Android Developers
+						</li>
+						<li>
+							<span class="glyphicon glyphicon-comment"></span>
+							3 Comments
+						</li>
+					</ul>
+
+				</section>
+				<ul id="video-comments" class="card-bg">
+					<li>
+						<img src="imgs/avatar2.jpg" class="video-comment-avatar" />
+						<div class="video-comment-text">
+							<h3 class="video-comment-name">Android Developers</h3>
+							<span class="video-comment-date on-hover-link text-small">1yr ago</span>
+						</div>
+						<div class="video-comment-text">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare libero odio, quis dapibus elit vehicula vel. Pellentesque aliquet nec eros quis pellentesque. Etiam placerat iaculis purus, in ullamcorper elit iaculis non. Vivamus volutpat tristique massa quis commodo. Sed eget lectus at elit cursus vestibulum. Nulla consectetur, turpis sit amet mollis feugiat, enim sem dapibus dui, vel feugiat sapien tellus vitae sapien.
+						</div>
+					</li>
+					
+					<li>
+						<img src="imgs/avatar2.jpg" class="video-comment-avatar" />
+						<div class="video-comment-text">
+							<h3 class="video-comment-name">Android Developers</h3>
+							<span class="video-comment-date on-hover-link text-small">1yr ago</span>
+						</div>
+						<div class="video-comment-text">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare libero odio, quis dapibus elit vehicula vel. Pellentesque aliquet nec eros quis pellentesque. Etiam placerat iaculis purus, in ullamcorper elit iaculis non. Vivamus volutpat tristique massa quis commodo. Sed eget lectus at elit cursus vestibulum. Nulla consectetur, turpis sit amet mollis feugiat, enim sem dapibus dui, vel feugiat sapien tellus vitae sapien.
+						</div>
+					</li><li>
+						<img src="imgs/avatar2.jpg" class="video-comment-avatar" />
+						<div class="video-comment-text">
+							<h3 class="video-comment-name">Android Developers</h3>
+							<span class="video-comment-date on-hover-link text-small">1yr ago</span>
+						</div>
+						<div class="video-comment-text">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare libero odio, quis dapibus elit vehicula vel. Pellentesque aliquet nec eros quis pellentesque. Etiam placerat iaculis purus, in ullamcorper elit iaculis non. Vivamus volutpat tristique massa quis commodo. Sed eget lectus at elit cursus vestibulum. Nulla consectetur, turpis sit amet mollis feugiat, enim sem dapibus dui, vel feugiat sapien tellus vitae sapien.
+						</div>
+					</li><li>
+						<img src="imgs/avatar2.jpg" class="video-comment-avatar" />
+						<div class="video-comment-text">
+							<h3 class="video-comment-name">Android Developers</h3>
+							<span class="video-comment-date on-hover-link text-small">1yr ago</span>
+						</div>
+						<div class="video-comment-text">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare libero odio, quis dapibus elit vehicula vel. Pellentesque aliquet nec eros quis pellentesque. Etiam placerat iaculis purus, in ullamcorper elit iaculis non. Vivamus volutpat tristique massa quis commodo. Sed eget lectus at elit cursus vestibulum. Nulla consectetur, turpis sit amet mollis feugiat, enim sem dapibus dui, vel feugiat sapien tellus vitae sapien.
+						</div>
+					</li>
+				</ul>
+
+
 			</div>
+
 
 		</div>
 		<div class="clear"></div>
