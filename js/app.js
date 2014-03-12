@@ -45,12 +45,13 @@ var TestView = Backbone.View.extend({
 	initialize: function () {
 		console.log("init");
 		_.bindAll(this, 'render'); // remember: every function that uses 'this' as the current object should be in here
-		this.render();
+		//this.render();
 	},
 
 	render: function () {
-		console.log("render");
-		this.$el.html("<span id=\"aa\">aaa</span>" + this.$el.html());
+		console.log("TestView-render");
+		//this.$el.html("<span id=\"aa\">aaa</span>" + this.$el.html());
+		this.$el.html("<span id=\"aa\">aaa</span>");
 	},
 	
 	name_click_callback: function (ev) {
@@ -101,22 +102,26 @@ var Router = Backbone.Router.extend({
 	}
 });
 
-var router = new Router;
-router.on('route:a', function () {
+app.router = new Router;
+app.router.on('route:home', function () {
+	console.log("routed to home");
 	testView.render();
 })
-router.on('route:b', function () {
-	testView2.render();
-})
-router.on('route:c', function (id) {
-	userEditView.render({
-		id: id
-	});
+app.router.on('route:c', function (id) {
+//	userEditView.render({
+//		id: id
+//	});
 })
 Backbone.history.start();
 
 
 $("#add_comment").click(function () {
-	console.log("add");
 	app.comments.create(app.Comment.defaults);
+});
+
+$("#brand").click(function () {
+	console.log("home");
+	app.router.navigate('', {
+		trigger: true
+	});
 });

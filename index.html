@@ -53,37 +53,8 @@
 				<span id="search-loading">&nbsp;</span>
 			</div>
 
-			<div id="channels-panel">
-				<div class="navigation-panel-button">
-					<div>
-						<div id="navigation-avatar" class="navigation-panel-btn-icon"></div>
-						<label>A's Channel</label>
-						<p class="black-overlay">3</p>
-					</div>
-				</div>
-				<div class="navigation-panel-button active">
-					<div>
-						<div id="navigation-avatar" class="navigation-panel-btn-icon"></div>
-						<label>A's Channel</label>
-						<p class="black-overlay">3</p>
-					</div>
-				</div>
-				<div class="navigation-panel-button">
-					<div>
-						<div id="navigation-avatar" class="navigation-panel-btn-icon"></div>
-						<label>A's Channel</label>
-						<p class="black-overlay">3</p>
-					</div>
-				</div>
-				<div class="navigation-panel-button">
-					<div>
-						<div id="navigation-avatar" class="navigation-panel-btn-icon"></div>
-						<!--TODO id's ?!-->
-						<label>A's Channel</label>
-						<p class="black-overlay">3</p>
-					</div>
-				</div>
-			</div>
+			<ul id="channels-panel">
+			</ul>
 		</div>
 
 		<!-- main content panel f.e. timeline, images, search etc. -->
@@ -91,7 +62,7 @@
 			<header id="main-panel-header-strip"></header>
 			<p id="view-title" class="text-big">
 				<span class="glyphicon glyphicon-list-alt"></span>
-				A's Channel
+				<span id="view-title-text">A's Channel</span>
 			</p>
 			<div id="main-panel-content">
 
@@ -166,11 +137,33 @@
 		</div>
 	</script>
 	
+	<script type="text/template" id="channel-template">
+		<div class="hover-white-glow">
+			<div id="navigation-avatar" class="navigation-panel-btn-icon"></div> <!--TODO id's ?!-->
+			<label><%= name %></label>
+			<p class="black-overlay" style="<%= video_count>0?"":"visibility:hidden;" %>">
+				<%= video_count %>
+			</p>
+		</div>
+	</script>
+				
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js" type="text/javascript"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/backbone-localstorage.js/1.0/backbone.localStorage-min.js" type="text/javascript"></script>
 	<script src="js/app.js"></script>
+	<script src="js/models/subscription.js"></script>
+	<script src="js/views/subscription.js"></script>
+	<script>
+	/*
+	var length = app.channelList.length;
+	for (var i = 0; i < length; i++) {
+		app.channelList.at(0).destroy();
+	}*/
+	//app.channelList.create(app.Channel.defaults);
+	//app.channelList.create({active:true,name:"Abc",video_count:4});
+	//app.channelList.create({video_count:0});
+	</script>
 
 
 </body>

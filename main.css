@@ -184,9 +184,6 @@ body {
 	position: relative;
 /*	border: 1px solid red;*/
 }
-.navigation-panel-button:hover {
-	/*background-color: hsla(0, 91%, 70%, 0.8);*/
-}
 .navigation-panel-button > div {
 	background-color: white;
 	position: relative;
@@ -281,10 +278,13 @@ body {
 	color: white;
 /*	border-top: 1px solid #aaa;*/
 	border-top: 1px solid #d5d4d0;
+	list-style: none;
+	padding: 0;
+	margin: 0;
 }
 
 .navigation-panel-btn-icon {
-	width: 20px;
+	width: 25px;
 	position: absolute;
 	height: 78%;
 	top: 4px;
