@@ -93,28 +93,10 @@ app.CommentListView = Backbone.View.extend({
 });
 app.commentsListView = new app.CommentListView();
 
-// routing
-var Router = Backbone.Router.extend({
-	routes: {
-		"": "home",
-		"b": "b",
-		"c/:id": "c"
-	}
-});
 
-app.router = new Router;
-app.router.on('route:home', function () {
-	console.log("routed to home");
-	testView.render();
-})
-app.router.on('route:c', function (id) {
-//	userEditView.render({
-//		id: id
-//	});
-})
-Backbone.history.start();
-
-
+//
+// normal jQuery event callbacks register
+//
 $("#add_comment").click(function () {
 	app.comments.create(app.Comment.defaults);
 });

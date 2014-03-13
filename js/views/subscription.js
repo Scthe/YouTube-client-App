@@ -25,21 +25,16 @@ app.ChannelView = Backbone.View.extend({
 		this.$el.html(this.template(this.model.toJSON()));
 		if(this.model.get('active')){
             $(this.el).addClass('active');
-			// change view title
-			$("#view-title-text").html(this.model.get("name")+"'s Channel");
 		}else
 			$(this.el).removeClass('active');
 		return this;
 	},
 	
 	selectItem: function(){
-		console.log("click: "+this.model.get("name"));
-		app.channelList.each(function(e){
-			e.set("active",false);
+		//console.log("click: "+this.model.get("name"));
+		app.router.navigate('channel/'+this.model.id, {
+			trigger: true
 		});
-		this.model.set("active",true);
-		this.parent.render();
-		// TODO go to other subpage
 	}
 	
 });
@@ -54,7 +49,6 @@ app.ChannelListView = Backbone.View.extend({
 	},
 	
 	render: function () {
-		//console.log("render whole: "+app.channelList.length);
 		this.$el.html("");
 		var that = this;
 		app.channelList.each(function(e){that.onAdd(e);});

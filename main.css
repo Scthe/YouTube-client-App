@@ -305,10 +305,23 @@ body {
 .card img {
 	width: auto;
 	max-height: 150px;
+	max-width: 100%;
 }
 
 #main-panel-content {
 	padding: 5px 15px;
+}
+
+.video-card{
+	width:32%;
+	vertical-align: top;
+	margin-bottom:5px;
+	margin-right:5px;
+}
+
+.video-card:nth-child(3){
+	margin-right:0px;
+	/*border:1px solid red;*/
 }
 
 .video-select-play {
@@ -318,6 +331,7 @@ body {
 	cursor: pointer;
 	color: white;
 }
+
 .video-select-play > p{
 	background-color: hsl(170, 52%, 54%);
 	padding: 5px 15px;
@@ -328,18 +342,19 @@ body {
 }
 
 .video-card-title {
-	display: block;
 	overflow-wrap: break-word;
 	font-size: 13px;
 	color: #2793E6;
 	cursor: pointer;
 }
+
 .video-card-title:hover {
 	text-decoration: underline;
 }
 
 .video-card-thumb {
 	position: relative;
+	width: 100%;
 }
 
 .video-card-thumb>div {
@@ -371,8 +386,6 @@ body {
 	padding: 10px;
 	margin: 0px;
 }
-
-
 
 .video-card-text ul {
 	list-style: none;
@@ -413,9 +426,11 @@ body {
 	margin-right: 35px;
 	line-height: 16px;
 }
+
 #video-date span:first-child{
 	display: block;
 }
+
 #video-date span:last-child {
 	text-transform: uppercase;
 }
@@ -455,21 +470,16 @@ body {
 	float: left;
 }
 
-
 .video-comment-name {
 	display: inline;
 	font-size: 1.3em;
 }
-
-
 
 .video-comment-text {
 	overflow: hidden;
 	padding-left: 15px;
 	line-height: 1.6em;
 }
-
-
 
 .video-comment-date {
 	color:#aaa;
