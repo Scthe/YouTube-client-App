@@ -240,6 +240,7 @@ body {
 	overflow: hidden;
 	background-color: #f2f2f0;
 	height: inherit;
+	padding-bottom:15px;
 }
 #view-title {
 	color: #6b6a66;

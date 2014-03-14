@@ -65,49 +65,13 @@
 				<span id="view-title-text">A's Channel</span>
 			</p>
 			<div id="main-panel-content">
-			
-				<!--video-->
-				<img src="imgs/img6.jpg" id="video" style="display:none" />
-				<section id="video-info" class="card" style="display:none">
-					<div>
-						<p id="video-date">
-							<span>17th</span>
-							<span>dec</span>
-						</p>
-						<span id="video-bookmark-icon" class="glyphicon glyphicon-bookmark"></span>
-					</div>
-					<ul class="text-small">
-						<li>
-							<span class="glyphicon glyphicon-user"></span>
-							Android Developers
-						</li>
-						<li>
-							<span class="glyphicon glyphicon-comment"></span>
-							3 Comments
-						</li>
-					</ul>
-
-				</section>
-				<button id="add_comment" style="display:none">AddComment</button>
-				<ul id="video-comments" class="card-bg" style="display:none">
-				</ul>
-
 			</div>
 
 		</div>
 		<div class="clear"></div>
 	</div>
 
-	<script type="text/template" id="comment-template">
-		<img src="<%= avatar %>" class="video-comment-avatar" />
-		<div class="video-comment-text">
-			<h3 class="video-comment-name"><%= author %></h3>
-			<span class="video-comment-date on-hover-link text-small"><%= created_at %></span>
-		</div>
-		<div class="video-comment-text">
-			<%= text %>
-		</div>
-	</script>
+	
 
 	<script type="text/template" id="channel-template">
 		<div class="hover-white-glow">
@@ -144,7 +108,46 @@
 			</ul>
 		</section>
 	</script>
+	
+	<script type="text/template" id="video-template">
+		<!-- TODO add back button ? -->
+		<img src="<%= thumbnail %>" id="video"/>
+		<section id="video-info" class="card">
+			<div>
+				<p id="video-date"><!-- TODO hardcoded -->
+					<span>17th</span>
+					<span>dec</span>
+				</p>
+				<span id="video-bookmark-icon" class="glyphicon glyphicon-bookmark"></span>
+			</div>
+			<ul class="text-small">
+				<li>
+					<span class="glyphicon glyphicon-user"></span>
+					<%= user %>
+				</li>
+				<li>
+					<span class="glyphicon glyphicon-comment"></span>
+					3 Comments<!-- TODO hardcoded -->
+				</li>
+			</ul>
 
+		</section>
+		<button id="add_comment">AddComment</button>
+		<ul id="video-comments" class="card-bg">
+		</ul>
+	</script>
+	
+	<script type="text/template" id="comment-template">
+		<img src="<%= avatar %>" class="video-comment-avatar" />
+		<div class="video-comment-text">
+			<h3 class="video-comment-name"><%= author %></h3>
+			<span class="video-comment-date on-hover-link text-small"><%= created_at %></span>
+		</div>
+		<div class="video-comment-text">
+			<%= text %>
+		</div>
+	</script>
+	
 
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js" type="text/javascript"></script>
@@ -155,6 +158,7 @@
 	<script src="js/views/subscription.js"></script>
 	<script src="js/models/video.js"></script>
 	<script src="js/views/videoList.js"></script>
+	<script src="js/views/video.js"></script>
 	<script>
 		/*
 		var length = app.channelList.length;

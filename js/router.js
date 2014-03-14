@@ -10,12 +10,19 @@ app.router = new Router;
 
 app.router.on('route:home', function () {
 	console.log("routed to home");
-	testView.render();
+	
+	// render left subscription panel
+	app.channelListView.render();
+	
+	// render content
+	//app.videoListView.render();
+	$("#main-panel-content").html("");
 });
 
 app.router.on('route:channel', function (id) {
 	console.log("routed to channel '"+id+"'");
-	// set as active
+	
+	// set active channels
 	app.channelList.each(function(e){
 		e.set("active",e.id==id);
 	});
@@ -24,7 +31,7 @@ app.router.on('route:channel', function (id) {
 	app.channelListView.render();
 	
 	// change view title
-	m = app.channelList._byId[id];
+	m = app.channelList.get(id);
 	$("#view-title-text").html(m.get("name")+"'s Channel");
 	
 	// render content
@@ -35,11 +42,12 @@ app.router.on('route:video', function (id) {
 	console.log("routed to video '"+id+"'");
 	
 	// change view title
-	m = app.channelList._byId[id];
-	$("#view-title-text").html(id);
+	m = app.videoList.get(id);
+	$("#view-title-text").html(m.get("name"));
 	
 	// render content
-	$("#main-panel-content").html("Video: "+id);
+	app.videoView.setVideo(m);
+	app.videoView.render();
 });
 
 Backbone.history.start();
