@@ -16,10 +16,10 @@ Settings.setup();
 
 
 var app = {}; // app namespace
+app.log = function( t){}
 
 // app.comments.on('add', this.addAll, this);
 // TODO _.bindAll(this, 'render'); // remember: every function that uses 'this' as the current object should be in here
-
 
 //
 // normal jQuery event callbacks register

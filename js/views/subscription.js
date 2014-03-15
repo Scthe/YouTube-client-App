@@ -45,10 +45,12 @@ app.ChannelListView = Backbone.View.extend({
 	initialize: function () {
 		app.channelList.on('add', this.onAdd, this);
 		app.channelList.fetch();
-		this.render();
+		//this.render();
 	},
 	
 	render: function () {
+		if( Settings.get("debug"))
+			console.log("VIEW ChannelListView render");
 		this.$el.html("");
 		var that = this;
 		app.channelList.each(function(e){that.onAdd(e);});

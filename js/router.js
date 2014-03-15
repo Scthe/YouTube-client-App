@@ -16,7 +16,14 @@ app.router.on('route:home', function () {
 	
 	// render content
 	//app.videoListView.render();
-	$("#main-panel-content").html("");
+	$("#main-panel-content").html(API_KEY);
+	
+	// add pseudo-console on top
+	if( Settings.get("debug") && typeof($("#main-panel-content") == undefined)){
+		$("#main-panel-content").before("<pre id=\"pseudo-console\"></pre>");
+		app.log = function( t){$("#pseudo-console").append(t+"</br>");};
+	}
+	app.search("Android");
 });
 
 app.router.on('route:channel', function (id) {
