@@ -2,7 +2,8 @@ var Router = Backbone.Router.extend({
 	routes: {
 		"": "home",
 		"video/:id": "video",
-		"channel/:id": "channel"
+		"channel/:id": "channel",
+		'search/:term/:page': "search",
 	}
 });
 
@@ -19,11 +20,10 @@ app.router.on('route:home', function () {
 	$("#main-panel-content").html(API_KEY);
 	
 	// add pseudo-console on top
-	if( Settings.get("debug") && typeof($("#main-panel-content") == undefined)){
+	if( Settings.get("debug") &&( $("#pseudo-console")[0]==undefined ) ){
 		$("#main-panel-content").before("<pre id=\"pseudo-console\"></pre>");
 		app.log = function( t){$("#pseudo-console").append(t+"</br>");};
 	}
-	app.search("Android");
 });
 
 app.router.on('route:channel', function (id) {
@@ -55,6 +55,35 @@ app.router.on('route:video', function (id) {
 	// render content
 	app.videoView.setVideo(m);
 	app.videoView.render();
+});
+
+app.router.on('route:search', function (term, page) {
+	console.log("routed to search for: '"+term+"', page: "+page);
+	// add pseudo-console on top
+	if( Settings.get("debug") &&( $("#pseudo-console")[0]==undefined ) ){
+		$("#main-panel-content").before("<pre id=\"pseudo-console\"></pre>");
+		app.log = function( t){$("#pseudo-console").append(t+"</br>");};
+	}
+	
+	// set active channels
+	app.channelList.each(function(e){
+		e.set("active",false);
+	});
+	
+	// render left subscription panel
+	app.channelListView.render();
+	
+	// change view title
+	$("#view-title-text").html("Search");
+	$("#view-title-text").html("branches !!!");
+	
+	// download data
+	app.search(term, page)
+	
+	
+	// render content
+	//app.videoListView.render();
+	
 });
 
 Backbone.history.start();

@@ -30,7 +30,9 @@ app.VideoListView = Backbone.View.extend({
 	el: "#main-panel-content",
 
 	initialize: function () {
+		 _.bindAll(this, 'onAdd', 'resetAll', 'render');
 		app.videoList.on('add', this.onAdd, this);
+		app.videoList.on('reset', this.resetAll, this);
 		app.videoList.fetch();
 		this.render();
 	},
@@ -49,6 +51,10 @@ app.VideoListView = Backbone.View.extend({
 			parent:this
 		});
 		this.$el.append(view.render().el);
+	},
+	
+	resetAll: function (){
+		this.$el.html("");
 	}
 });
 app.videoListView = new app.VideoListView();
