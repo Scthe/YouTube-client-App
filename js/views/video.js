@@ -41,6 +41,8 @@ app.commentsListView = new app.CommentListView();
 //
 // VideoView
 //
+var monthNames = [ "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December" ];
 app.VideoView = Backbone.View.extend({
 	el: "#main-panel-content",
 
@@ -54,9 +56,16 @@ app.VideoView = Backbone.View.extend({
 	},
 	
 	render: function () {
-		//console.log(this.model);
+		if(Settings.get("debug")){
+			console.log("VIEW VideoView render:");
+			//console.log(this.model);
+		}
 		this.$el.html(this.template(this.model.toJSON()));
-		app.commentsListView.render();
+		if(typeof(this.model.get("created_on")) != undefined){
+			var d = new Date( this.model.get("created_on"));
+			$("#video-date").html("<span>"+d.getDate()+"</span><span>"+monthNames[d.getMonth()].substring(0,3)+"</span>");
+		}
+		//app.commentsListView.render();
 		return this;
 	},
 	

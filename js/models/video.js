@@ -1,13 +1,27 @@
 app.Video = Backbone.Model.extend({
 	//urlRoot: '/'
 	defaults: {
-		name: 'This Week in Android Development',
-		thumbnail: "imgs/img6.jpg",
-		created_on: "17th dec",
-		user: "Android Developers",
-		view_count:"10224",
-		time:"1:43"
-	}
+		// youTube data
+		youTube_id:"",
+		youTube_channel_id:"",
+		youTube_embed_Html:"",
+		thumbnail: "",
+		// base data
+		name: '', // title
+		user: "", // channel id
+		created_on: undefined,
+		created_on_date: undefined,
+		// details
+		view_count:"0",
+		time:"0", // duration
+		description:""
+		// dimension,
+		// definition,
+		// youTube comments ?
+	},
+	
+	initialize:function(){}
+	
 });
 
 app.VideoList = Backbone.Collection.extend({

@@ -34,10 +34,11 @@ app.VideoListView = Backbone.View.extend({
 		app.videoList.on('add', this.onAdd, this);
 		app.videoList.on('reset', this.resetAll, this);
 		app.videoList.fetch();
-		this.render();
 	},
 	
 	render: function () {
+		if(Settings.get("debug"))
+			console.log("VIEW VideoListView render");
 		this.$el.html("");
 		var that = this;
 		app.videoList.each(function(e){that.onAdd(e);});

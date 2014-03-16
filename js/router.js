@@ -47,14 +47,35 @@ app.router.on('route:channel', function (id) {
 
 app.router.on('route:video', function (id) {
 	console.log("routed to video '"+id+"'");
+	// add pseudo-console on top
+	if( Settings.get("debug") &&( $("#pseudo-console")[0]==undefined ) ){
+		$("#main-panel-content").before("<pre id=\"pseudo-console\"></pre>");
+		app.log = function( t){$("#pseudo-console").append(t+"</br>");};
+	}
 	
-	// change view title
-	m = app.videoList.get(id);
-	$("#view-title-text").html(m.get("name"));
-	
-	// render content
-	app.videoView.setVideo(m);
-	app.videoView.render();
+	// find the selected model
+	// ( due to 'app.videoList.reset()' resetting the _byId look up we have to do it by hand)
+	var m = undefined;
+	app.videoList.each(function(e){
+		//app.log("\t "+e.id+"("+(e.id==id)+")");
+		if( e.id==id) m = e;
+	});
+	if( m != undefined){
+		//console.log(m);
+		// change view title
+		//console.log("dict:"+app.videoList._byId);
+		$("#view-title-text").html(m.get("name"));
+		
+		// call for more details
+		app.videoDetails(m.get("youTube_id"));
+		
+		// render content
+		//app.videoView.setVideo(m);
+		//app.videoView.render(); // TODO display video description
+	}else{
+		// TODO on video look up error
+		console.log("err!");
+	}
 });
 
 app.router.on('route:search', function (term, page) {
@@ -75,10 +96,9 @@ app.router.on('route:search', function (term, page) {
 	
 	// change view title
 	$("#view-title-text").html("Search");
-	$("#view-title-text").html("branches !!!");
 	
 	// download data
-	app.search(term, page)
+	app.search(term, page);
 	
 	
 	// render content

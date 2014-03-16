@@ -111,13 +111,10 @@
 	
 	<script type="text/template" id="video-template">
 		<!-- TODO add back button ? -->
-		<img src="<%= thumbnail %>" id="video"/>
+		<%= youTube_embed_Html %>
 		<section id="video-info" class="card">
 			<div>
-				<p id="video-date"><!-- TODO hardcoded -->
-					<span>17th</span>
-					<span>dec</span>
-				</p>
+				<p id="video-date"></p>
 				<span id="video-bookmark-icon" class="glyphicon glyphicon-bookmark"></span>
 			</div>
 			<ul class="text-small">
@@ -162,18 +159,6 @@
 	<script src="js/models/video.js"></script>
 	<script src="js/views/videoList.js"></script>
 	<script src="js/views/video.js"></script>
-	<script>
-		/*
-		var length = app.channelList.length;
-		for (var i = 0; i < length; i++) {
-			app.channelList.at(0).destroy();
-		}*/
-		//app.channelList.create(app.Channel.defaults);
-		//app.channelList.create({active:true,name:"Abc",video_count:4});
-		//app.channelList.create({video_count:0});
-		//app.videoList.create();
-		//app.videoList.create({name:"Aaaaaa",user:"Android",time:"2:41",view_count:"502",thumbnail: "imgs/img4.jpg"});
-	</script>
 	<script src="js/router.js"></script>
 
 	

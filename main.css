@@ -307,6 +307,7 @@ body {
 	width: auto;
 	max-height: 150px;
 	max-width: 100%;
+	min-width: 100%;
 }
 
 #main-panel-content {
@@ -402,7 +403,7 @@ body {
 	cursor: pointer;
 }
 
-#video {
+#main-panel-content > iframe {
 	max-width: 600px;
 	display: block;
     margin-left: auto;
