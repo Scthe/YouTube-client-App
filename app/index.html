@@ -2,37 +2,15 @@
 <html lang="en">
 
 <head>
-	<title>Web app 2</title>
+	<title>YouTube player</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="author" content="Scthe" />
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 
 	<!-- Style sheets -->
-	<link href="main.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="../styles/main.css" >
 </head>
-
-<!--
-	background-color: hsl(0, 91%, 70%);
-	background-color: hsl(170, 52%, 54%);
-
-	1. log
-		var printf = function(s) {console.log(s); alert(s);};
-		printf("Hello World");
-
-	2. translate
-		 $('[data-translate]').each(function(){
-			var $el = $(this);
-			var key = $el.data('translate');
-
-			if( $el.is('input') ) {
-				$el.attr('placeholder', i18n.__(key));
-			} else {
-				$el.text(i18n.__(key));
-			}
-		});
--->
 
 <body id="page-background">
 	<div id="page-content">
@@ -75,7 +53,7 @@
 
 	<script type="text/template" id="channel-template">
 		<div class="hover-white-glow">
-			<div id="navigation-avatar" class="navigation-panel-btn-icon"></div> <!--TODO id's ?!-->
+			<div id="navigation-avatar" class="navigation-panel-btn-icon"></div> <!--TODO ids ?!-->
 			<label><%= name %></label>
 			<p class="black-overlay" style="<%= video_count>0?"":"visibility:hidden;" %>">
 				<%= video_count %>
@@ -146,20 +124,20 @@
 	</script>
 	
 
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js" type="text/javascript"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/backbone-localstorage.js/1.0/backbone.localStorage-min.js" type="text/javascript"></script>
-	
+	<script src='../bower_components/jquery/dist/jquery.min.js')></script>
+	<script src='../bower_components/underscore/underscore.js')></script>
+	<script src='../bower_components/backbone/backbone.js')></script>
+	<script src='../bower_components/backbone.localStorage/backbone.localStorage-min.js')></script>
+
 	<script src="keys.js"></script>
-	<script src="js/app.js"></script>
-	<script src="js/controllers.js"></script>
-	<script src="js/models/subscription.js"></script>
-	<script src="js/views/subscription.js"></script>
-	<script src="js/models/video.js"></script>
-	<script src="js/views/videoList.js"></script>
-	<script src="js/views/video.js"></script>
-	<script src="js/router.js"></script>
+	<script src="scripts/app.js"></script>
+	<script src="scripts/controllers.js"></script>
+	<script src="scripts/models/subscription.js"></script>
+	<script src="scripts/views/subscription.js"></script>
+	<script src="scripts/models/video.js"></script>
+	<script src="scripts/views/videoList.js"></script>
+	<script src="scripts/views/video.js"></script>
+	<script src="scripts/router.js"></script>
 
 	
 	<script src="https://apis.google.com/js/client.js?onload=executeGoogleApiCalls"></script>

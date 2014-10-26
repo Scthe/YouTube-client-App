@@ -1,16 +1,12 @@
-/* utils */
+$icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+@import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
+// endbower
 
-@font-face {
-	font-family: JosefinSlabLight;
-	src: url(JosefinSlabLight.ttf);
-}
-@font-face {
-	font-family: NixieOne-Regular;
-	src: url(NixieOne-Regular.otf);
-}
+/* utils */
 @font-face {
 	font-family: corbertregular;
-	src: url('Corbert-Regular-webfont.ttf') format('truetype');
+	src: url('../assets/Corbert-Regular-webfont.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -18,7 +14,7 @@
 	clear: both;
 }
 .text-normal {
-	font-family: 'Calibri', NixieOne-Regular;
+	font-family: 'Calibri', corbertregular;
 	font-size: 1.2em;
 }
 .text-small {
@@ -33,7 +29,7 @@
 	font-size: 2em
 }
 #navigation-avatar {
-	background: url('imgs/avatar2.jpg');
+	background: url('../images/avatar2.jpg');
 	background-size: cover;
 }
 /*
@@ -69,7 +65,7 @@ body {
 	width: 210px;
 }
 #page-background {
-	background: url('imgs/img4.jpg') no-repeat center center fixed;
+	background: url('../images/img4.jpg') no-repeat center center fixed;
 	background-size: cover;
 	/*	border: 1px solid blue;*/
 	/*	height: 100%;*/
@@ -164,7 +160,7 @@ body {
 	height: 18px;
 	right: 10px;
 	top: 25%;
-	background: url(imgs/loaderb64.gif);
+	background: url(../images/loaderb64.gif);
 	background-size: cover;
 	display: none;
 }

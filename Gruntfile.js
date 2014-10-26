@@ -133,10 +133,24 @@ module.exports = function(grunt) {
       }
     },
 
+    autoprefixer: {
+      options: {
+        browsers: ['last 1 version']
+      },
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '.tmp/styles/',
+          src: '{,*/}*.css',
+          dest: '.tmp/styles/'
+        }]
+      }
+    },
+
     bowerInstall: {
       app: {
         src: ['<%= config.app %>/index.html'],
-        exclude: ['bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js']
+        exclude: ['bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js']
       },
       sass: {
         src: ['<%= config.app %>/styles/{,*/}*.{scss,sass}']
@@ -162,7 +176,7 @@ module.exports = function(grunt) {
           expand: true,
           dot: true,
           cwd: '.',
-          src: ['bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*.*'],
+          src: ['bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*.*'],
           dest: '<%= config.dist %>'
         }]
       },
@@ -216,7 +230,7 @@ module.exports = function(grunt) {
     grunt.task.run([
       'clean:server',
       'concurrent:server',
-      // 'autoprefixer',
+      'autoprefixer',
       'jade',
       'connect:livereload',
       'watch'
