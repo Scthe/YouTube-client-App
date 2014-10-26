@@ -1,6 +1,7 @@
-'use strict';
-
 module.exports = function(grunt) {
+
+  'use strict';
+  /*global module, require*/
 
   require('load-grunt-tasks')(grunt);
   require('time-grunt')(grunt);
@@ -21,8 +22,7 @@ module.exports = function(grunt) {
         tasks: ['bowerInstall']
       },
       js: {
-        // files: ['<%= config.app %>/scripts/{,*/}*.js'],
-        files: ['js/**/*.js'],
+        files: ['<%= config.app %>/scripts/{,*/}*.js'],
         tasks: ['jshint'],
         options: {
           livereload: true
@@ -103,9 +103,7 @@ module.exports = function(grunt) {
       },
       all: [
         'Gruntfile.js',
-        '<%= config.app %>/scripts/{,*/}*.js',
-        '!<%= config.app %>/scripts/vendor/*',
-        'test/spec/{,*/}*.js'
+        '<%= config.app %>/scripts/{,*/}*.js'
       ]
     },
 
