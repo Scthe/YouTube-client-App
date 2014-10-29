@@ -3,51 +3,19 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/bootstr
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
 // endbower
 
+$left-panel-size: 210px;
+$nav-bar-h: 50px;
+
 @import 'utils';
 @import 'layout';
 @import 'theme';
 @import 'modules';
 @import 'state';
 
-
-
-/* navigation panel button TODO rename here*/
-.state-button {
-	padding: 0px 20px;
-	font-size: 14px;
-	cursor: pointer;
-	line-height: 25px;
-	position: relative;
-}
-.state-button > div {
-	position: relative;
-	border-radius: 5px; 
-}
-.state-button label {
-	position: relative;
-	top: 4px;
-	display: inline;
-	font-weight: normal;
-	cursor: pointer;
-	margin-right: 5px;
-	margin-left: 39px;
-}
-.state-button p {
-	position: relative;
-	width: 13px;
-	height: 10px;
-	display: inline-block;
-	top: 3px;
-	font-size: 7px;
-	border-radius: 27%;
-	text-align: center;
-	line-height: 10px;
-}
-
 /* wtf */
 #brand {
 	font-size: 20px;
-	line-height: 50px;
+	line-height: $nav-bar-h;
 	text-align: center;
 	height: inherit;
 }

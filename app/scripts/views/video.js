@@ -4,7 +4,7 @@
 app.CommentView = Backbone.View.extend({
 	tagName: 'li',
 
-	className: 'comment-text hide-overflow',
+	className: 'comment-text hide-overflow video-comment',
 
 	template: _.template($("#comment-template").html()),
 

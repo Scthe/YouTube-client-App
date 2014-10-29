@@ -1,63 +1,28 @@
-#main-panel-header-strip {
-	height: 7px;
-	width: 100%;
+#page-content {
+	width: 1024px;
+	margin: 0px auto;
+	padding: 0px;
+	height: inherit;
 }
 
 .left-panel-size {
-	width: 210px;
+	width: $left-panel-size;
 }
 
 #navigation-bar {
-	height: 50px;
-}
-
-.absolute-center{
-	position: absolute;
-	top: 50%;
-	left: 50%;
-
-	.centered{
-		position: relative;
-		left: -50%;
-		top: -14px;
-	}
-}
-.absolute-bottom-right{
-	position: absolute;
-	bottom: 0px;
-	right: 0px;
-}
-.fill-whole{
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	right: 0px;
-	bottom: 0px;
-}
-
-.fill-width{
-	position: relative;
-	width: 100%;
+	height: $nav-bar-h;
 }
 
 #main-panel-content > iframe {
-	max-width: 600px;
+	/* effectively only usage is the embedded YT video */
 	display: block;
     margin-left: auto;
     margin-right: auto;
 	margin-bottom: 15px;
 }
 
-#main-panel-content {
-	padding: 5px 15px;
-}
-
-#video-comments {
-	padding: 5px 10px;
-	line-height: 2.0em;
-}
-
-#video-comments li {
+/* TODO section below is too complicated */
+.video-comment {
 	margin-bottom: 15px;
 }
 
@@ -74,41 +39,35 @@
 	line-height: 1.6em;
 }
 
-#page-content {
-	width: 1024px;
-	margin: 0px auto;
-	padding: 0px;
-	height: inherit;
-}
+.state-button {
+	padding: 0px 20px;
+	font-size: 14px;
+	line-height: 25px;
+	position: relative;
 
-.ui-content-min-h {
-	min-height: 500px;
-}
 
-.no-padding{
-	padding: 0px !important;
-}
-.no-margin{
-	margin: 0px !important;
-}
-
-.video-select-play > p{
-	padding: 5px 15px;
-}
-
-.video-card-title {
-	overflow-wrap: break-word;
-	font-size: 13px;
-}
-
-.video-card-time {
-	padding: 0px 3px;
-}
-
-.video-card-text {
-	padding: 10px;
-}
-
-.video-card-text ul {
-	font-size: 11px;
+	div {
+		position: relative;
+		border-radius: 5px; 
+	}
+	label {
+		position: relative;
+		top: 4px;
+		display: inline;
+		font-weight: normal;
+		cursor: pointer;
+		margin-right: 5px;
+		margin-left: 39px;
+	}
+	p {
+		position: relative;
+		width: 13px;
+		height: 10px;
+		display: inline-block;
+		top: 3px;
+		font-size: 7px;
+		border-radius: 27%;
+		text-align: center;
+		line-height: 10px;
+	}
 }

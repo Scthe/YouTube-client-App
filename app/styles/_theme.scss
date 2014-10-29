@@ -3,8 +3,9 @@
 	color: white;
 }
 
-.toned-red{
-	background-color: hsl(0, 91%, 70%) !important;
+.fierce-red-bottom-separator{
+	/* toned-red */
+	border-bottom: 3px solid hsl(0, 91%, 70%);
 }
 
 .page-background {
@@ -12,6 +13,13 @@
 	background-size: cover;
 }
 
+/* bg colors */
+.turquoise{
+	background-color: hsl(170, 52%, 54%);
+}
+.semi-transparent{
+	background-color: rgba(50,50,50,0.2);
+}
 .soft-white{
 	background-color: #f2f2f0;
 }
@@ -19,10 +27,7 @@
 	background-color: #f7f6f2;
 }
 
-.decorated-text{
-	font-family: corbertregular;
-}
-
+/* color only */
 .alt-text-color{
 	color: #6b6a66;
 }
@@ -39,21 +44,15 @@
 	color: #aaa;
 }
 
+.text-white{
+	color: white;
+}
+
+/* borders etc. */
 .channel-content-separator{
 	border-left: 1px solid #999894;
 }
 
 .section-border{
 	border-bottom: 1px solid #d5d4d0;
-}
-
-.text-white{
-	color: white;
-}
-
-.turquoise{
-	background-color: hsl(170, 52%, 54%);
-}
-.semi-transparent{
-	background-color: rgba(50,50,50,0.2);
 }

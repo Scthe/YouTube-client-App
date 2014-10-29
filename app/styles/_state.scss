@@ -24,7 +24,6 @@
 .hover-showable-child:hover > div{
 	opacity: 1;
 }
-
 .hover-underline:hover{
 	text-decoration: underline;
 }
@@ -33,4 +32,12 @@
 	text-decoration: underline;
 	color: #2793E6;
 	cursor: pointer;
+}
+
+.hoverable {
+	opacity: 0.95;
+	transition: opacity 0.3s ease-out;
+}
+.hoverable:hover {
+	opacity: 1;
 }
