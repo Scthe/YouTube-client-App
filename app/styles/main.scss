@@ -10,102 +10,64 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/bootstr
 @import 'state';
 
 
-#main-panel-content {
-	padding: 5px 15px;
+
+/* navigation panel button TODO rename here*/
+.state-button {
+	padding: 0px 20px;
+	font-size: 14px;
+	cursor: pointer;
+	line-height: 25px;
+	position: relative;
 }
-
-
-
-
-#main-panel-content > iframe {
-	max-width: 600px;
-	display: block;
-    margin-left: auto;
-    margin-right: auto;
-	margin-bottom: 15px;
+.state-button > div {
+	position: relative;
+	border-radius: 5px; 
 }
-
-#video-info div {
-	padding: 15px 10px 15px 55px;
-}
-
-#video-info {
-	width: 170px;
-/*	background-color: #484848;*/
-/*	color: white;*/
-/*	display: inline-block;*/
-	float:left;
-}
-
-#video-date {
-	display: inline-block;
-	margin-right: 35px;
-	line-height: 16px;
-}
-
-#video-date span:first-child{
-	display: block;
-}
-
-#video-date span:last-child {
-	text-transform: uppercase;
-}
-
-#video-bookmark-icon {
-	color: hsl(0, 91%, 70%);
-	display:inline-block;
-	vertical-align:super;
-}
-
-#video-info ul {
-	list-style: none;
-	padding: 5px 10px;
-	margin: 0px !important;
-	line-height: 2.4em;
-/*	color: #555555;*/
-}
-
-#video-comments {
-	list-style: none;
-/*	margin: 0px !important;*/
-	color: #555555;
-	font-size: 0.9em;
-	padding: 5px 10px;
-	line-height: 2.0em;
-	overflow: hidden;
-/*	border: 1px solid red;	*/
-}
-
-#video-comments li {
-	margin-bottom: 15px;
-}
-
-.video-comment-avatar {
-	height: 80px;
-	float: left;
-}
-
-.video-comment-name {
+.state-button label {
+	position: relative;
+	top: 4px;
 	display: inline;
-	font-size: 1.3em;
+	font-weight: normal;
+	cursor: pointer;
+	margin-right: 5px;
+	margin-left: 39px;
+}
+.state-button p {
+	position: relative;
+	width: 13px;
+	height: 10px;
+	display: inline-block;
+	top: 3px;
+	font-size: 7px;
+	border-radius: 27%;
+	text-align: center;
+	line-height: 10px;
 }
 
-.video-comment-text {
-	overflow: hidden;
-	padding-left: 15px;
-	line-height: 1.6em;
+/* wtf */
+#brand {
+	font-size: 20px;
+	line-height: 50px;
+	text-align: center;
+	height: inherit;
+}
+#view-title {
+	padding: 9px 25px;
+	width: inherit;
 }
 
-.video-comment-date {
-	color:#aaa;
+
+
+/*
+TODO use bootstrap grid
+ */
+.video-card{
+	width:32%;
+	vertical-align: top;
+	margin-bottom:5px;
+	margin-right:5px;
 }
 
-.card-bg {
-	/* used for comments ? */
-/*	border: 1px solid #aaa;*/
-/*	min-width: 200px;*/
-/*	display: inline-block;*/
-/*	position: relative;*/
-	padding: 5px;
-	background-color: #f7f6f2;
+.video-card:nth-child(3){
+	margin-right:0px;
 }

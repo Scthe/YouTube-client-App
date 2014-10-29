@@ -41,3 +41,12 @@
 	white-space:nowrap;
 	text-overflow:ellipsis;
 }
+
+ul{
+	list-style: none;
+	padding-left: 0;
+}
+
+.activable{
+	cursor: pointer;
+}
