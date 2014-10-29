@@ -8,7 +8,7 @@ app.VideoView = Backbone.View.extend({
 	el: '#main-panel-content',
 
 	events: {
-		'click #add_comment': 'add_comment'
+		'click #add_comment': 'addComment'
 	},
 
 	template: _.template($('#video-template').html()),
@@ -29,7 +29,7 @@ app.VideoView = Backbone.View.extend({
 		this.model = video;
 	},
 
-	add_comment: function() {
+	addComment: function() {
 		console.log('adding new comment');
 		app.comments.create(app.Comment.defaults);
 	}

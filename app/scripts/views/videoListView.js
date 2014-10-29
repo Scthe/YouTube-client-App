@@ -22,7 +22,7 @@ app.VideoListView = Backbone.View.extend({
 	onAdd: function(video) {
 		// TODO sort A-Z ?
 		// TODO ensure only 1 is active at a time ?
-		var view = new app.VideoCardItemView({
+		var view = new app.VideoListItemView({
 			model: video,
 			parent: this
 		});

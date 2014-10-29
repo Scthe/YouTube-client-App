@@ -1,8 +1,8 @@
 'use strict';
 /*global app, Backbone, Store*/
 
-app.Comments = Backbone.Collection.extend({
+app.CommentList = Backbone.Collection.extend({
 	model: app.Comment,
 	localStorage: new Store('backbone-comments')
 });
-app.comments = new app.Comments();
+app.comments = new app.CommentList();

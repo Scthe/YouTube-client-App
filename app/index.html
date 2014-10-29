@@ -60,8 +60,8 @@
 
 			<label><%= name %></label>
 
-			<p class="black-overlay" style="<%= video_count>0?"":"visibility:hidden;" %>">
-				<%= video_count %>
+			<p class="black-overlay" style="<%= videoCount > 0 ? "" : "visibility:hidden;" %>">
+				<%= videoCount %>
 			</p>
 		</div>
 	</script>
@@ -108,7 +108,7 @@
 		<div class="video-comment-text">
 			<h3 class="video-comment-name comment-misc text-normal"><%= author %></h3>
 			<span class="comment-misc on-hover-link text-small">
-				<%= created_at %>
+				<%= createdAt %>
 			</span>
 		</div>
 		<div class="video-comment-text hide-overflow">
@@ -153,10 +153,11 @@
 			app.channelList.at(0).destroy();
 		}*/
 		app.channelList.create(app.Channel.defaults);
-		app.channelList.create({active:true,name:'Abc',video_count:4});
-		app.channelList.create({video_count:0});
+		app.channelList.create({active:true,name:'Abc',videoCount:4});
+		app.channelList.create({videoCount:0});
 
 		for( var i=0; i < 5; i++){
+			/*jshint camelcase: false */
 			app.videoList.create({
 				name: 'Video: '+i,
 				user: 'User A',

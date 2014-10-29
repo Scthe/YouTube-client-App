@@ -1,5 +1,6 @@
 'use strict';
-/*global app, API_KEY*/
+/*global app, API_KEY, gapi*/
+/*jshint camelcase: false */
 
 app.__scheduledCalls = [];
 

@@ -1,7 +1,7 @@
 'use strict';
 /*global app, Backbone, _*/
 
-app.VideoCardItemView = Backbone.View.extend({
+app.VideoListItemView = Backbone.View.extend({
 	tagName: 'article',
 
 	// className:'card video-card .col-md-4',
