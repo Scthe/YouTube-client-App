@@ -1,5 +1,5 @@
 'use strict';
-/*global app, Backbone, Settings, _*/
+/*global app, Backbone, _*/
 
 app.VideoListView = Backbone.View.extend({
 	el: '#main-panel-content',
@@ -12,9 +12,6 @@ app.VideoListView = Backbone.View.extend({
 	},
 
 	render: function() {
-		if (Settings.get('debug')) {
-			console.log('VIEW VideoListView render: ' + app.videoList.length);
-		}
 		this.$el.html('');
 		var that = this;
 		app.videoList.each(function(e) {

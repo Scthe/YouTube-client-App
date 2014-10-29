@@ -1,5 +1,5 @@
 'use strict';
-/*global app, Backbone, _, Settings*/
+/*global app, Backbone, _*/
 
 var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
 	'July', 'August', 'September', 'October', 'November', 'December'
@@ -16,10 +16,6 @@ app.VideoView = Backbone.View.extend({
 	initialize: function() {},
 
 	render: function() {
-		if (Settings.get('debug')) {
-			console.log('VIEW VideoView render:');
-			//console.log(this.model);
-		}
 		this.$el.html(this.template(this.model.toJSON()));
 		if (typeof(this.model.get('created_on')) !== undefined) {
 			var d = new Date(this.model.get('created_on'));

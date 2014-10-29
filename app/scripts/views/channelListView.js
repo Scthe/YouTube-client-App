@@ -1,5 +1,5 @@
 'use strict';
-/*global app, Backbone, Settings*/
+/*global app, Backbone*/
 
 app.ChannelListView = Backbone.View.extend({
 	el: '#channels-panel',
@@ -11,10 +11,6 @@ app.ChannelListView = Backbone.View.extend({
 	},
 
 	render: function() {
-		if (Settings.get('debug')) {
-			console.log('VIEW ChannelListView render');
-		}
-
 		this.$el.html('');
 		var that = this;
 		app.channelList.each(function(e) {
