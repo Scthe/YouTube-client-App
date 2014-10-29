@@ -5,6 +5,8 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/bootstr
 
 $left-panel-size: 210px;
 $nav-bar-h: 50px;
+$nav-bar-after-break: 90px;
+$nav-bar-break: 480px;
 
 @import 'utils';
 @import 'layout';
@@ -17,7 +19,16 @@ $nav-bar-h: 50px;
 	font-size: 20px;
 	line-height: $nav-bar-h;
 	text-align: center;
-	height: inherit;
+
+	@media screen and (max-width: $nav-bar-break) {
+		width: 100%;
+		display: block;
+	}
+	@media screen and (min-width: $nav-bar-break) {
+		height: inherit;
+		width: $left-panel-size;
+		float: left;
+	}
 }
 #view-title {
 	padding: 9px 25px;

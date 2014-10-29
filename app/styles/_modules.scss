@@ -26,7 +26,21 @@
 
 /* search bar */
 #search-bar {
-	position: relative;
+	@media screen and (max-width: $nav-bar-break) {
+		position: absolute;
+		bottom: 0px;
+		width: 100%;
+		/*margin: 0px 1px;*/
+	}
+	@media screen and (min-width: $nav-bar-break) {
+		position: relative;
+		top: 8px;
+		right: 10px;
+		width: 240px;
+		float: right;
+	}
+
+	
 
 	input {
 		border: 1px solid rgba(0, 0, 0, 0.149);

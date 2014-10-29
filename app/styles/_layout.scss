@@ -10,7 +10,14 @@
 }
 
 #navigation-bar {
-	height: $nav-bar-h;
+	position: relative;
+	
+	@media screen and (max-width: $nav-bar-break) {
+		height: $nav-bar-after-break;
+	}
+	@media screen and (min-width: $nav-bar-break) {
+		height: $nav-bar-h;
+	}
 }
 
 #main-panel-content > iframe {
