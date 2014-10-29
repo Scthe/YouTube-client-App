@@ -12,8 +12,6 @@ var GOOGLE_YOU_TUBE_API_LOADED = false;
 function executeGoogleApiCalls() {
 	gapi.client.setApiKey(API_KEY);
 	gapi.client.load('youtube', 'v3', function() {
-		//if(Settings.get('debug'))
-		//	app.log('executeGoogleApiCalls() - library loaded');
 		$.each(app.__scheduledCalls, function(i, e) {
 			e(gapi.client.youtube);
 		});
@@ -27,7 +25,6 @@ function executeGoogleApiCalls() {
  * https://developers.google.com/youtube/v3/docs/videos
  */
 app.videoDetails = function(id) {
-	app.log('loading video: \'' + id);
 	var idList = id;
 
 	app.scheduleGoogleApiCall(function(yt) {
@@ -37,11 +34,8 @@ app.videoDetails = function(id) {
 			maxResults: 1
 		});
 
-		//app.log( 'AJAX sending !');
 		request.execute(function(response) {
-			//app.log( 'AJAX response !');
 			var json = response.result;
-			//app.log(JSON.stringify(json, undefined, 2));
 			if (json.items.length === 1) {
 				var e = json.items[0];
 				app.videoView.setVideo(new app.Video({
@@ -60,7 +54,6 @@ app.videoDetails = function(id) {
 				}));
 				app.videoView.render();
 			}
-			app.log('###');
 		});
 	});
 	if (GOOGLE_YOU_TUBE_API_LOADED){
@@ -75,7 +68,6 @@ app.videoDetails = function(id) {
  */
 app.search = function(searchTerm, page) {
 	// TODO add pages
-	app.log('searching for: \'' + searchTerm + '\', page: ' + page);
 	$('#search-loading').show();
 	app.videoList.reset();
 
@@ -87,9 +79,7 @@ app.search = function(searchTerm, page) {
 			maxResults: 3
 		});
 
-		//app.log( 'AJAX sending !');
 		request.execute(function(response) {
-			//app.log( 'AJAX response !');
 			var json = response.result;
 			//app.videoList.reset();
 			$.each(json.items, function(i, e) {
@@ -106,7 +96,6 @@ app.search = function(searchTerm, page) {
 			app.videoList.localStorage.save();
 			$('#search-input-icon').show();
 			$('#search-loading').hide();
-			app.log('###');
 		});
 	});
 	if (GOOGLE_YOU_TUBE_API_LOADED){

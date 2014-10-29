@@ -21,14 +21,6 @@ app.router.on('route:home', function() {
 	// render content
 	//app.videoListView.render();
 	$('#main-panel-content').html(API_KEY);
-
-	// add pseudo-console on top
-	if (Settings.get('debug') && ($('#pseudo-console')[0] === undefined)) {
-		$('#main-panel-content').before('<pre id=\"pseudo-console\"></pre>');
-		app.log = function(t) {
-			$('#pseudo-console').append(t + '</br>');
-		};
-	}
 });
 
 app.router.on('route:channel', function(id) {
@@ -52,19 +44,11 @@ app.router.on('route:channel', function(id) {
 
 app.router.on('route:video', function(id) {
 	console.log('routed to video \'' + id + '\'');
-	// add pseudo-console on top
-	if (Settings.get('debug') && ($('#pseudo-console')[0] === undefined)) {
-		$('#main-panel-content').before('<pre id=\"pseudo-console\"></pre>');
-		app.log = function(t) {
-			$('#pseudo-console').append(t + '</br>');
-		};
-	}
 
 	// find the selected model
 	// ( due to 'app.videoList.reset()' resetting the _byId look up we have to do it by hand)
 	var m;
 	app.videoList.each(function(e) {
-		//app.log("\t "+e.id+"("+(e.id==id)+")");
 		if (e.id === id) {
 			m = e;
 		}
@@ -89,13 +73,6 @@ app.router.on('route:video', function(id) {
 
 app.router.on('route:search', function(term, page) {
 	console.log('routed to search for: \'' + term + '\', page: ' + page);
-	// add pseudo-console on top
-	if (Settings.get('debug') && ($('#pseudo-console')[0] === undefined)) {
-		$('#main-panel-content').before('<pre id=\'pseudo-console\'></pre>');
-		app.log = function(t) {
-			$('#pseudo-console').append(t + '</br>');
-		};
-	}
 
 	// set active channels
 	app.channelList.each(function(e) {
