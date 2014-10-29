@@ -1,0 +1,113 @@
+@font-face {
+	font-family: corbertregular;
+	src: url('../assets/Corbert-Regular-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+.decorated-text{
+	font-family: corbertregular;
+}
+
+ul{
+	list-style: none;
+	padding-left: 0;
+}
+
+.clear {
+	clear: both;
+}
+
+/* text sizes */
+.text-normal {
+	font-family: 'Calibri', corbertregular;
+	font-size: 1.2em;
+}
+.text-small {
+	font-size: 0.9em;
+}
+.text-smaller {
+	font-size: 0.7em;
+	margin: 0px;
+	padding: 0px;
+}
+.text-big {
+	font-size: 2em
+}
+
+/* overlays */
+.black-overlay {
+	color: white;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+.black-overlay-light {
+	background-color: rgba(0, 0, 0, 0.13);
+}
+
+/* overflows */
+.hide-overflow{
+	overflow: hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}
+.break-word-overflow{
+	overflow-wrap: break-word;
+}
+
+
+
+.activable{
+	cursor: pointer;
+}
+
+/* layout */
+.absolute-center{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+
+	.centered{
+		position: relative;
+		left: -50%;
+		top: -14px;
+	}
+}
+.absolute-bottom-right{
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+}
+.fill-whole{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+.fill-width{
+	position: relative;
+	width: 100%;
+}
+.text-center{
+	text-align: center;
+}
+
+/* padding and margins */
+.no-padding{
+	padding: 0px !important;
+}
+.no-margin{
+	margin: 0px !important;
+}
+.small-padding-horizontal{
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.std-paddings{
+	padding: 5px 15px;
+}
+.std-paddings-square{
+	padding: 10px;
+}
+.small-paddings-square{
+	padding: 5px;
+}

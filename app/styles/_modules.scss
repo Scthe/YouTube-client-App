@@ -1,0 +1,84 @@
+/* card */
+.card {
+	border: 1px solid #aaa;
+/*	min-width: 200px;*/
+	display: inline-block;
+	position: relative;
+	padding: 5px;
+	background-color: #f7f6f2;
+}
+
+.card img {
+	width: auto;
+	max-height: 150px;
+	max-width: 100%;
+	min-width: 100%;
+}
+
+.card-bg {
+/*	border: 1px solid #aaa;*/
+/*	min-width: 200px;*/
+/*	display: inline-block;*/
+/*	position: relative;*/
+	padding: 5px;
+	background-color: #f7f6f2;
+}
+
+/* search bar */
+#search-bar input {
+	border: 1px solid rgba(0, 0, 0, 0.149);
+	border-radius: 0.15em;
+	color: rgba(0, 0, 0, 0.702);
+	font-size: 0.88em;
+	transition: background-color 0.3s cubic-bezier(0, 0, 0.58, 1) 0, box-shadow 0.2s cubic-bezier(0.25, 0.1, 0.25, 1) 0, border-color 0.2s cubic-bezier(0.25, 0.1, 0.25, 1) 0;
+}
+#search-loading {
+	position: absolute;
+	width: 18px;
+	height: 18px;
+	right: 10px;
+	top: 25%;
+	background: url(../images/loaderb64.gif);
+	background-size: cover;
+	display: none;
+}
+#search-input-icon {
+	position: absolute;
+	right: 7px;
+	top: 21%;
+	font-size: 15px;
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.state-button {
+	padding: 0px 20px;
+	font-size: 14px;
+	line-height: 25px;
+	position: relative;
+
+
+	div {
+		position: relative;
+		border-radius: 5px; 
+	}
+	label {
+		position: relative;
+		top: 4px;
+		display: inline;
+		
+		font-weight: normal;
+		cursor: pointer;
+	}
+	p {
+		position: relative;
+		width: 13px;
+		height: 10px;
+		display: inline-block;
+		top: 3px;
+
+		font-size: 7px;
+		border-radius: 27%;
+		text-align: center;
+		line-height: 10px;
+	}
+}

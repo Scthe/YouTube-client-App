@@ -1,0 +1,43 @@
+.state-button {
+	transition: background-color 0.5s ease-out;
+}
+.state-button.active {
+	background-color:hsl(0, 91%, 70%);
+}
+.state-button > div {
+	background-color:transparent;
+	transition: background-color 0.3s ease-out;
+}
+.state-button:not(.active):hover > div {
+	background-color: rgba(255,255,255,0.5);
+	color:#444;
+}
+.state-button.active:hover{
+	background-color: rgba(255,0,255,0.5);
+	cursor: default;
+}
+
+.hover-showable-child > div{
+	opacity: 0;
+	transition: opacity 0.5s;
+}
+.hover-showable-child:hover > div{
+	opacity: 1;
+}
+.hover-underline:hover{
+	text-decoration: underline;
+}
+
+.on-hover-link:hover{
+	text-decoration: underline;
+	color: #2793E6;
+	cursor: pointer;
+}
+
+.hoverable {
+	opacity: 0.95;
+	transition: opacity 0.3s ease-out;
+}
+.hoverable:hover {
+	opacity: 1;
+}

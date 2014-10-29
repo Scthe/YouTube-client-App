@@ -1,0 +1,58 @@
+.fierce-red{
+	background-color: #c74029;
+	color: white;
+}
+
+.fierce-red-bottom-separator{
+	/* toned-red */
+	border-bottom: 3px solid hsl(0, 91%, 70%);
+}
+
+.page-background {
+	background: url('../images/img4.jpg') no-repeat center center fixed;
+	background-size: cover;
+}
+
+/* bg colors */
+.turquoise{
+	background-color: hsl(170, 52%, 54%);
+}
+.semi-transparent{
+	background-color: rgba(50,50,50,0.2);
+}
+.soft-white{
+	background-color: #f2f2f0;
+}
+.soft-white-light{
+	background-color: #f7f6f2;
+}
+
+/* color only */
+.alt-text-color{
+	color: #6b6a66;
+}
+
+.link-blue{
+	color: #2793E6;
+}
+
+.text-mid-gray{
+	color: #555555;
+}
+
+.comment-misc{
+	color: #aaa;
+}
+
+.text-white{
+	color: white;
+}
+
+/* borders etc. */
+.channel-content-separator{
+	border-left: 1px solid #999894;
+}
+
+.section-border{
+	border-bottom: 1px solid #d5d4d0;
+}
