@@ -1,6 +1,7 @@
 app.VideoCardItemView = Backbone.View.extend({
 	tagName: 'article',
 
+	// className:"card video-card .col-md-4",
 	className:"card video-card",
 
 	template: _.template($("#video-card-template").html()),
@@ -38,7 +39,7 @@ app.VideoListView = Backbone.View.extend({
 	
 	render: function () {
 		if(Settings.get("debug"))
-			console.log("VIEW VideoListView render");
+			console.log("VIEW VideoListView render: "+app.videoList.length);
 		this.$el.html("");
 		var that = this;
 		app.videoList.each(function(e){that.onAdd(e);});

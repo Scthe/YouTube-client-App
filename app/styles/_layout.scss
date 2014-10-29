@@ -1,0 +1,30 @@
+#main-panel-header-strip {
+	height: 7px;
+	width: 100%;
+}
+
+.left-panel-size {
+	width: 210px;
+}
+
+#navigation-bar {
+	height: 50px;
+}
+
+.absolute-center{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+}
+.absolute-bottom-right{
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+}
+.fill-whole{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+}

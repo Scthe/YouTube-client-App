@@ -1,0 +1,184 @@
+/* search bar */
+#search-bar {
+	position: relative;
+}
+#search-bar input {
+	width: 100%;
+	border: 1px solid rgba(0, 0, 0, 0.149);
+	border-radius: 0.15em;
+	color: rgba(0, 0, 0, 0.702);
+	font-size: 0.88em;
+	margin: 0px;
+	padding: 0.45em 0.5em;
+	transition: background-color 0.3s cubic-bezier(0, 0, 0.58, 1) 0, box-shadow 0.2s cubic-bezier(0.25, 0.1, 0.25, 1) 0, border-color 0.2s cubic-bezier(0.25, 0.1, 0.25, 1) 0;
+}
+#search-loading {
+	position: absolute;
+	width: 18px;
+	height: 18px;
+	right: 10px;
+	top: 25%;
+	background: url(../images/loaderb64.gif);
+	background-size: cover;
+	display: none;
+}
+#search-input-icon {
+	position: absolute;
+	right: 7px;
+	top: 21%;
+	font-size: 15px;
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.card {
+	border: 1px solid #aaa;
+/*	min-width: 200px;*/
+	display: inline-block;
+	position: relative;
+	padding: 5px;
+	background-color: #f7f6f2;
+}
+
+.card img {
+	width: auto;
+	max-height: 150px;
+	max-width: 100%;
+	min-width: 100%;
+}
+
+
+/*
+ * TODO fix elements below
+ */
+
+
+/* navigation panel */
+#navigation-panel {
+	border-right: 1px solid #999894;
+}
+#channels-panel {
+	color: white;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+/* navigation panel button TODO rename here*/
+.state-button {
+	padding: 0px 20px;
+	font-size: 14px;
+	cursor: pointer;
+	line-height: 25px;
+	position: relative;
+}
+.state-button > div {
+	position: relative;
+	border-radius: 5px; 
+}
+.state-button label {
+	position: relative;
+	top: 4px;
+	display: inline;
+	font-weight: normal;
+	cursor: pointer;
+	margin-right: 5px;
+	margin-left: 39px;
+}
+.state-button p {
+	position: relative;
+	width: 13px;
+	height: 10px;
+	display: inline-block;
+	top: 3px;
+	font-size: 7px;
+	border-radius: 27%;
+	text-align: center;
+	line-height: 10px;
+}
+
+/* wtf */
+#brand {
+	font-size: 20px;
+	line-height: 50px;
+	text-align: center;
+	height: inherit;
+}
+#view-title {
+	padding: 9px 25px;
+	width: inherit;
+	border-bottom: 1px solid #d5d4d0;
+}
+
+
+
+#page-content {
+	width: 1024px;
+	margin: 0px auto;
+	padding: 0px;
+	height: inherit;
+}
+.ui-content-min-h {
+	min-height: 500px;
+}
+
+/*
+TODO use bootstrap grid
+ */
+.video-card{
+	width:32%;
+	vertical-align: top;
+	margin-bottom:5px;
+	margin-right:5px;
+}
+
+.video-card:nth-child(3){
+	margin-right:0px;
+}
+
+
+/* video card elements */
+.video-select-play {
+	cursor: pointer;
+	color: white;
+}
+
+.video-select-play > p{
+	background-color: hsl(170, 52%, 54%);
+	padding: 5px 15px;
+	position: relative;
+	left: -50%;
+	top: -14px;
+	cursor: pointer;
+}
+
+.video-card-title {
+	overflow-wrap: break-word;
+	font-size: 13px;
+	cursor: pointer;
+}
+
+.video-card-thumb {
+	position: relative;
+	width: 100%;
+}
+.video-card-time {
+	background-color: rgba(50,50,50,0.2);
+	padding: 0px 3px;
+}
+
+.video-card-overlay {
+	cursor: pointer;
+}
+
+.video-card-text {
+	padding: 10px;
+	margin: 0px;
+}
+
+.video-card-text ul {
+	list-style: none;
+	padding: 0px;
+	margin: 0px !important;
+	color: #555555;
+	font-size: 11px;
+}

@@ -1,0 +1,43 @@
+@font-face {
+	font-family: corbertregular;
+	src: url('../assets/Corbert-Regular-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+.clear {
+	clear: both;
+}
+.text-normal {
+	font-family: 'Calibri', corbertregular;
+	font-size: 1.2em;
+}
+.text-small {
+	font-size: 0.9em;
+}
+.text-smaller {
+	font-size: 0.7em;
+	margin: 0px;
+	padding: 0px;
+}
+.text-big {
+	font-size: 2em
+}
+.black-overlay {
+	color: white;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+.black-overlay-light {
+	background-color: rgba(0, 0, 0, 0.13);
+}
+.hoverable {
+	opacity: 0.95;
+	transition: opacity 0.3s ease-out;
+}
+.hoverable:hover {
+	opacity: 1;
+}
+.hide-overflow{
+	overflow: hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}

@@ -12,36 +12,35 @@
 	<link rel="stylesheet" href="../styles/main.css" >
 </head>
 
-<body id="page-background">
+<body class="page-background">
 	<div id="page-content">
 
 		<!-- navbar -->
-		<div id="navigation-bar" class="ui-mid-gray">
-			<span id="navigation-bar-logout" class="glyphicon glyphicon-remove navigation-bar-icon hoverable"></span>
-			<span id="navigation-bar-settings" class="glyphicon glyphicon-cog navigation-bar-icon hoverable"></span>
-			<div id="navigation-avatar" class="navigation-bar-icon"></div>
-			<span id="brand" class="left-panel-size">YouTube</span>
-		</div>
-
-		<!-- the left panel with navigation buttons -->
-		<div id="navigation-panel" class="left-panel-size ui-content-min-h">
-			<div id="search-bar">
+		<div id="navigation-bar" class="fierce-red">
+			<span id="brand" class="left-panel-size pull-left decorated-text">YouTube</span>
+			<div id="search-bar" class="pull-right">
 				<input type="text" placeholder="Search..." />
 				<span id="search-input-icon" class="glyphicon glyphicon-search"></span>
 				<span id="search-loading">&nbsp;</span>
 			</div>
+		</div>
 
+		<!-- the left panel with navigation buttons -->
+		<div id="navigation-panel" class="left-panel-size ui-content-min-h pull-left">
 			<ul id="channels-panel">
 			</ul>
 		</div>
 
 		<!-- main content panel f.e. timeline, images, search etc. -->
-		<div id="main-panel" class="ui-content-min-h">
-			<header id="main-panel-header-strip"></header>
-			<p id="view-title" class="text-big">
+		<div class="ui-content-min-h hide-overflow soft-white">
+			
+			<header id="main-panel-header-strip" class="toned-red"></header>
+			<p id="view-title" class="text-big alt-text-color soft-white-light">
 				<span class="glyphicon glyphicon-list-alt"></span>
-				<span id="view-title-text">A's Channel</span>
+				<span id="view-title-text" class="decorated-text">A's Channel</span>
 			</p>
+
+			<!-- TODO use bootstrap grid -->
 			<div id="main-panel-content">
 			</div>
 
@@ -53,8 +52,10 @@
 
 	<script type="text/template" id="channel-template">
 		<div class="hover-white-glow">
-			<div id="navigation-avatar" class="navigation-panel-btn-icon"></div> <!--TODO ids ?!-->
+			<!--TODO channel avatar-->
+
 			<label><%= name %></label>
+
 			<p class="black-overlay" style="<%= video_count>0?"":"visibility:hidden;" %>">
 				<%= video_count %>
 			</p>
@@ -62,18 +63,21 @@
 	</script>
 
 	<script type="text/template" id="video-card-template">
-		<section class="video-card-thumb">
-			<img src="<%= thumbnail %>" />
-			<span class="video-card-time"><%= time %></span>
 
-			<!--overlay	-->
-			<div class="black-overlay video-card-overlay"></div>
-			<div class="video-select-play">
+		<!-- thumbnail -->
+		<section class="video-card-thumb hover-showable-child">
+			<img src="<%= thumbnail %>" />
+			<span class="video-card-time absolute-bottom-right"><%= time %></span>
+
+			<!-- overlay -->
+			<div class="hover-showable black-overlay video-card-overlay fill-whole"></div>
+			<div class="hover-showable video-select-play absolute-center">
 				<p>play</p>
 			</div>
 		</section>
+
 		<section class="video-card-text">
-			<span class="video-card-title"><%= name %></span>
+			<span class="video-card-title link-blue hover-underline"><%= name %></span>
 			<ul>
 				<li>
 					Author:
@@ -82,7 +86,8 @@
 				<li>
 					<%= view_count %> views
 				</li>
-				<!--<span class="video-card-ago">5 days ago</span>-->
+
+				<!-- TODO add > uploaded X ago -->
 			</ul>
 		</section>
 	</script>
@@ -140,7 +145,32 @@
 	<script src="scripts/router.js"></script>
 
 	
-	<script src="https://apis.google.com/js/client.js?onload=executeGoogleApiCalls"></script>
+	<!-- <script src="https://apis.google.com/js/client.js?onload=executeGoogleApiCalls"></script> -->
+
+	<script>
+		/*
+		var length = app.channelList.length;
+		for (var i = 0; i < length; i++) {
+			app.channelList.at(0).destroy();
+		}*/
+		app.channelList.create(app.Channel.defaults);
+		app.channelList.create({active:true,name:'Abc',video_count:4});
+		app.channelList.create({video_count:0});
+
+		for( var i=0; i < 5; i++){
+			app.videoList.create({
+				name: 'Video: '+i,
+				user: 'User A',
+				time:'2:41',
+				view_count:'502',
+				thumbnail: 'images/img5.png'
+				// thumbnail: e.snippet.thumbnails["default"].url,
+				// created_on: e.snippet.publishedAt,
+				// youTube_id:e.id.videoId // TODO when the search result is a channel this will be undefined
+			});
+		}
+	</script>
+	
 </body>
 
 </html>

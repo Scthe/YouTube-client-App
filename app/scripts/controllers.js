@@ -7,6 +7,7 @@ app.scheduleGoogleApiCall = function( f){
 var GOOGLE_YOU_TUBE_API_LOADED = false;
 
 function executeGoogleApiCalls(){
+	/*
 	//if(Settings.get("debug"))
 	//	app.log("executeGoogleApiCalls()");
 	
@@ -20,6 +21,7 @@ function executeGoogleApiCalls(){
 		app.__scheduledCalls = [];
 		GOOGLE_YOU_TUBE_API_LOADED = true;
 	});
+*/
 }
 
 

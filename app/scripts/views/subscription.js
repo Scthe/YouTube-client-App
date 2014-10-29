@@ -1,7 +1,7 @@
 app.ChannelView = Backbone.View.extend({
 	tagName: 'li',
 
-	className:"navigation-panel-button",
+	className:"state-button",
 
 	template: _.template($("#channel-template").html()),
 
