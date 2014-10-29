@@ -25,30 +25,12 @@
 }
 
 /* search bar */
-#search-bar {
-	@media screen and (max-width: $nav-bar-break) {
-		position: absolute;
-		bottom: 0px;
-		width: 100%;
-		/*margin: 0px 1px;*/
-	}
-	@media screen and (min-width: $nav-bar-break) {
-		position: relative;
-		top: 8px;
-		right: 10px;
-		width: 240px;
-		float: right;
-	}
-
-	
-
-	input {
-		border: 1px solid rgba(0, 0, 0, 0.149);
-		border-radius: 0.15em;
-		color: rgba(0, 0, 0, 0.702);
-		font-size: 0.88em;
-		transition: background-color 0.3s cubic-bezier(0, 0, 0.58, 1) 0, box-shadow 0.2s cubic-bezier(0.25, 0.1, 0.25, 1) 0, border-color 0.2s cubic-bezier(0.25, 0.1, 0.25, 1) 0;
-	}
+#search-bar input {
+	border: 1px solid rgba(0, 0, 0, 0.149);
+	border-radius: 0.15em;
+	color: rgba(0, 0, 0, 0.702);
+	font-size: 0.88em;
+	transition: background-color 0.3s cubic-bezier(0, 0, 0.58, 1) 0, box-shadow 0.2s cubic-bezier(0.25, 0.1, 0.25, 1) 0, border-color 0.2s cubic-bezier(0.25, 0.1, 0.25, 1) 0;
 }
 #search-loading {
 	position: absolute;
@@ -68,3 +50,35 @@
 	color: rgba(0, 0, 0, 0.5);
 }
 
+.state-button {
+	padding: 0px 20px;
+	font-size: 14px;
+	line-height: 25px;
+	position: relative;
+
+
+	div {
+		position: relative;
+		border-radius: 5px; 
+	}
+	label {
+		position: relative;
+		top: 4px;
+		display: inline;
+		
+		font-weight: normal;
+		cursor: pointer;
+	}
+	p {
+		position: relative;
+		width: 13px;
+		height: 10px;
+		display: inline-block;
+		top: 3px;
+
+		font-size: 7px;
+		border-radius: 27%;
+		text-align: center;
+		line-height: 10px;
+	}
+}

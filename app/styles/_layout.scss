@@ -1,17 +1,50 @@
+/* page content */
 #page-content {
-	width: 1024px;
 	margin: 0px auto;
 	padding: 0px;
 	height: inherit;
+
+	@media screen and (max-width: $content-break) {
+		width: 100%;
+	}
+	@media screen and (min-width: $content-break) {
+		width: 1024px;
+	}
+
 }
 
-.left-panel-size {
-	width: $left-panel-size;
+#left-panel {
+	@media screen and (max-width: $content-break-2){
+		display:none;
+	}
+	@media screen and (max-width: $content-break) and (min-width: $content-break-2){
+		width: $left-panel-size-after-break;
+		float: left;
+		text-align: left;
+
+		li{
+			padding-left: 10px;
+			
+			div{
+				overflow: hidden;
+			}
+		}
+	}
+	@media screen and (min-width: $content-break) {
+		width: $left-panel-size;
+		float: left;
+		text-align: center;
+	}
 }
 
+#main-panel-content{
+
+}
+
+/* navigation bar */
 #navigation-bar {
 	position: relative;
-	
+
 	@media screen and (max-width: $nav-bar-break) {
 		height: $nav-bar-after-break;
 	}
@@ -20,13 +53,38 @@
 	}
 }
 
+.navigation-bar-right {
+	@media screen and (max-width: $nav-bar-break) {
+		position: absolute;
+		bottom: 0px;
+		width: 100%;
+		/*margin: 0px 1px;*/
+	}
+	@media screen and (min-width: $nav-bar-break) {
+		position: relative;
+		top: 8px;
+		right: 10px;
+		width: 240px;
+		float: right;
+	}
+}
+
+/* embedded YT video */
 #main-panel-content > iframe {
 	/* effectively only usage is the embedded YT video */
-	display: block;
-    margin-left: auto;
-    margin-right: auto;
-	margin-bottom: 15px;
+	
+	@media screen and (max-width: $video-to-fill-width) {
+		/* TODO title overflow */
+		width: 100%;
+	}
+	@media screen and (min-width: $video-to-fill-width) {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 15px;
+	}
 }
+
 
 /* TODO section below is too complicated */
 .video-comment {
@@ -44,37 +102,4 @@
 .video-comment-text {
 	padding-left: 15px;
 	line-height: 1.6em;
-}
-
-.state-button {
-	padding: 0px 20px;
-	font-size: 14px;
-	line-height: 25px;
-	position: relative;
-
-
-	div {
-		position: relative;
-		border-radius: 5px; 
-	}
-	label {
-		position: relative;
-		top: 4px;
-		display: inline;
-		font-weight: normal;
-		cursor: pointer;
-		margin-right: 5px;
-		margin-left: 39px;
-	}
-	p {
-		position: relative;
-		width: 13px;
-		height: 10px;
-		display: inline-block;
-		top: 3px;
-		font-size: 7px;
-		border-radius: 27%;
-		text-align: center;
-		line-height: 10px;
-	}
 }

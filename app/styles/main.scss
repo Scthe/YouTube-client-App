@@ -3,10 +3,17 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/bootstr
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
 // endbower
 
-$left-panel-size: 210px;
+
 $nav-bar-h: 50px;
 $nav-bar-after-break: 90px;
 $nav-bar-break: 480px;
+
+$left-panel-size: 210px;
+$left-panel-size-after-break: 150px;
+$content-break: 1024px + 17;/* fix for scrollbar -> TODO ff count differently */
+$content-break-2: 840px + 17;
+$video-to-fill-width: 656px + 17; /* change from XXXpx to 100% */
+
 
 @import 'utils';
 @import 'layout';
