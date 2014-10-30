@@ -2,7 +2,8 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
-], function($, _, Backbone) {
+	'text!templates/comment.tmpl.html'
+], function($, _, Backbone, tmpl) {
 
 	'use strict';
 
@@ -11,7 +12,7 @@ define([
 
 		className: 'comment-text hide-overflow video-comment',
 
-		template: _.template($('#comment-template').html()),
+		template: _.template(tmpl),
 
 		render: function() {
 			this.$el.html(this.template(this.model.toJSON()));

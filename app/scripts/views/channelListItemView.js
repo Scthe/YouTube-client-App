@@ -2,8 +2,8 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'requirejsText',
-  'text!templates/channelViewListItem.tmpl.html'
+  'requirejsText', // TODO ?!
+  'text!templates/channelListItem.tmpl.html'
 ], function($, _, Backbone,te, tmpl) {
 
   'use strict';

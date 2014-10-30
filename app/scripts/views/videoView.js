@@ -3,8 +3,9 @@ define([
 	'underscore',
 	'backbone',
 	'models/comment',
-	'models/commentList'
-], function($, _, Backbone, Comment, comments) {
+	'models/commentList',
+	'text!templates/videoView.tmpl.html'
+], function($, _, Backbone, Comment, comments, tmpl) {
 
 	'use strict';
 
@@ -19,7 +20,7 @@ define([
 			'click #add_comment': 'addComment'
 		},
 
-		template: _.template($('#video-template').html()),
+		template: _.template(tmpl),
 
 		initialize: function() {},
 

@@ -5,7 +5,7 @@ define([
 	'models/video',
 	'models/videoList',
 	'views/videoView'
-], function($, _, Backbone, Video, videoList, videoView) {
+], function($, _, Backbone, Video, videoList, VideoView) {
 
 	'use strict';
 	/*global youTubeApiLoaded, youTubeApiCalls, executeGoogleApiCalls*/
@@ -37,7 +37,7 @@ define([
 				var json = response.result;
 				if (json.items.length === 1) {
 					var e = json.items[0];
-					videoView.setVideo(new Video({
+					var video = new Video({
 						youTube_id: e.id,
 						youTube_channel_id: e.snippet.channelId,
 						youTube_embed_Html: e.player.embedHtml,
@@ -50,7 +50,9 @@ define([
 						view_count: e.statistics.viewCount,
 						time: e.contentDetails.duration,
 						description: e.snippet.description
-					}));
+					});
+					var videoView = new VideoView(); // TODO leak ?
+					videoView.setVideo(video);
 					videoView.render();
 				}
 			});

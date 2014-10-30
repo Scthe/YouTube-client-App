@@ -2,7 +2,8 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
-], function($, _, Backbone) {
+	'text!templates/videoListItem.tmpl.html'
+], function($, _, Backbone, tmpl) {
 
 	'use strict';
 
@@ -12,7 +13,7 @@ define([
 		// className:'card video-card .col-md-4',
 		className: 'card video-card',
 
-		template: _.template($('#video-card-template').html()),
+		template: _.template(tmpl),
 
 		events: {
 			// 'click .video-card-thumb': 'goToVideo', // TODO restore
