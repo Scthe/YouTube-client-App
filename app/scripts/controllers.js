@@ -8,12 +8,8 @@ define([
 ], function($, _, Backbone, Video, videoList, videoView) {
 
 	'use strict';
-	/*global API_KEY, gapi*/
+	/*global youTubeApiLoaded, youTubeApiCalls, executeGoogleApiCalls*/
 	/*jshint camelcase: false */
-
-	var __scheduledCalls = [];
-
-	var GOOGLE_YOU_TUBE_API_LOADED = false;
 
 	return {
 		search: search,
@@ -21,20 +17,8 @@ define([
 	};
 
 	function scheduleGoogleApiCall(f) {
-		__scheduledCalls.push(f);
+		youTubeApiCalls.push(f);
 	}
-
-	function executeGoogleApiCalls() {
-		gapi.client.setApiKey(API_KEY);
-		gapi.client.load('youtube', 'v3', function() {
-			$.each(__scheduledCalls, function(i, e) {
-				e(gapi.client.youtube);
-			});
-			__scheduledCalls = [];
-			GOOGLE_YOU_TUBE_API_LOADED = true;
-		});
-	}
-
 
 	/*
 	 * https://developers.google.com/youtube/v3/docs/videos
@@ -71,7 +55,7 @@ define([
 				}
 			});
 		});
-		if (GOOGLE_YOU_TUBE_API_LOADED) {
+		if (youTubeApiLoaded) {
 			executeGoogleApiCalls();
 		}
 	}
@@ -112,7 +96,7 @@ define([
 				$('#search-loading').hide();
 			});
 		});
-		if (GOOGLE_YOU_TUBE_API_LOADED) {
+		if (youTubeApiLoaded) {
 			executeGoogleApiCalls();
 		}
 	}

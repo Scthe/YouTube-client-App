@@ -118,6 +118,26 @@
 		</div>
 	</script>
 	
+	<script src="keys.js"></script>
+	<script>
+		'use strict';
+		/*global API_KEY, gapi, youTubeApiLoaded, youTubeApiCalls*/
+
+		window.youTubeApiLoaded = false;
+		window.youTubeApiCalls = [];
+
+		window.executeGoogleApiCalls = function() {
+			gapi.client.setApiKey(API_KEY);
+			gapi.client.load('youtube', 'v3', function() {
+				for( var i = 0; i < youTubeApiCalls.length; i++){
+					youTubeApiCalls[i](gapi.client.youtube);
+				}
+
+				youTubeApiCalls = [];
+				youTubeApiLoaded = true;
+			});
+		};
+	</script>
 	<script src="https://apis.google.com/js/client.js?onload=executeGoogleApiCalls"></script>
 
 	<!--
