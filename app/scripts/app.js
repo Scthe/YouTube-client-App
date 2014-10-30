@@ -1,51 +1,80 @@
-Settings = {
-	"_default": {
-		//"version":"0"
-		"debug": true,
-		"search_delay":500
-	},
+define([
+	'jquery',
+	'underscore',
+	'backbone',
+	'router'
+], function($, _, Backbone, Router) {
+	'use strict';
 
-	"setup": function () {
-		console.log("settings setup");
-	},
+	var settings = { // TODO separate setting into own file
+		_default: {
+			//'version':'0'
+			'debug': true,
+			'search_delay': 500
+		},
 
-	"get": function (name) {
-		return Settings._default[name];
+		get: function(name) {
+			return settings._default[name];
+		}
+	};
+
+	var contentPanel = $('#main-panel-content'),
+		viewTitle = $('#view-title-text'),
+		searchInputIcon = $('#search-input-icon');
+
+
+	return {
+		config: settings,
+		initialize: initialize
+	};
+
+	function initialize() {
+		/*global app*/
+		console.log('app initialize');
+
+		window.app = {
+			setContent: setContent,
+			setViewTitle: setViewTitle
+		};
+		app.router = Router.initialize();
+
+		jQueryInit();
 	}
-}
-Settings.setup();
 
-
-var app = {}; // app namespace
-app.log = function( t){}
-
-// app.comments.on('add', this.addAll, this);
-// TODO _.bindAll(this, 'render'); // remember: every function that uses 'this' as the current object should be in here
-
-//
-// normal jQuery event callbacks register
-//
-$("#brand").click(function () {
-	console.log("home");
-	app.router.navigate('', {
-		trigger: true
-	});
-});
-
-var searchTimer = null;
-$("#search-bar input").keyup(function () {
-	// hide normal search icon
-	if ($("#search-input-icon").is(':visible')) {
-		$("#search-input-icon").hide();
+	function setContent(content) {
+		contentPanel.html(content);
 	}
-	
-	var term = $(this).val();
-	clearTimeout(searchTimer);
-	// wait some time before firing up the callback
-	searchTimer = setTimeout(function () {
-		// do search
-		app.router.navigate('search/'+term+"/1", {
-			trigger: true
+
+	function setViewTitle(str) {
+		viewTitle.html(str);
+	}
+
+	function jQueryInit() {
+		$('#brand').click(function() {
+			console.log('home');
+			app.router.navigate('', {
+				trigger: true
+			});
 		});
-	}, Settings.get("search_delay"));
+
+		// TODO create search controller
+		var searchTimer = null;
+		$('#search-bar input').keyup(function() {
+			// hide normal search icon
+			if (searchInputIcon.is(':visible')) {
+				searchInputIcon.hide();
+			}
+
+			var term = $(this).val();
+			clearTimeout(searchTimer);
+			// wait some time before firing up the callback
+			searchTimer = setTimeout(function() {
+				// do search
+				app.router.navigate('search/' + term + '/1', {
+					trigger: true
+				});
+			}, settings.get('search_delay'));
+		});
+	}
+
 });

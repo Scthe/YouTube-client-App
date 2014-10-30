@@ -10,6 +10,8 @@
 
 	<!-- Style sheets -->
 	<link rel="stylesheet" href="../styles/main.css" >
+
+	<script data-main="scripts/main" src='../bower_components/requirejs/require.js')></script>
 </head>
 
 <body class="page-background">
@@ -18,7 +20,7 @@
 	<div id="navigation-bar" class="fierce-red fierce-red-bottom-separator">
 		
 		<!-- app title -->
-		<span id="brand" class="decorated-text">YouTube</span>
+		<span id="brand" class="activable decorated-text">YouTube</span>
 
 		<!-- search bar-->
 		<div id="search-bar" class="navigation-bar-right">
@@ -52,113 +54,28 @@
 		<div class="clear"></div>
 	</div>
 
-	
-
-	<script type="text/template" id="channel-template">
-		<div class="hover-white-glow">
-			<!--TODO channel avatar, remove button-->
-
-			<label><%= name %></label>
-
-			<p class="black-overlay" style="<%= video_count>0?"":"visibility:hidden;" %>">
-				<%= video_count %>
-			</p>
-		</div>
-	</script>
-
-	<script type="text/template" id="video-card-template">
-
-		<!-- thumbnail -->
-		<section class="fill-width hover-showable-child">
-			<img src="<%= thumbnail %>" />
-			<span class="small-padding-horizontal semi-transparent absolute-bottom-right"><%= time %></span>
-
-			<!-- overlay -->
-			<div class="activable hover-showable black-overlay fill-whole"></div>
-			<div class="activable hover-showable text-white absolute-center">
-				<p class="activable centered turquoise std-paddings">play</p>
-			</div>
-		</section>
-
-		<section class="text-mid-gray no-margin std-paddings-square">
-			<span class="break-word-overflow text-small activable link-blue hover-underline"><%= name %></span>
-			<ul class="no-padding no-margin text-mid-gray text-small">
-				<li>
-					Author: <span class="on-hover-link"><%= user %></span>
-				</li>
-				<li>
-					<%= view_count %> views
-				</li>
-
-				<!-- TODO add > uploaded X ago -->
-			</ul>
-		</section>
-	</script>
-	
-	<script type="text/template" id="video-template">
-		<!-- becomes iframe -->
-		<%= youTube_embed_Html %>
-
-		<!-- TODO add author, upload date, #comments, comments list info -->
-		<!-- <ul id="video-comments" class="card-bg std-paddings"></ul> -->
-	</script>
-	
-	<script type="text/template" id="comment-template">
-		<img src="<%= avatar %>" class="video-comment-avatar pull-left" />
-		<div class="video-comment-text">
-			<h3 class="video-comment-name comment-misc text-normal"><%= author %></h3>
-			<span class="comment-misc on-hover-link text-small">
-				<%= created_at %>
-			</span>
-		</div>
-		<div class="video-comment-text hide-overflow">
-			<%= text %>
-		</div>
-	</script>
-	
-
-	<script src='../bower_components/jquery/dist/jquery.min.js')></script>
-	<script src='../bower_components/underscore/underscore.js')></script>
-	<script src='../bower_components/backbone/backbone.js')></script>
-	<script src='../bower_components/backbone.localStorage/backbone.localStorage-min.js')></script>
-
 	<script src="keys.js"></script>
-	<script src="scripts/app.js"></script>
-	<script src="scripts/controllers.js"></script>
-	<script src="scripts/models/subscription.js"></script>
-	<script src="scripts/views/subscription.js"></script>
-	<script src="scripts/models/video.js"></script>
-	<script src="scripts/views/videoList.js"></script>
-	<script src="scripts/views/video.js"></script>
-	<script src="scripts/router.js"></script>
+	<script>
+		'use strict';
+		/*global API_KEY, gapi, youTubeApiLoaded, youTubeApiCalls*/
 
-	
+		window.youTubeApiLoaded = false;
+		window.youTubeApiCalls = [];
+
+		window.executeGoogleApiCalls = function() {
+			gapi.client.setApiKey(API_KEY);
+			gapi.client.load('youtube', 'v3', function() {
+				for( var i = 0; i < youTubeApiCalls.length; i++){
+					youTubeApiCalls[i](gapi.client.youtube);
+				}
+
+				youTubeApiCalls = [];
+				youTubeApiLoaded = true;
+			});
+		};
+	</script>
 	<script src="https://apis.google.com/js/client.js?onload=executeGoogleApiCalls"></script>
 
-	<script>
-		/*
-		var length = app.channelList.length;
-		for (var i = 0; i < length; i++) {
-			app.channelList.at(0).destroy();
-		}*/
-		app.channelList.create(app.Channel.defaults);
-		app.channelList.create({active:true,name:'Abc',video_count:4});
-		app.channelList.create({video_count:0});
-
-		for( var i=0; i < 5; i++){
-			app.videoList.create({
-				name: 'Video: '+i,
-				user: 'User A',
-				time:'2:41',
-				view_count:'502',
-				thumbnail: 'images/img5.png'
-				// thumbnail: e.snippet.thumbnails["default"].url,
-				// created_on: e.snippet.publishedAt,
-				// youTube_id:e.id.videoId // TODO when the search result is a channel this will be undefined
-			});
-		}
-	</script>
-	
 </body>
 
 </html>
