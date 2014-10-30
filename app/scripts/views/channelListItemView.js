@@ -2,7 +2,9 @@ define([
   'jquery',
   'underscore',
   'backbone',
-], function($, _, Backbone) {
+  'requirejsText',
+  'text!templates/channelViewListItem.tmpl.html'
+], function($, _, Backbone,te, tmpl) {
 
   'use strict';
 
@@ -11,7 +13,7 @@ define([
 
     className: 'state-button activable text-white',
 
-    template: _.template($('#channel-template').html()),
+    template: _.template(tmpl),
 
     events: {
       // 'click': 'selectItem' // TODO restore

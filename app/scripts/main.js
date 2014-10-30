@@ -1,20 +1,24 @@
 'use strict';
 
 require.config({
-	// baseUrl: 'lib', TODO use baseUrl
 	paths: {
 		jquery: '../../bower_components/jquery/dist/jquery.min',
 		underscore: '../../bower_components/underscore/underscore',
 		backbone: '../../bower_components/backbone/backbone',
-		backboneLocalStorage: '../../bower_components/backbone.localStorage/backbone.localStorage-min'
+		backboneLocalStorage: '../../bower_components/backbone.localStorage/backbone.localStorage-min',
+		requirejsText: '../../bower_components/requirejs-text/text',
+
+		templates: '../templates',
+		// models: '/models',
+		// views: '/views'
 	},
-    shim: {
-        'backbone': {
-            deps: ['jquery', 'underscore'],
-            exports: 'Backbone'
-        }
-    },
-    waitSeconds: 10
+	shim: {
+		'backbone': {
+			deps: ['jquery', 'underscore'],
+			exports: 'Backbone'
+		}
+	},
+	waitSeconds: 10
 
 });
 
