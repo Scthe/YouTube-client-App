@@ -16,8 +16,7 @@ define([
 		template: _.template(tmpl),
 
 		events: {
-			// 'click .video-card-thumb': 'goToVideo', // TODO restore
-			// 'click .video-card-title': 'goToVideo'  // TODO restore
+			'click .video-link': 'goToVideo'
 		},
 
 		initialize: function() {
@@ -30,6 +29,7 @@ define([
 		},
 
 		goToVideo: function() {
+			/*global app*/
 			app.router.navigate('video/' + this.model.id, {
 				trigger: true
 			});

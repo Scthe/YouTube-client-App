@@ -25,14 +25,19 @@ define([
 	};
 
 	function initialize() {
+		/*global app*/
 		console.log('app initialize');
 
 		var router = Router.initialize();
 
+		window.app = {
+			router: router
+		};
+
 		// jQuery event callbacks register
 		$('#brand').click(function() {
 			console.log('home');
-			router.navigate('', {
+			app.router.navigate('', {
 				trigger: true
 			});
 		});
@@ -50,7 +55,7 @@ define([
 			// wait some time before firing up the callback
 			searchTimer = setTimeout(function() {
 				// do search
-				router.navigate('search/' + term + '/1', {
+				app.router.navigate('search/' + term + '/1', {
 					trigger: true
 				});
 			}, settings.get('search_delay'));

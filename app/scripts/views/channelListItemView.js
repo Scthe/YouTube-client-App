@@ -18,11 +18,10 @@ define([
     template: _.template(tmpl),
 
     events: {
-      // 'click': 'selectItem' // TODO restore
+      'click': 'selectItem'
     },
 
     initialize: function(options) {
-      //this.on('click', 'selectItem'); // TODO restore
       this.className += this.model.get('active') ? ' active' : '';
       this.render();
       this.parent = options.parent;
@@ -44,6 +43,7 @@ define([
     },
 
     selectItem: function() {
+      /*global app*/
       //console.log("click: "+this.model.get("name"));
       app.router.navigate('channel/' + this.model.id, {
         trigger: true
