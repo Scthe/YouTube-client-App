@@ -1,14 +1,14 @@
 define([
 	'jquery',
 	'underscore',
-	'backbone'
+	'backbone',
 	'models/video',
 	'models/videoList',
 	'views/videoView'
 ], function($, _, Backbone, Video, videoList, videoView) {
 
 	'use strict';
-	/*global app, API_KEY, gapi*/
+	/*global API_KEY, gapi*/
 	/*jshint camelcase: false */
 
 	var __scheduledCalls = [];
@@ -27,10 +27,10 @@ define([
 	function executeGoogleApiCalls() {
 		gapi.client.setApiKey(API_KEY);
 		gapi.client.load('youtube', 'v3', function() {
-			$.each(app.__scheduledCalls, function(i, e) {
+			$.each(__scheduledCalls, function(i, e) {
 				e(gapi.client.youtube);
 			});
-			app.__scheduledCalls = [];
+			__scheduledCalls = [];
 			GOOGLE_YOU_TUBE_API_LOADED = true;
 		});
 	}

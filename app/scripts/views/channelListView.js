@@ -35,8 +35,7 @@ define([
 			this.$el.append(view.render().el);
 		}
 	});
-	// app.channelListView = new app.ChannelListView();
-	// return new ChannelListView();
+
 	return ChannelListView;
 
 });

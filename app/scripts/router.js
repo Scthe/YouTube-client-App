@@ -4,11 +4,10 @@ define([
 	'backbone',
 	'views/channelListView',
 	'models/channelList',
-	// 'views/videoListView',
-	// 'models/videoList',
-	// 'controllers'
-	// ], function($, _, Backbone, channelListView, channelList, videoListView, videoList, YT_Service) {
-], function($, _, Backbone, ChannelListView, channelList) {
+	'views/videoListView',
+	'models/videoList',
+	'controllers'
+], function($, _, Backbone, ChannelListView, channelList, VideoListView, videoList, ytService) {
 
 	'use strict';
 
@@ -29,6 +28,8 @@ define([
 		console.log('router initialize');
 
 		var channelListView = new ChannelListView();
+		var videoListView = new VideoListView();
+
 		var router = new Router();
 		// TODO separate files in /routes
 
@@ -41,7 +42,6 @@ define([
 			$('#main-panel-content').html('home'); // TODO app.setContent
 		});
 
-		/*
 		router.on('route:channel', function(id) {
 			console.log('routed to channel \'' + id + '\'');
 
@@ -79,11 +79,7 @@ define([
 				$('#view-title-text').html(m.get('name'));
 
 				// call for more details
-				YT_Service.videoDetails(m.get('youTube_id'));
-
-				// render content
-				//app.videoView.setVideo(m);
-				//app.videoView.render(); // TODO display video description
+				ytService.videoDetails(m.get('youTube_id'));
 			} else {
 				// TODO on video look up error
 				console.log('err!');
@@ -105,14 +101,8 @@ define([
 			$('#view-title-text').html('Search');
 
 			// download data
-			YT_Service.search(term, page);
-
-
-			// render content
-			//app.videoListView.render();
-
+			ytService.search(term, page);
 		});
-*/
 
 		Backbone.history.start();
 

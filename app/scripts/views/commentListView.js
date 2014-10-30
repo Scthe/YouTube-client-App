@@ -30,7 +30,6 @@ define([
 			var view = new CommentView({
 				model: comment
 			});
-			//this.$el.append(view.render().el);
 			$(this.el_).append(view.render().el);
 		}
 	});

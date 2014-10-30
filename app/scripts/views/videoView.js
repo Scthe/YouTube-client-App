@@ -1,37 +1,47 @@
-'use strict';
-/*global app, Backbone, _*/
+define([
+	'jquery',
+	'underscore',
+	'backbone',
+	'models/comment',
+	'models/commentList'
+], function($, _, Backbone, Comment, comments) {
 
-var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-	'July', 'August', 'September', 'October', 'November', 'December'
-];
-app.VideoView = Backbone.View.extend({
-	el: '#main-panel-content',
+	'use strict';
 
-	events: {
-		'click #add_comment': 'addComment'
-	},
+	var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+		'July', 'August', 'September', 'October', 'November', 'December'
+	];
 
-	template: _.template($('#video-template').html()),
+	var VideoView = Backbone.View.extend({
+		el: '#main-panel-content',
 
-	initialize: function() {},
+		events: {
+			'click #add_comment': 'addComment'
+		},
 
-	render: function() {
-		this.$el.html(this.template(this.model.toJSON()));
-		if (typeof(this.model.get('created_on')) !== undefined) {
-			var d = new Date(this.model.get('created_on'));
-			$('#video-date').html('<span>' + d.getDate() + '</span><span>' + monthNames[d.getMonth()].substring(0, 3) + '</span>');
+		template: _.template($('#video-template').html()),
+
+		initialize: function() {},
+
+		render: function() {
+			this.$el.html(this.template(this.model.toJSON()));
+			if (typeof(this.model.get('created_on')) !== undefined) {
+				var d = new Date(this.model.get('created_on'));
+				$('#video-date').html('<span>' + d.getDate() + '</span><span>' + monthNames[d.getMonth()].substring(0, 3) + '</span>');
+			}
+			//app.commentsListView.render();
+			return this;
+		},
+
+		setVideo: function(video) {
+			this.model = video;
+		},
+
+		addComment: function() {
+			console.log('adding new comment');
+			comments.create(Comment.defaults);
 		}
-		//app.commentsListView.render();
-		return this;
-	},
+	});
 
-	setVideo: function(video) {
-		this.model = video;
-	},
-
-	addComment: function() {
-		console.log('adding new comment');
-		app.comments.create(app.Comment.defaults);
-	}
+	return VideoView;
 });
-app.videoView = new app.VideoView();

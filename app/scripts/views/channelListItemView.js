@@ -18,7 +18,7 @@ define([
     },
 
     initialize: function(options) {
-      this.on('click', 'selectItem');
+      //this.on('click', 'selectItem'); // TODO restore
       this.className += this.model.get('active') ? ' active' : '';
       this.render();
       this.parent = options.parent;

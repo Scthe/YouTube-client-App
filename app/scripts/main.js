@@ -1,3 +1,5 @@
+'use strict';
+
 require.config({
 	// baseUrl: 'lib', TODO use baseUrl
 	paths: {
