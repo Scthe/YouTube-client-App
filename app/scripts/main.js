@@ -7,7 +7,8 @@ require.config({
 
 		templates: '/templates',
 		models: 'models',
-		views: 'views'
+		views: 'views',
+		routes: 'routes'
 	},
 	shim: {
 		'backbone': {

@@ -18,6 +18,8 @@ define([
 		}
 	};
 
+	var contentPanel = $('#main-panel-content');
+
 
 	return {
 		config: settings,
@@ -28,13 +30,19 @@ define([
 		/*global app*/
 		console.log('app initialize');
 
-		var router = Router.initialize();
-
 		window.app = {
-			router: router
+			setContent: setContent
 		};
+		app.router = Router.initialize();
 
-		// jQuery event callbacks register
+		jQueryInit();
+	}
+
+	function setContent(content) {
+		contentPanel.html(content);
+	}
+
+	function jQueryInit() {
 		$('#brand').click(function() {
 			console.log('home');
 			app.router.navigate('', {
