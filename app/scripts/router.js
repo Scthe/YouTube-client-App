@@ -7,8 +7,9 @@ define([
 	'views/videoListView',
 	'models/videoList',
 	'controllers',
-	'routes/index'
-], function($, _, Backbone, ChannelListView, channelList, VideoListView, videoList, ytService, routeIndex) {
+	'routes/home',
+	'routes/channel'
+], function($, _, Backbone, ChannelListView, channelList, VideoListView, videoList, ytService, routeIndex, routeChannel) {
 
 	'use strict';
 
@@ -34,26 +35,9 @@ define([
 		var router = new Router();
 
 		routeIndex.initialize(router, channelListView);
+		routeChannel.initialize(router, channelListView, videoListView);
 
-		router.on('route:channel', function(id) {
-			console.log('routed to channel \'' + id + '\'');
 
-			// set active channels
-			channelList.each(function(e) {
-				e.set('active', e.id === id);
-			});
-
-			// render left subscription panel
-			channelListView.render();
-
-			// change view title
-			var m = channelList.get(id);
-			var newTtitle = m.get('name') + '\'s Channel';
-			$('#view-title-text').html(newTtitle); // TODO app.setViewTitle('abc')
-
-			// render content
-			videoListView.render();
-		});
 
 		router.on('route:video', function(id) {
 			console.log('routed to video \'' + id + '\'');

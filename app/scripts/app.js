@@ -18,7 +18,8 @@ define([
 		}
 	};
 
-	var contentPanel = $('#main-panel-content');
+	var contentPanel = $('#main-panel-content'),
+		viewTitle = $('#view-title-text');
 
 
 	return {
@@ -31,7 +32,8 @@ define([
 		console.log('app initialize');
 
 		window.app = {
-			setContent: setContent
+			setContent: setContent,
+			setViewTitle: setViewTitle
 		};
 		app.router = Router.initialize();
 
@@ -40,6 +42,10 @@ define([
 
 	function setContent(content) {
 		contentPanel.html(content);
+	}
+
+	function setViewTitle(str) {
+		viewTitle.html(str);
 	}
 
 	function jQueryInit() {

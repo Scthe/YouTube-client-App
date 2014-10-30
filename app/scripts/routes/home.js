@@ -9,6 +9,7 @@ define({
 			// render left subscription panel
 			channelListView.render();
 
+			app.setViewTitle('Home');
 			app.setContent('home');
 		});
 	}
