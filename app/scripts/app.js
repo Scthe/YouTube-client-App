@@ -19,7 +19,8 @@ define([
 	};
 
 	var contentPanel = $('#main-panel-content'),
-		viewTitle = $('#view-title-text');
+		viewTitle = $('#view-title-text'),
+		searchInputIcon = $('#search-input-icon');
 
 
 	return {
@@ -60,8 +61,8 @@ define([
 		var searchTimer = null;
 		$('#search-bar input').keyup(function() {
 			// hide normal search icon
-			if ($('#search-input-icon').is(':visible')) {
-				$('#search-input-icon').hide();
+			if (searchInputIcon.is(':visible')) {
+				searchInputIcon.hide();
 			}
 
 			var term = $(this).val();

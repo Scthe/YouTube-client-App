@@ -28,7 +28,8 @@ define([
 			this.$el.html(this.template(this.model.toJSON()));
 			if (typeof(this.model.get('created_on')) !== undefined) {
 				var d = new Date(this.model.get('created_on'));
-				$('#video-date').html('<span>' + d.getDate() + '</span><span>' + monthNames[d.getMonth()].substring(0, 3) + '</span>');
+				var dateHTML = '<span>' + d.getDate() + '</span><span>' + monthNames[d.getMonth()].substring(0, 3) + '</span>';
+				$('#video-date').html(dateHTML);
 			}
 			//app.commentsListView.render();
 			return this;

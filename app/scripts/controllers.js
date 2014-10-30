@@ -11,6 +11,10 @@ define([
 	/*global youTubeApiLoaded, youTubeApiCalls, executeGoogleApiCalls*/
 	/*jshint camelcase: false */
 
+	var seachLoading = $('#search-loading'),
+		searchInputIcon = $('#search-input-icon');
+
+
 	return {
 		search: search,
 		videoDetails: videoDetails
@@ -69,7 +73,7 @@ define([
 	 */
 	function search(searchTerm, page) {
 		// TODO add pages
-		$('#search-loading').show();
+		seachLoading.show();
 		videoList.reset();
 
 		scheduleGoogleApiCall(function(yt) {
@@ -94,8 +98,8 @@ define([
 					});
 				});
 				videoList.localStorage.save();
-				$('#search-input-icon').show();
-				$('#search-loading').hide();
+				searchInputIcon.show();
+				seachLoading.hide();
 			});
 		});
 		if (youTubeApiLoaded) {
