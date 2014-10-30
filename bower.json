@@ -7,7 +7,8 @@
     "underscore": "~1.7.0",
     "backbone": "~1.1.2",
     "jQuery": "~2.1.1",
-    "backbone.localstorage": "~1.1.13"
+    "backbone.localstorage": "~1.1.13",
+    "requirejs": "~2.1.15"
   },
   "appPath": "app"
 }

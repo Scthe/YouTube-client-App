@@ -1,8 +1,18 @@
-'use strict';
-/*global app, Backbone, Store*/
+define([
+	'jquery',
+	'underscore',
+	'backbone',
+	'backboneLocalStorage',
+	'models/channel'
+], function($, _, Backbone, Store, Channel) {
 
-app.ChannelList = Backbone.Collection.extend({
-	model: app.Channel,
-	localStorage: new Store('backbone-channels')
+	'use strict';
+
+	var ChannelList = Backbone.Collection.extend({
+		model: Channel,
+		localStorage: new Store('backbone-channels')
+	});
+	// app.channelList = new app.ChannelList();
+	// return ChannelList;
+	return new ChannelList();
 });
-app.channelList = new app.ChannelList();
