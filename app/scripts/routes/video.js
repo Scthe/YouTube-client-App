@@ -1,7 +1,7 @@
 define([
 	'underscore',
 	'models/videoList',
-	'controllers'
+	'services/YouTubeService'
 ], function(_, videoList, ytService) {
 
 	'use strict';

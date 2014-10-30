@@ -8,7 +8,8 @@ require.config({
 		templates: '/templates',
 		models: 'models',
 		views: 'views',
-		routes: 'routes'
+		routes: 'routes',
+		services: 'services'
 	},
 	shim: {
 		'backbone': {

@@ -2,7 +2,7 @@ define([
 	'underscore',
 	'views/channelListView',
 	'models/channelList',
-	'controllers'
+	'services/YouTubeService'
 ], function(_, ChannelListView, channelList, ytService) {
 
 	'use strict';
