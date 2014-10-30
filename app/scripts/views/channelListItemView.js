@@ -1,8 +1,10 @@
+/*jslint indent: 2 */
+
 define([
   'jquery',
   'underscore',
   'backbone',
-  'requirejsText', // TODO ?!
+  'text', // TODO why requirejs plugin is required here ?!
   'text!templates/channelListItem.tmpl.html'
 ], function($, _, Backbone,te, tmpl) {
 
