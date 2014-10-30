@@ -3,15 +3,17 @@ define([
 	'underscore',
 	'backbone',
 	'views/channelListView',
-	'models/channelList',
 	'views/videoListView',
-	'models/videoList',
-	'controllers',
 	'routes/home',
-	'routes/channel'
-], function($, _, Backbone, ChannelListView, channelList, VideoListView, videoList, ytService, routeIndex, routeChannel) {
+	'routes/channel',
+	'routes/video',
+	'routes/search'
+], function($, _, Backbone, ChannelListView, VideoListView) {
 
 	'use strict';
+
+	// parameters after first 5 are assumed to be routes modules
+	var routes = Array.prototype.slice.call(arguments, 5);
 
 	var Router = Backbone.Router.extend({
 		routes: {
@@ -34,51 +36,8 @@ define([
 
 		var router = new Router();
 
-		routeIndex.initialize(router, channelListView);
-		routeChannel.initialize(router, channelListView, videoListView);
-
-
-
-		router.on('route:video', function(id) {
-			console.log('routed to video \'' + id + '\'');
-
-			// find the selected model
-			// ( due to 'app.videoList.reset()' resetting the _byId look up we have to do it by hand)
-			var m;
-			videoList.each(function(e) {
-				if (e.id === id) {
-					m = e;
-				}
-			});
-
-			if (m) {
-				// change view title
-				$('#view-title-text').html(m.get('name'));
-
-				// call for more details
-				ytService.videoDetails(m.get('youTube_id'));
-			} else {
-				// TODO on video look up error
-				console.log('err!');
-			}
-		});
-
-		router.on('route:search', function(term, page) {
-			console.log('routed to search for: \'' + term + '\', page: ' + page);
-
-			// set active channels
-			channelList.each(function(e) {
-				e.set('active', false);
-			});
-
-			// render left subscription panel
-			channelListView.render();
-
-			// change view title
-			$('#view-title-text').html('Search');
-
-			// download data
-			ytService.search(term, page);
+		_.each(routes, function(e) {
+			e.initialize(router, channelListView, videoListView);
 		});
 
 		Backbone.history.start();
