@@ -1,8 +1,17 @@
-'use strict';
-/*global app, Backbone, Store*/
+define([
+	'jquery',
+	'underscore',
+	'backbone',
+	'backboneLocalStorage',
+	'models/comment'
+], function($, _, Backbone, Store, Comment) {
 
-app.CommentList = Backbone.Collection.extend({
-	model: app.Comment,
-	localStorage: new Store('backbone-comments')
+	'use strict';
+
+	var CommentList = Backbone.Collection.extend({
+		model: Comment,
+		localStorage: new Store('backbone-comments')
+	});
+
+	return new CommentList(); // TODO instantiate in app.js
 });
-app.comments = new app.CommentList();
