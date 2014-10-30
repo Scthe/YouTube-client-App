@@ -27,8 +27,6 @@ define([
 		},
 
 		onAdd: function(video) {
-			// TODO sort A-Z ?
-			// TODO ensure only 1 is active at a time ?
 			var view = new VideoListItemView({
 				model: video,
 				parent: this
