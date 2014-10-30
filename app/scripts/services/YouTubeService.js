@@ -22,12 +22,16 @@ define([
 
 	function scheduleGoogleApiCall(f) {
 		youTubeApiCalls.push(f);
+
+		if (youTubeApiLoaded) {
+			executeGoogleApiCalls();
+		}
 	}
 
 	/*
 	 * https://developers.google.com/youtube/v3/docs/videos
 	 */
-	function videoDetails(id) {
+	function videoDetails(id, callback) {
 		var idList = id;
 
 		scheduleGoogleApiCall(function(yt) {
@@ -40,30 +44,12 @@ define([
 			request.execute(function(response) {
 				var json = response.result;
 				if (json.items.length === 1) {
-					var e = json.items[0];
-					var video = new Video({
-						youTube_id: e.id,
-						youTube_channel_id: e.snippet.channelId,
-						youTube_embed_Html: e.player.embedHtml,
-						thumbnail: e.snippet.thumbnails['default'].url,
-
-						name: e.snippet.title,
-						user: e.snippet.channelTitle,
-						created_on: e.snippet.publishedAt,
-
-						view_count: e.statistics.viewCount,
-						time: e.contentDetails.duration,
-						description: e.snippet.description
-					});
-					var videoView = new VideoView(); // TODO leak ?
-					videoView.setVideo(video);
-					videoView.render();
+					callback.success(json.items[0]);
+				} else {
+					callback.failure(id);
 				}
 			});
 		});
-		if (youTubeApiLoaded) {
-			executeGoogleApiCalls();
-		}
 	}
 
 
@@ -102,9 +88,6 @@ define([
 				seachLoading.hide();
 			});
 		});
-		if (youTubeApiLoaded) {
-			executeGoogleApiCalls();
-		}
 	}
 
 });

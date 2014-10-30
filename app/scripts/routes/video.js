@@ -1,8 +1,10 @@
 define([
 	'underscore',
 	'models/videoList',
-	'services/YouTubeService'
-], function(_, videoList, ytService) {
+	'services/YouTubeService',
+	'models/video',
+	'views/videoView'
+], function(_, videoList, ytService, Video, VideoView) {
 
 	'use strict';
 	/*global app*/
@@ -26,13 +28,42 @@ define([
 				app.setViewTitle(video.get('name'));
 
 				// call for more details
-				ytService.videoDetails(video.get('youTube_id'));
+				ytService.videoDetails(video.get('youTube_id'), {
+					success: videoGetSuccess,
+					failure: videoGetFail
+				});
 			} else {
-				// TODO on video look up error
-				console.log('err!');
+				videoGetFail(id);
 			}
 
 		});
+	}
+
+	function videoGetSuccess(e) {
+		/*jshint camelcase: false */
+
+		var video = new Video({
+			youTube_id: e.id,
+			youTube_channel_id: e.snippet.channelId,
+			youTube_embed_Html: e.player.embedHtml,
+			thumbnail: e.snippet.thumbnails['default'].url,
+
+			name: e.snippet.title,
+			user: e.snippet.channelTitle,
+			created_on: e.snippet.publishedAt,
+
+			view_count: e.statistics.viewCount,
+			time: e.contentDetails.duration,
+			description: e.snippet.description
+		});
+		var videoView = new VideoView(); // TODO leak ?
+		videoView.setVideo(video);
+		videoView.render();
+	}
+
+	function videoGetFail(id) {
+		// TODO on video look up error
+		console.log('err!');
 	}
 
 });
