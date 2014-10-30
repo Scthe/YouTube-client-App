@@ -1,30 +1,39 @@
-'use strict';
-/*global app, Backbone*/
+define([
+	'jquery',
+	'underscore',
+	'backbone',
+	'../models/commentList',
+	'views/commentListItemView'
+], function($, _, Backbone, comments, CommentView) {
 
-app.CommentListView = Backbone.View.extend({
-	el: '#video-comments', // TODO seems to not be working..
-	el_: '#video-comments',
+	'use strict';
 
-	initialize: function() {
-		app.comments.on('add', this.addOne, this);
-		app.comments.fetch();
-	},
+	var CommentListView = Backbone.View.extend({
+		el: '#video-comments', // TODO seems to not be working..
+		el_: '#video-comments',
 
-	render: function() {
-		this.$el.empty();
-		var that = this;
-		app.comments.each(function(e) {
-			that.addOne(e);
-		});
-		return this;
-	},
+		initialize: function() {
+			comments.on('add', this.addOne, this);
+			comments.fetch();
+		},
 
-	addOne: function(comment) {
-		var view = new app.CommentView({
-			model: comment
-		});
-		//this.$el.append(view.render().el);
-		$(this.el_).append(view.render().el);
-	}
+		render: function() {
+			this.$el.empty();
+			var that = this;
+			comments.each(function(e) {
+				that.addOne(e);
+			});
+			return this;
+		},
+
+		addOne: function(comment) {
+			var view = new CommentView({
+				model: comment
+			});
+			//this.$el.append(view.render().el);
+			$(this.el_).append(view.render().el);
+		}
+	});
+
+	return CommentListView;
 });
-app.commentsListView = new app.CommentListView();

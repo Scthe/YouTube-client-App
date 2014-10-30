@@ -12,5 +12,6 @@ define([
 		model: Channel,
 		localStorage: new Store('backbone-channels')
 	});
+	
 	return new ChannelList(); // TODO instantiate in app.js
 });

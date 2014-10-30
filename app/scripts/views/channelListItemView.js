@@ -4,9 +4,7 @@ define([
   'backbone',
 ], function($, _, Backbone) {
 
-
   'use strict';
-  /*global app*/
 
   var ChannelView = Backbone.View.extend({
     tagName: 'li',

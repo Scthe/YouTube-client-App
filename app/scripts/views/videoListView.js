@@ -1,36 +1,46 @@
-'use strict';
-/*global app, Backbone, _*/
+define([
+	'jquery',
+	'underscore',
+	'backbone',
+	'../models/videoList',
+	'views/videoListItemView'
+], function($, _, Backbone, videoList, VideoListItemView) {
 
-app.VideoListView = Backbone.View.extend({
-	el: '#main-panel-content',
+	'use strict';
 
-	initialize: function() {
-		_.bindAll(this, 'onAdd', 'resetAll', 'render');
-		app.videoList.on('add', this.onAdd, this);
-		app.videoList.on('reset', this.resetAll, this);
-		app.videoList.fetch();
-	},
+	var VideoListView = Backbone.View.extend({
+		el: '#main-panel-content',
 
-	render: function() {
-		this.$el.html('');
-		var that = this;
-		app.videoList.each(function(e) {
-			that.onAdd(e);
-		});
-	},
+		initialize: function() {
+			_.bindAll(this, 'onAdd', 'resetAll', 'render');
+			videoList.on('add', this.onAdd, this);
+			videoList.on('reset', this.resetAll, this);
+			videoList.fetch();
+		},
 
-	onAdd: function(video) {
-		// TODO sort A-Z ?
-		// TODO ensure only 1 is active at a time ?
-		var view = new app.VideoListItemView({
-			model: video,
-			parent: this
-		});
-		this.$el.append(view.render().el);
-	},
+		render: function() {
+			this.$el.html('');
+			var that = this;
+			videoList.each(function(e) {
+				that.onAdd(e);
+			});
+		},
 
-	resetAll: function() {
-		this.$el.html('');
-	}
+		onAdd: function(video) {
+			// TODO sort A-Z ?
+			// TODO ensure only 1 is active at a time ?
+			var view = new VideoListItemView({
+				model: video,
+				parent: this
+			});
+			this.$el.append(view.render().el);
+		},
+
+		resetAll: function() {
+			this.$el.html('');
+		}
+	});
+
+	return VideoListView;
+
 });
-app.videoListView = new app.VideoListView();
