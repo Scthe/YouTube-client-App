@@ -1,19 +1,7 @@
-define([
-	'jquery',
-	'underscore',
-	'backbone',
-	'models/video',
-	'models/videoList',
-	'views/videoView'
-], function($, _, Backbone, Video, videoList, VideoView) {
+define(function() {
 
 	'use strict';
 	/*global youTubeApiLoaded, youTubeApiCalls, executeGoogleApiCalls*/
-	/*jshint camelcase: false */
-
-	var seachLoading = $('#search-loading'),
-		searchInputIcon = $('#search-input-icon');
-
 
 	return {
 		search: search,
@@ -23,6 +11,7 @@ define([
 	function scheduleGoogleApiCall(f) {
 		youTubeApiCalls.push(f);
 
+		// try to invoke now
 		if (youTubeApiLoaded) {
 			executeGoogleApiCalls();
 		}
@@ -57,10 +46,8 @@ define([
 	 * https://developers.google.com/youtube/v3/docs/search
 	 * https://developers.google.com/youtube/v3/docs/search/list
 	 */
-	function search(searchTerm, page) {
+	function search(searchTerm, page, callback) {
 		// TODO add pages
-		seachLoading.show();
-		videoList.reset();
 
 		scheduleGoogleApiCall(function(yt) {
 			var request = yt.search.list({
@@ -72,20 +59,7 @@ define([
 
 			request.execute(function(response) {
 				var json = response.result;
-				$.each(json.items, function(i, e) {
-					videoList.create({
-						name: e.snippet.title,
-						user: e.snippet.channelTitle,
-						time: '2:41', // TODO hardcoded
-						view_count: '502', // TODO hardcoded
-						thumbnail: e.snippet.thumbnails['default'].url,
-						created_on: e.snippet.publishedAt,
-						youTube_id: e.id.videoId // TODO when the search result is a channel this will be undefined
-					});
-				});
-				videoList.localStorage.save();
-				searchInputIcon.show();
-				seachLoading.hide();
+				callback(json.items);
 			});
 		});
 	}

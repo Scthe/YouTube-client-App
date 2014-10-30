@@ -29,17 +29,17 @@ define([
 
 				// call for more details
 				ytService.videoDetails(video.get('youTube_id'), {
-					success: videoGetSuccess,
-					failure: videoGetFail
+					success: onVideoGetSuccess,
+					failure: onVideoGetFail
 				});
 			} else {
-				videoGetFail(id);
+				onVideoGetFail(id);
 			}
 
 		});
 	}
 
-	function videoGetSuccess(e) {
+	function onVideoGetSuccess(e) {
 		/*jshint camelcase: false */
 
 		var video = new Video({
@@ -61,9 +61,9 @@ define([
 		videoView.render();
 	}
 
-	function videoGetFail(id) {
+	function onVideoGetFail(id) {
 		// TODO on video look up error
-		console.log('err!');
+		console.log('Could not get video: \'' + id + '\'');
 	}
 
 });
