@@ -185,6 +185,10 @@ module.exports = function(grunt) {
         cwd: '<%= config.app %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
+      },
+      requirejsText:{
+        dest: '.tmp/scripts/text.js',
+        src: 'bower_components/requirejs-text/text.js'
       }
     },
 
@@ -231,6 +235,7 @@ module.exports = function(grunt) {
       'concurrent:server',
       'autoprefixer',
       'jade',
+      'copy:requirejsText',
       'connect:livereload',
       'watch'
     ]);

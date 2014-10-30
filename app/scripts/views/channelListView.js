@@ -1,31 +1,41 @@
-'use strict';
-/*global app, Backbone*/
+define([
+	'jquery',
+	'underscore',
+	'backbone',
+	'../models/channelList',
+	'views/channelListItemView'
+], function($, _, Backbone, channelList, ChannelView) {
 
-app.ChannelListView = Backbone.View.extend({
-	el: '#channels-panel',
+	'use strict';
 
-	initialize: function() {
-		app.channelList.on('add', this.onAdd, this);
-		app.channelList.fetch();
-		//this.render();
-	},
+	var ChannelListView = Backbone.View.extend({
+		el: '#channels-panel',
 
-	render: function() {
-		this.$el.html('');
-		var that = this;
-		app.channelList.each(function(e) {
-			that.onAdd(e);
-		});
-	},
+		initialize: function() {
+			channelList.on('add', this.onAdd, this);
+			channelList.fetch();
+			//this.render();
+		},
 
-	onAdd: function(channel) {
-		// TODO sort A-Z ?
-		// TODO ensure only 1 is active at a time ?
-		var view = new app.ChannelView({
-			model: channel,
-			parent: this
-		});
-		this.$el.append(view.render().el);
-	}
+		render: function() {
+			this.$el.html('');
+			var that = this;
+			channelList.each(function(e) {
+				that.onAdd(e);
+			});
+		},
+
+		onAdd: function(channel) {
+			// TODO sort A-Z ?
+			// TODO ensure only 1 is active at a time ?
+			var view = new ChannelView({
+				model: channel,
+				parent: this
+			});
+			this.$el.append(view.render().el);
+		}
+	});
+
+	return ChannelListView;
+
 });
-app.channelListView = new app.ChannelListView();

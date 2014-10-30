@@ -1,15 +1,24 @@
-'use strict';
-/*global app, Backbone, _*/
+define([
+	'jquery',
+	'underscore',
+	'backbone',
+	'text!templates/comment.tmpl.html'
+], function($, _, Backbone, tmpl) {
 
-app.CommentView = Backbone.View.extend({
-	tagName: 'li',
+	'use strict';
 
-	className: 'comment-text hide-overflow video-comment',
+	var CommentView = Backbone.View.extend({
+		tagName: 'li',
 
-	template: _.template($('#comment-template').html()),
+		className: 'comment-text hide-overflow video-comment',
 
-	render: function() {
-		this.$el.html(this.template(this.model.toJSON()));
-		return this;
-	}
+		template: _.template(tmpl),
+
+		render: function() {
+			this.$el.html(this.template(this.model.toJSON()));
+			return this;
+		}
+	});
+
+	return CommentView;
 });

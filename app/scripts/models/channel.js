@@ -1,11 +1,19 @@
-'use strict';
-/*global app, Backbone */
+define([
+	'jquery',
+	'underscore',
+	'backbone',
+], function($, _, Backbone) {
 
-app.Channel = Backbone.Model.extend({
-	//urlRoot: '/'
-	defaults: {
-		name: 'Channel A',
-		videoCount: 3,
-		active: false
-	}
+	'use strict';
+
+	var Channel = Backbone.Model.extend({
+		//urlRoot: '/'
+		defaults: {
+			name: 'Channel A',
+			videoCount: 3,
+			active: false
+		}
+	});
+
+	return Channel;
 });

@@ -1,8 +1,17 @@
-'use strict';
-/*global app, Backbone, Store*/
+define([
+	'jquery',
+	'underscore',
+	'backbone',
+	'backboneLocalStorage',
+	'models/video'
+], function($, _, Backbone, Store, Video) {
 
-app.VideoList = Backbone.Collection.extend({
-	model: app.Video,
-	localStorage: new Store('backbone-videos')
+	'use strict';
+
+	var VideoList = Backbone.Collection.extend({
+		model: Video,
+		localStorage: new Store('backbone-videos')
+	});
+
+	return new VideoList(); // TODO instantiate in app.js
 });
-app.videoList = new app.VideoList();

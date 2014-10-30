@@ -1,31 +1,40 @@
-'use strict';
-/*global app, Backbone, _*/
+define([
+	'jquery',
+	'underscore',
+	'backbone',
+	'text!templates/videoListItem.tmpl.html'
+], function($, _, Backbone, tmpl) {
 
-app.VideoListItemView = Backbone.View.extend({
-	tagName: 'article',
+	'use strict';
 
-	// className:'card video-card .col-md-4',
-	className: 'card video-card',
+	var VideoListItemView = Backbone.View.extend({
+		tagName: 'article',
 
-	template: _.template($('#video-card-template').html()),
+		// className:'card video-card .col-md-4',
+		className: 'card video-card',
 
-	events: {
-		'click .video-card-thumb': 'goToVideo',
-		'click .video-card-title': 'goToVideo'
-	},
+		template: _.template(tmpl),
 
-	initialize: function() {
-		this.render();
-	},
+		events: {
+			'click .video-link': 'goToVideo'
+		},
 
-	render: function() {
-		this.$el.html(this.template(this.model.toJSON()));
-		return this;
-	},
+		initialize: function() {
+			this.render();
+		},
 
-	goToVideo: function() {
-		app.router.navigate('video/' + this.model.id, {
-			trigger: true
-		});
-	}
+		render: function() {
+			this.$el.html(this.template(this.model.toJSON()));
+			return this;
+		},
+
+		goToVideo: function() {
+			/*global app*/
+			app.router.navigate('video/' + this.model.id, {
+				trigger: true
+			});
+		}
+	});
+
+	return VideoListItemView;
 });
