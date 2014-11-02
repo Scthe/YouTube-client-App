@@ -54,7 +54,7 @@ define(function() {
 				q: searchTerm,
 				part: 'snippet',
 				type: 'video',
-				maxResults: 3
+				maxResults: 10
 			});
 
 			request.execute(function(response) {

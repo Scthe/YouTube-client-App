@@ -10,8 +10,7 @@ define([
 	var VideoListItemView = Backbone.View.extend({
 		tagName: 'article',
 
-		// className:'card video-card .col-md-4',
-		className: 'card video-card',
+		className:'card flex-grid',
 
 		template: _.template(tmpl),
 

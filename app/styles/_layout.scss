@@ -38,6 +38,32 @@
 }
 
 #main-panel-content{
+	display: flex;
+	flex-wrap: wrap;
+
+	@media screen and (max-width: $flex-grid-break-2){
+		padding-left: 5px !important;
+		padding-right: 5px !important;
+	}
+}
+
+/* video grid */
+.flex-grid{
+	margin-bottom:5px;
+	
+
+	@media screen and (max-width: $flex-grid-break-3){
+		width:100%;
+	}
+	@media screen and (max-width: $flex-grid-break-2) and (min-width: $flex-grid-break-3){
+		width:50%;
+	}
+	@media screen and (max-width: $flex-grid-break) and (min-width: $flex-grid-break-2){
+		width:33%;
+	}
+	@media screen and (min-width: $flex-grid-break) {
+		width:25%;
+	}
 
 }
 
@@ -66,6 +92,18 @@
 		right: 10px;
 		width: 240px;
 		float: right;
+	}
+}
+
+.navigation-bar-left {
+	@media screen and (max-width: $nav-bar-break) {
+		width: 100%;
+		display: block;
+	}
+	@media screen and (min-width: $nav-bar-break) {
+		height: inherit;
+		width: $left-panel-size;
+		float: left;
 	}
 }
 
