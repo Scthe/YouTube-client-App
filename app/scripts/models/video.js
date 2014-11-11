@@ -23,7 +23,8 @@ define([
 			duration: '0',
 			description: '',
 			likeCount: 0,
-			dislikeCount: 0
+			dislikeCount: 0,
+			commentCount:0
 		},
 		initialize: function(youTubeId, successCallback, failCallback) {
 			_.bindAll(this, 'onVideoGetSuccess', 'onVideoGetFail');
@@ -42,6 +43,7 @@ define([
 
 		onVideoGetSuccess: function(e) {
 			/*jshint camelcase: false */
+			console.log(e)
 
 			this.set('title', e.snippet.title);
 			this.set('channelId', e.snippet.channelId);
@@ -54,6 +56,7 @@ define([
 			this.set('description', e.snippet.description);
 			this.set('likeCount', e.statistics.likeCount);
 			this.set('dislikeCount', e.statistics.dislikeCount);
+			this.set('commentCount', e.statistics.commentCount);
 
 			if (this.successCallback !== undefined) {
 				this.successCallback(this);
