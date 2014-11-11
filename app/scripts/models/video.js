@@ -30,14 +30,16 @@ define([
 		initialize: function(youTubeId, successCallback, failCallback) {
 			_.bindAll(this, 'onVideoGetSuccess', 'onVideoGetFail');
 
-			this.youTubeId = youTubeId;
-			this.successCallback = successCallback;
-			this.failCallback = failCallback;
+			if (typeof youTubeId === 'string') {
+				this.youTubeId = youTubeId;
+				this.successCallback = successCallback;
+				this.failCallback = failCallback;
 
-			ytService.videoDetails(youTubeId, {
-				success: this.onVideoGetSuccess,
-				failure: this.onVideoGetFail
-			});
+				ytService.videoDetails(youTubeId, {
+					success: this.onVideoGetSuccess,
+					failure: this.onVideoGetFail
+				});
+			}
 		},
 
 		onVideoGetSuccess: function(e) {

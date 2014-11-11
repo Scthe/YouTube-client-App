@@ -55,32 +55,38 @@
 
 	<script src="keys.js"></script>
 	<script>
-		'use strict';
-		/*global API_KEY, gapi, youTubeApiLoaded, youTubeApiCalls*/
+		var apiCallBeforeAPIWasLoaded;
 
-		window.youTubeApiLoaded = false;
-		window.youTubeApiCalls = [];
-
-		window.executeGoogleApiCalls = function() {
-			gapi.client.setApiKey(API_KEY);
-			gapi.client.load('youtube', 'v3', function() {
-				for( var i = 0; i < youTubeApiCalls.length; i++){
-					youTubeApiCalls[i](gapi.client.youtube);
-				}
-
-				youTubeApiCalls = [];
-				youTubeApiLoaded = true;
-			});
+		window.executeGoogleApiCall = function(f) {
+			'use strict';
+			apiCallBeforeAPIWasLoaded = f;
 		};
 
+		function onGAPILoaded(){
+			'use strict';
+			/*global API_KEY, gapi*/
+
+			gapi.client.setApiKey(API_KEY);
+			gapi.client.load('youtube', 'v3', function() {
+				window.executeGoogleApiCall = function(f) {
+					if(f !== undefined){
+						f(gapi.client.youtube);
+					}
+				};
+				window.executeGoogleApiCall(apiCallBeforeAPIWasLoaded);
+			});
+		}
+
 		 String.prototype.fmt = function() {
+		 	'use strict';
+
 		    var args = arguments;
 		    return this.replace(/{(\d+)}/g, function(match, number) { 
 		      return (typeof args[number] !== 'undefined') ? args[number] : match;
 		    });
 		  };
 	</script>
-	<script src="https://apis.google.com/js/client.js?onload=executeGoogleApiCalls"></script>
+	<script src="https://apis.google.com/js/client.js?onload=onGAPILoaded"></script>
 
 </body>
 

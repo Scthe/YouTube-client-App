@@ -1,33 +1,21 @@
 define(function() {
 
 	'use strict';
-	/*global youTubeApiLoaded, youTubeApiCalls, executeGoogleApiCalls*/
 
 	return {
 		search: search,
 		videoDetails: videoDetails
 	};
 
-	function scheduleGoogleApiCall(f) {
-		// TODO only last call, not array
-		// TODO check how many calls there are on page load
-		youTubeApiCalls.push(f); 
-
-		// try to invoke now
-		if (youTubeApiLoaded) {
-			executeGoogleApiCalls();
-		}
-	}
-
 	/*
 	 * https://developers.google.com/youtube/v3/docs/videos
 	 */
-	function videoDetails(id, callback) {
-		var idList = id;
+	function videoDetails(videoId, callback) {
+		window.executeGoogleApiCall(f);
 
-		scheduleGoogleApiCall(function(yt) {
+		function f(yt) {
 			var request = yt.videos.list({
-				id: idList,
+				id: videoId,
 				part: 'snippet,statistics,player,contentDetails',
 				maxResults: 1
 			});
@@ -37,10 +25,11 @@ define(function() {
 				if (json.items.length === 1) {
 					callback.success(json.items[0]);
 				} else {
-					callback.failure(id);
+					callback.failure(videoId);
 				}
 			});
-		});
+
+		}
 	}
 
 
@@ -59,7 +48,7 @@ define(function() {
 			query.pageToken = pageToken;
 		}
 
-		scheduleGoogleApiCall(function(yt) {
+		window.executeGoogleApiCall(function(yt) {
 			var request = yt.search.list(query);
 
 			request.execute(function(response) {
