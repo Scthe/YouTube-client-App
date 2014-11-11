@@ -13,5 +13,5 @@ define([
 		localStorage: new Store('backbone-videos')
 	});
 
-	return new VideoList(); // TODO instantiate in app.js
+	return VideoList;
 });
