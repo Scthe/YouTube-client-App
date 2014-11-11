@@ -29,10 +29,11 @@ define([
 			this.page = page;
 
 			this.videoList = new VideoList();
-
 			this.videoList.on('add', this.renderVideo, this);
 			this.videoList.on('reset', this.resetVideoList, this);
-			this.videoList.fetch_(term, page, function() { // kick off search
+
+			// kick off search
+			this.videoList.fetch_(term, page, function() {
 				self.setPageSelector('prev', self.page !== 1);
 				self.setPageSelector('next', true);
 			});
@@ -42,6 +43,11 @@ define([
 
 		render: function() {
 			this.$el.html(this.template());
+			this.listEl = this.$el.find('#video-list');
+			this.pageButtons = {
+				'prev': this.$el.find('#prev'),
+				'next': this.$el.find('#next')
+			};
 			return this;
 		},
 
@@ -50,7 +56,6 @@ define([
 				model: video,
 				parent: this
 			});
-			this.listEl = $('#main-panel-content #video-list'); // TODO cache selector
 			this.listEl.append(view.render().el);
 		},
 
@@ -59,12 +64,14 @@ define([
 		},
 
 		prevPage: function() {
+			// console.log('prev-page');
 			app.router.navigate('search/{0}/{1}'.fmt(this.term, this.page - 1), {
 				trigger: true
 			});
 		},
 
 		nextPage: function() {
+			// console.log('next-page');
 			app.router.navigate('search/{0}/{1}'.fmt(this.term, this.page + 1), {
 				trigger: true
 			});
@@ -73,8 +80,8 @@ define([
 		setPageSelector: function(selector, activate) {
 			// selector: either prev/next
 			var classes = 'on-hover-link activable link-blue hover-underline';
-			var $el = $('#main-panel-content #' + selector);
-			$el[activate ? 'addClass' : 'removeClass'](classes); // TODO cache selector
+			var $el = this.pageButtons[selector];
+			$el[activate ? 'addClass' : 'removeClass'](classes);
 		}
 
 	});
