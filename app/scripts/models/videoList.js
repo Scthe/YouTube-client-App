@@ -21,7 +21,6 @@ define([
 
 		initialize: function() {
 			_.bindAll(this, 'fetch_', 'onSearchResults', 'fetchNextPage', 'fetchPrevPage');
-
 		},
 
 		fetch_: function(term, callback) {
@@ -55,7 +54,6 @@ define([
 		},
 
 		onSearchResults: function(result) {
-			/*jshint camelcase: false */
 			var self = this;
 			var items = result.items;
 			// console.log(items);
@@ -67,13 +65,13 @@ define([
 
 			$.each(items, function(i, e) {
 				self.create({
-					name: e.snippet.title,
-					user: e.snippet.channelTitle,
-					time: '2:41', // TODO hardcoded
-					view_count: '502', // TODO hardcoded
-					thumbnail: e.snippet.thumbnails['default'].url,
-					created_on: e.snippet.publishedAt,
-					youTube_id: e.id.videoId // TODO when the search result is a channel this will be undefined
+					youTubeId: e.id.videoId, // TODO when the search result is a channel this will be undefined
+					title: e.snippet.title,
+					channelId: e.snippet.channelId,
+					channelTitle: e.snippet.channelTitle,
+					description: e.snippet.description,
+					publishedAt: e.snippet.publishedAt,
+					thumbnail: e.snippet.thumbnails['default'].url
 				});
 			});
 			//self.localStorage.save();

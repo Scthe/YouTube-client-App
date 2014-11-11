@@ -2,36 +2,74 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
-], function($, _, Backbone) {
+	'services/YouTubeService'
+], function($, _, Backbone, ytService) {
 
 	'use strict';
-	/*jshint camelcase: false */
 
 	var Video = Backbone.Model.extend({
 		//urlRoot: '/'
 		defaults: {
 			// youTube data
-			youTube_id: '',
-			youTube_channel_id: '',
-			youTube_embed_Html: '',
+			youTubeId: '',
+			title: '',
+			channelId: '',
+			channelTitle: '',
+			publishedAt: '', // str date
+			// media
 			thumbnail: '',
-
-			// base data
-			name: '', // title
-			user: '', // channel id
-			created_on: undefined,
-			created_on_date: undefined,
-
+			embedLink: '',
 			// details
-			view_count: '0',
-			time: '0', // duration
+			views: 0,
+			duration: '0',
 			description: ''
-			// dimension,
-			// definition,
-			// youTube comments ?
+				// dimension,
+				// definition,
+				// youTube comments ?
+		},
+		initialize: function(youTubeId, successCallback, failCallback) {
+			_.bindAll(this, 'onVideoGetSuccess', 'onVideoGetFail');
+
+			this.youTubeId = youTubeId;
+			this.successCallback = successCallback;
+			this.failCallback = failCallback;
+
+			ytService.videoDetails(youTubeId, {
+				success: this.onVideoGetSuccess,
+				failure: this.onVideoGetFail
+			});
 		},
 
-		initialize: function() {}
+		onVideoGetSuccess: function(e) {
+			/*jshint camelcase: false */
+
+			this.set('title', e.snippet.title);
+			this.set('channelId', e.snippet.channelId);
+			this.set('channelTitle', e.snippet.channelTitle);
+			this.set('publishedAt', e.snippet.publishedAt);
+			this.set('thumbnail', e.snippet.thumbnails['default'].url);
+			this.set('embedLink', e.player.embedHtml);
+			this.set('views', e.statistics.viewCount);
+			this.set('duration', e.contentDetails.duration);
+			this.set('description', e.snippet.description);
+
+			if (this.successCallback !== undefined) {
+				this.successCallback(this);
+
+				this.successCallback = undefined;
+				this.failCallback = undefined;
+			}
+		},
+
+		onVideoGetFail: function() {
+			console.log('Could not get video: \'{0}\''.fmt(this.youTubeId));
+			if (this.failCallback !== undefined) {
+				this.failCallback(this.youTubeId);
+
+				this.successCallback = undefined;
+				this.failCallback = undefined;
+			}
+		}
 
 	});
 

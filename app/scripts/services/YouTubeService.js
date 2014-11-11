@@ -9,7 +9,9 @@ define(function() {
 	};
 
 	function scheduleGoogleApiCall(f) {
-		youTubeApiCalls.push(f);
+		// TODO only last call, not array
+		// TODO check how many calls there are on page load
+		youTubeApiCalls.push(f); 
 
 		// try to invoke now
 		if (youTubeApiLoaded) {
