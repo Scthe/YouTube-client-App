@@ -3,9 +3,8 @@ define([
 	'underscore',
 	'views/channelListView',
 	'models/channelList',
-	'views/videoListView',
-	'services/YouTubeService'
-], function($, _, ChannelListView, channelList, VideoListView, ytService) {
+	'views/videoListView'
+], function($, _, ChannelListView, channelList, VideoListView) {
 
 	'use strict';
 	/*global app*/
@@ -32,12 +31,6 @@ define([
 
 			var videoListView = new VideoListView(term, parseInt(page));
 			videoListView.render();
-
-			// kick off search // TODO move to collection class
-			// var seachLoading = $('#search-loading'),
-			var seachLoading = $('#search-loading');
-			seachLoading.show();
-			ytService.search(term, page, videoListView.onSearchResults);
 		});
 	}
 

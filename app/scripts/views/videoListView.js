@@ -21,8 +21,9 @@ define([
 		},
 
 		initialize: function(term, page) {
+			var self = this;
 			_.bindAll(this, 'renderVideo', 'resetVideoList', 'render',
-				'prevPage', 'nextPage', 'setPageSelector', 'onSearchResults');
+				'prevPage', 'nextPage', 'setPageSelector');
 
 			this.term = term;
 			this.page = page;
@@ -31,7 +32,10 @@ define([
 
 			this.videoList.on('add', this.renderVideo, this);
 			this.videoList.on('reset', this.resetVideoList, this);
-			// this.videoList.fetch();
+			this.videoList.fetch_(term, page, function() { // kick off search
+				self.setPageSelector('prev', self.page !== 1);
+				self.setPageSelector('next', true);
+			});
 
 			this.render();
 		},
@@ -71,33 +75,6 @@ define([
 			var classes = 'on-hover-link activable link-blue hover-underline';
 			var $el = $('#main-panel-content #' + selector);
 			$el[activate ? 'addClass' : 'removeClass'](classes); // TODO cache selector
-		},
-
-		onSearchResults: function(items) {
-			/*jshint camelcase: false */
-			console.log('Search returned with ' + items.length + ' elements');
-			var self = this;
-
-			$.each(items, function(i, e) {
-				self.videoList.create({
-					name: e.snippet.title,
-					user: e.snippet.channelTitle,
-					time: '2:41', // TODO hardcoded
-					view_count: '502', // TODO hardcoded
-					thumbnail: e.snippet.thumbnails['default'].url,
-					created_on: e.snippet.publishedAt,
-					youTube_id: e.id.videoId // TODO when the search result is a channel this will be undefined
-				});
-			});
-			//videoList.localStorage.save();
-
-			this.setPageSelector('prev', this.page !== 1);
-			this.setPageSelector('next', true);
-
-			var seachLoading = $('#search-loading'), // TODO cache selector
-				searchInputIcon = $('#search-input-icon');
-			searchInputIcon.show();
-			seachLoading.hide();
 		}
 
 	});
