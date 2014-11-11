@@ -54,7 +54,6 @@ ul{
 }
 
 
-
 .activable{
 	cursor: pointer;
 }
@@ -90,6 +89,15 @@ ul{
 .text-center{
 	text-align: center;
 }
+.block-center{
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+}
+.width-25{
+	width: 25%;
+	height: auto;
+}
 
 /* padding and margins */
 .no-padding{
@@ -110,4 +118,7 @@ ul{
 }
 .small-paddings-square{
 	padding: 5px;
+}
+.no-borders{
+	border-style: none;
 }

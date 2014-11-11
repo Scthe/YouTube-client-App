@@ -2,7 +2,7 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
-	'../models/videoList',
+	'models/videoList',
 	'views/videoListItemView',
 	'text!templates/videoListView.tmpl.html'
 ], function($, _, Backbone, VideoList, VideoListItemView, tmpl) {
@@ -31,6 +31,7 @@ define([
 
 		setActive: function(term, page) {
 			var self = this;
+			// TODO too much logic
 
 			// kick off search
 			if (this.term === term && Math.abs(this.page - page) === 1) {
@@ -42,7 +43,7 @@ define([
 				}
 				this.page = page;
 			} else {
-				// reset search
+				// reset search TODO better just route to search/:term/:page
 				this.term = term;
 				this.page = 1;
 
@@ -76,7 +77,7 @@ define([
 		},
 
 		resetVideoList: function() {
-			if (this.listEl) {
+			if (this.listEl) { // TODO try to reuse views
 				this.listEl.html('');
 			}
 		},
