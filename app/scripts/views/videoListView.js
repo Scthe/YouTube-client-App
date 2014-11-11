@@ -20,25 +20,41 @@ define([
 			'click #next.activable': 'nextPage'
 		},
 
-		initialize: function(term, page) {
-			var self = this;
+		initialize: function() {
 			_.bindAll(this, 'renderVideo', 'resetVideoList', 'render',
-				'prevPage', 'nextPage', 'setPageSelector');
-
-			this.term = term;
-			this.page = page;
+				'prevPage', 'nextPage', 'setPageSelector', 'setActive');
 
 			this.videoList = new VideoList();
 			this.videoList.on('add', this.renderVideo, this);
 			this.videoList.on('reset', this.resetVideoList, this);
+		},
+
+		setActive: function(term, page) {
+			var self = this;
 
 			// kick off search
-			this.videoList.fetch_(term, page, function() {
-				self.setPageSelector('prev', self.page !== 1);
-				self.setPageSelector('next', true);
-			});
+			if (this.term === term && Math.abs(this.page - page) === 1) {
+				// next/prev page
+				if (this.page > page) {
+					this.videoList.fetchPrevPage(updatePaginationButtons);
+				} else {
+					this.videoList.fetchNextPage(updatePaginationButtons);
+				}
+				this.page = page;
+			} else {
+				// reset search
+				this.term = term;
+				this.page = 1;
+
+				this.videoList.fetch_(term, updatePaginationButtons);
+			}
 
 			this.render();
+
+			function updatePaginationButtons(hasNext) {
+				self.setPageSelector('prev', self.page !== 1);
+				self.setPageSelector('next', hasNext);
+			}
 		},
 
 		render: function() {
@@ -60,7 +76,9 @@ define([
 		},
 
 		resetVideoList: function() {
-			this.listEl.html('');
+			if (this.listEl) {
+				this.listEl.html('');
+			}
 		},
 
 		prevPage: function() {

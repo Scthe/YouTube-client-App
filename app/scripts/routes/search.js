@@ -17,6 +17,9 @@ define([
 
 
 	function initialize(router, channelListView) {
+
+		var videoListView = new VideoListView();
+
 		router.on('route:search', function(term, page) {
 			// TODO if just changing the pages it would be easier
 			// to reset model and request new data instead
@@ -29,8 +32,7 @@ define([
 
 			app.setViewTitle('Searching: ' + term);
 
-			var videoListView = new VideoListView(term, parseInt(page));
-			videoListView.render();
+			videoListView.setActive(term, parseInt(page));
 		});
 	}
 

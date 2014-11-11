@@ -9,7 +9,8 @@ define([
 
 	'use strict';
 
-	var seachLoading = $('#search-loading'),
+	var MAXRESULTS = 12,
+		seachLoading = $('#search-loading'),
 		searchInputIcon = $('#search-input-icon');
 
 	var VideoList = Backbone.Collection.extend({
@@ -19,21 +20,50 @@ define([
 		localStorage: new Store('backbone-videos'),
 
 		initialize: function() {
-			_.bindAll(this, 'fetch_', 'onSearchResults');
+			_.bindAll(this, 'fetch_', 'onSearchResults', 'fetchNextPage', 'fetchPrevPage');
 
 		},
 
-		fetch_: function(term, page, callback) {
+		fetch_: function(term, callback) {
 			this.fetchCallback = callback;
 			seachLoading.show();
 
-			ytService.search(term, page, this.onSearchResults);
+			this.reset();
+			this.term = term;
+
+			ytService.search(term, undefined, MAXRESULTS, this.onSearchResults);
 		},
 
-		onSearchResults: function(items) {
+		fetchNextPage: function(callback) {
+			if (this.nextPageToken) {
+				this.fetchCallback = callback;
+				this.reset();
+				ytService.search(this.term, this.nextPageToken, MAXRESULTS, this.onSearchResults);
+			} else {
+				this.fetch_();
+			}
+		},
+
+		fetchPrevPage: function(callback) {
+			if (this.prevPageToken) {
+				this.fetchCallback = callback;
+				this.reset();
+				ytService.search(this.term, this.prevPageToken, MAXRESULTS, this.onSearchResults);
+			} else {
+				this.fetch_();
+			}
+		},
+
+		onSearchResults: function(result) {
 			/*jshint camelcase: false */
-			console.log('Search returned with ' + items.length + ' elements');
 			var self = this;
+			var items = result.items;
+			// console.log(items);
+			console.log('Search returned with ' + items.length + ' elements');
+
+			// store tokens
+			this.prevPageToken = result.prevPageToken;
+			this.nextPageToken = result.nextPageToken;
 
 			$.each(items, function(i, e) {
 				self.create({
@@ -52,7 +82,8 @@ define([
 			seachLoading.hide();
 
 			if (this.fetchCallback) {
-				this.fetchCallback();
+				this.fetchCallback(this.nextPageToken !== undefined);
+				this.fetchCallback = undefined;
 			}
 		}
 
