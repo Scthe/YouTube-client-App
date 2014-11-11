@@ -8,7 +8,6 @@ define([
 	'use strict';
 
 	var Video = Backbone.Model.extend({
-		//urlRoot: '/'
 		defaults: {
 			// youTube data
 			youTubeId: '',
@@ -22,10 +21,9 @@ define([
 			// details
 			views: 0,
 			duration: '0',
-			description: ''
-				// dimension,
-				// definition,
-				// youTube comments ?
+			description: '',
+			likeCount: 0,
+			dislikeCount: 0
 		},
 		initialize: function(youTubeId, successCallback, failCallback) {
 			_.bindAll(this, 'onVideoGetSuccess', 'onVideoGetFail');
@@ -54,6 +52,8 @@ define([
 			this.set('views', e.statistics.viewCount);
 			this.set('duration', e.contentDetails.duration);
 			this.set('description', e.snippet.description);
+			this.set('likeCount', e.statistics.likeCount);
+			this.set('dislikeCount', e.statistics.dislikeCount);
 
 			if (this.successCallback !== undefined) {
 				this.successCallback(this);

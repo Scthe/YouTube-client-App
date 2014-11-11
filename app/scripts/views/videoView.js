@@ -18,15 +18,14 @@ define([
 	var VideoView = Backbone.View.extend({
 		el: '#main-panel-content',
 
-		// events: {
-		// 'click #add_comment': 'addComment'
-		// },
+		// TODO after clicking on author should go to the channel view
 
 		template: _.template(tmpl),
 
 		initialize: function(youTubeId) {
 			_.bindAll(this, 'render', 'onVideoGetSuccess', 'onVideoGetFail');
-
+			// TODO use web component for video
+			
 			// TODO better loading icon
 			var a = '<img src="../images/loaderb64.gif" class="block-center std-paddings width-25">';
 			this.$el.html(a);
@@ -36,17 +35,20 @@ define([
 		},
 
 		render: function() {
-			// TODO add original YT link to the view
+			if (typeof(this.model.get('publishedAt')) !== undefined) {
+				var months = ['January', 'February', 'March',
+					'April', 'May', 'June',
+					'July', 'August', 'September',
+					'October', 'November', 'December'
+				];
+				var d = new Date(this.model.get('publishedAt'));
+				var str = '{0} {1}, {2}'.fmt(months[d.getMonth()], d.getDate(), d.getFullYear());
+				this.model.set('_publishedAtViewable', str);
+			}
 
 			this.$el.html(this.template(this.model.toJSON()));
 
-			// if (typeof(this.model.get('created_on')) !== undefined) {
-			// var d = new Date(this.model.get('created_on'));
-			// var dateHTML = '<span>' + d.getDate() + '</span><span>' + monthNames[d.getMonth()].substring(0, 3) + '</span>';
-			// $('#video-date').html(dateHTML);
-			// }
 			//app.commentsListView.render();
-
 			return this;
 		},
 
@@ -61,11 +63,6 @@ define([
 			var a = '<div class="alert alert-danger" role="alert">{0}</div>'.fmt(text);
 			this.$el.html(a);
 		}
-
-		// addComment: function() {
-		// console.log('adding new comment');
-		// comments.create(Comment.defaults);
-		// }
 
 	});
 

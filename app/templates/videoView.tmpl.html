@@ -1,5 +1,41 @@
 <!-- becomes iframe -->
 <%= embedLink %>
 
-<!-- TODO add author, upload date, #comments, comments list info -->
-<!-- <ul id="video-comments" class="card-bg std-paddings"></ul> -->
+<!-- TODO comments list info -->
+<!-- TODO orginal YT link -->
+
+<div class="fill-width">
+
+	<div class="clearfix text-mid-gray">
+		<div class="pull-left">
+			<p>
+				<span class="small-padding-horizontal">
+				<span class="glyphicon glyphicon-eye-open"></span>
+					<%= views %>
+				</span>
+				<span class="small-padding-horizontal">
+					<span class="glyphicon glyphicon-thumbs-up"></span>
+					<%= likeCount %>
+				</span>
+				<span class="small-padding-horizontal">
+					<span class="glyphicon glyphicon-thumbs-down"></span>
+					<%= dislikeCount %>
+				</span>
+			</p>
+		</div>
+		<div class="pull-right">
+			<p>
+				<strong>Published on <%= _publishedAtViewable %></strong>
+			</p>
+			<p>
+				From <span class="activable link-blue hover-underline"><%= channelTitle %></span>
+			</p>
+		</div>
+	</div>
+
+	<pre class="full-transparent no-borders">
+		<%= description %>
+	</pre>
+	
+	<!-- <ul id="video-comments" class="card-bg std-paddings"></ul> -->
+</div>
