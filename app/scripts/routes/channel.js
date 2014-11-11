@@ -11,7 +11,7 @@ define([
 	};
 
 
-	function initialize(router, channelListView, videoListView) {
+	function initialize(router, channelListView) {
 		router.on('route:channel', function(id) {
 			console.log('routed to channel \'' + id + '\'');
 
@@ -27,9 +27,6 @@ define([
 			var m = channelList.get(id);
 			var newTtitle = m.get('name') + '\'s Channel';
 			app.setViewTitle(newTtitle);
-
-			// render content
-			videoListView.render();
 		});
 	}
 

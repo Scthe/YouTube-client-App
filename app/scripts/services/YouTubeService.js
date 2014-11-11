@@ -46,20 +46,22 @@ define(function() {
 	 * https://developers.google.com/youtube/v3/docs/search
 	 * https://developers.google.com/youtube/v3/docs/search/list
 	 */
-	function search(searchTerm, page, callback) {
-		// TODO add pages
+	function search(searchTerm, pageToken, resultCount, callback) {
+		var query = {
+			q: searchTerm,
+			part: 'snippet',
+			type: 'video',
+			maxResults: resultCount
+		};
+		if (pageToken) {
+			query.pageToken = pageToken;
+		}
 
 		scheduleGoogleApiCall(function(yt) {
-			var request = yt.search.list({
-				q: searchTerm,
-				part: 'snippet',
-				type: 'video',
-				maxResults: 3
-			});
+			var request = yt.search.list(query);
 
 			request.execute(function(response) {
-				var json = response.result;
-				callback(json.items);
+				callback(response.result);
 			});
 		});
 	}

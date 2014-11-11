@@ -3,15 +3,13 @@ define([
 	'underscore',
 	'views/channelListView',
 	'models/channelList',
-	'models/videoList',
-	'services/YouTubeService'
-], function($, _, ChannelListView, channelList, videoList, ytService) {
+	'views/videoListView'
+], function($, _, ChannelListView, channelList, VideoListView) {
 
 	'use strict';
 	/*global app*/
 
-	var seachLoading = $('#search-loading'),
-		searchInputIcon = $('#search-input-icon');
+
 
 	return {
 		initialize: initialize
@@ -19,43 +17,23 @@ define([
 
 
 	function initialize(router, channelListView) {
+
+		var videoListView = new VideoListView();
+
 		router.on('route:search', function(term, page) {
+			// TODO if just changing the pages it would be easier
+			// to reset model and request new data instead
+			// of recreating the whole view
 			console.log('routed to search for: \'' + term + '\', page: ' + page);
 
-			// set active channels
-			channelList.each(function(e) {
-				e.set('active', false);
-			});
+			// left subscription panel
+			channelList.deselectAll();
+			channelListView.render(); // TODO not 'ChannelListView' ?
 
-			// render left subscription panel
-			channelListView.render();
-			app.setViewTitle('Search');
+			app.setViewTitle('Searching: ' + term);
 
-			seachLoading.show();
-			videoList.reset();
-
-			// download data
-			ytService.search(term, page, onSearchResults);
+			videoListView.setActive(term, parseInt(page));
 		});
-	}
-
-	function onSearchResults(items) {
-		/*jshint camelcase: false */
-
-		$.each(items, function(i, e) {
-			videoList.create({
-				name: e.snippet.title,
-				user: e.snippet.channelTitle,
-				time: '2:41', // TODO hardcoded
-				view_count: '502', // TODO hardcoded
-				thumbnail: e.snippet.thumbnails['default'].url,
-				created_on: e.snippet.publishedAt,
-				youTube_id: e.id.videoId // TODO when the search result is a channel this will be undefined
-			});
-		});
-		videoList.localStorage.save();
-		searchInputIcon.show();
-		seachLoading.hide();
 	}
 
 });

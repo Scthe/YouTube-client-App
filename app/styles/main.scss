@@ -14,6 +14,9 @@ $content-break: 1024px + 17;/* fix for scrollbar -> TODO ff counts differently *
 $content-break-2: 840px + 17;
 $video-to-fill-width: 656px + 17; /* change from XXXpx to 100% */
 
+$flex-grid-break: 700px;	/* 3 cols*/
+$flex-grid-break-2: 550px;	/* 2 cols*/
+$flex-grid-break-3: 350px;	/* 1 cols*/
 
 @import 'utils';
 @import 'layout';
@@ -26,34 +29,9 @@ $video-to-fill-width: 656px + 17; /* change from XXXpx to 100% */
 	font-size: 20px;
 	line-height: $nav-bar-h;
 	text-align: center;
-
-	@media screen and (max-width: $nav-bar-break) {
-		width: 100%;
-		display: block;
-	}
-	@media screen and (min-width: $nav-bar-break) {
-		height: inherit;
-		width: $left-panel-size;
-		float: left;
-	}
 }
+
 #view-title {
 	padding: 9px 25px;
 	width: inherit;
-}
-
-
-
-/*
-TODO use bootstrap grid
- */
-.video-card{
-	width:32%;
-	vertical-align: top;
-	margin-bottom:5px;
-	margin-right:5px;
-}
-
-.video-card:nth-child(3){
-	margin-right:0px;
 }
