@@ -11,8 +11,10 @@ define([
 	'use strict';
 	/*global app */
 
-	var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-		'July', 'August', 'September', 'October', 'November', 'December'
+	var months = ['January', 'February', 'March',
+		'April', 'May', 'June',
+		'July', 'August', 'September',
+		'October', 'November', 'December'
 	];
 
 	var VideoView = Backbone.View.extend({
@@ -25,7 +27,7 @@ define([
 		initialize: function(youTubeId) {
 			_.bindAll(this, 'render', 'onVideoGetSuccess', 'onVideoGetFail');
 			// TODO use web component for video
-			
+
 			// TODO better loading icon
 			var a = '<img src="../images/loaderb64.gif" class="block-center std-paddings width-25">';
 			this.$el.html(a);
@@ -36,11 +38,6 @@ define([
 
 		render: function() {
 			if (typeof(this.model.get('publishedAt')) !== undefined) {
-				var months = ['January', 'February', 'March',
-					'April', 'May', 'June',
-					'July', 'August', 'September',
-					'October', 'November', 'December'
-				];
 				var d = new Date(this.model.get('publishedAt'));
 				var str = '{0} {1}, {2}'.fmt(months[d.getMonth()], d.getDate(), d.getFullYear());
 				this.model.set('_publishedAtViewable', str);
