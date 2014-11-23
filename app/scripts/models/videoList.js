@@ -10,7 +10,7 @@ define([
 	'use strict';
 
 	var MAXRESULTS = 12,
-		seachLoading = $('#search-loading'),
+		seachLoading = $('#search-loading'), // TODO not here !
 		searchInputIcon = $('#search-input-icon');
 
 	var VideoList = Backbone.Collection.extend({
@@ -21,16 +21,22 @@ define([
 
 		initialize: function() {
 			_.bindAll(this, 'fetch_', 'onSearchResults', 'fetchNextPage', 'fetchPrevPage');
+			this.term = '';
 		},
 
 		fetch_: function(term, callback) {
-			this.fetchCallback = callback;
-			seachLoading.show();
+			if (term && this.term !== term) {
+				this.fetchCallback = callback;
+				seachLoading.show();
 
-			this.reset();
-			this.term = term;
+				this.reset();
+				this.term = term;
 
-			ytService.search(term, undefined, MAXRESULTS, this.onSearchResults);
+				ytService.search(term, undefined, MAXRESULTS, this.onSearchResults);
+			} else {
+				callback(this.prevPageToken !== undefined,
+					this.nextPageToken !== undefined);
+			}
 		},
 
 		fetchNextPage: function(callback) {
@@ -80,7 +86,10 @@ define([
 			seachLoading.hide();
 
 			if (this.fetchCallback) {
-				this.fetchCallback(this.nextPageToken !== undefined);
+				// TODO use FRP for this
+				this.fetchCallback(
+					this.prevPageToken !== undefined,
+					this.nextPageToken !== undefined);
 				this.fetchCallback = undefined;
 			}
 		}

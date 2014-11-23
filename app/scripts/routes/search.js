@@ -16,10 +16,11 @@ define([
 
 	function initialize(router, channelListView) {
 
-		var videoListView = new VideoListView();
+		var videoListView = new VideoListView(),
+			videoList = videoListView.videoList;
 
-		router.on('route:search', function(term, page) {
-			console.log('routed to search for: \'' + term + '\', page: ' + page);
+		router.on('route:search', function(term) {
+			console.log('search: \'{0}\''.fmt(term));
 
 			// left subscription panel
 			channelList.deselectAll();
@@ -27,7 +28,8 @@ define([
 
 			app.setViewTitle('Searching: ' + term);
 
-			videoListView.setActive(term, parseInt(page));
+			videoListView.render();
+			videoList.fetch_(term, videoListView.updatePaginationButtons);
 		});
 	}
 
