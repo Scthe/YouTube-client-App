@@ -1,10 +1,9 @@
-define(['bacon'], function(Bacon) {
+define(function() {
 
 	'use strict';
 
 	var apiCallBeforeAPIWasLoaded,
 		executeGoogleApiCall = function(f) {
-			'use strict';
 			apiCallBeforeAPIWasLoaded = f;
 		};
 
@@ -64,15 +63,11 @@ define(['bacon'], function(Bacon) {
 		}
 
 		executeGoogleApiCall(function(yt) {
-			var request = yt.search.list(query),
-				reqExec = request.execute.bind(request);
+			var request = yt.search.list(query);
 
 			request.execute(function(response) {
 				callback(searchTerm, response.result);
 			});
-
-			// Bacon.fromCallback(request, request.execute).log();
-			// return Bacon.fromCallback(reqExec).log();
 		});
 	}
 

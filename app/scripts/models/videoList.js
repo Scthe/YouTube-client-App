@@ -44,14 +44,27 @@ define([
 					// 2nd part of the condition: prev / next page
 					self.term = term;
 					self.reset();
-					self.fetchCallback = callback;
-					ytService.search(self.term, pageToken, MAXRESULTS, self.onSearchResults);
+					ytService.search(self.term, pageToken, MAXRESULTS, function(term, result) {
+						if (term !== self.term) { // TODO can use FRP and filter here
+							return;
+						}
+
+						// do post search operations
+						self.onSearchResults(term, result);
+
+						// invoke callback
+						if (callback) {
+							callback(term,
+								self.prevPageToken !== undefined,
+								self.nextPageToken !== undefined);
+						}
+					});
 
 				} else if (callback) {
 					// keep old results & invoke callback
-					_.defer(callback, this.term,
-						this.prevPageToken !== undefined,
-						this.nextPageToken !== undefined);
+					_.defer(callback, self.term,
+						self.prevPageToken !== undefined,
+						self.nextPageToken !== undefined);
 				}
 			};
 		},
@@ -73,11 +86,6 @@ define([
 		},
 
 		onSearchResults: function(term, result) {
-			// TODO use FRP for this
-			// .filter(term==this.term)
-			// setPageTokens + items.term
-			// create models
-			// callback
 			var self = this;
 			var items = result.items;
 			// console.log(items);
@@ -87,6 +95,7 @@ define([
 			this.prevPageToken = result.prevPageToken;
 			this.nextPageToken = result.nextPageToken;
 
+			// create items
 			$.each(items, function(i, e) {
 				self.create({
 					youTubeId: e.id.videoId, // TODO when the search result is a channel this will be undefined
@@ -99,14 +108,6 @@ define([
 				});
 			});
 			//self.localStorage.save();
-
-			if (this.fetchCallback) {
-				this.fetchCallback(
-					term,
-					this.prevPageToken !== undefined,
-					this.nextPageToken !== undefined);
-				this.fetchCallback = undefined;
-			}
 		}
 
 	});
