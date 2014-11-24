@@ -2,11 +2,9 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
-	'models/comment',
-	'models/commentList',
 	'models/video',
 	'text!templates/videoView.tmpl.html'
-], function($, _, Backbone, Comment, comments, Video, tmpl) {
+], function($, _, Backbone, Video, tmpl) {
 
 	'use strict';
 	/*global app */
@@ -45,7 +43,6 @@ define([
 
 			this.$el.html(this.template(this.model.toJSON()));
 
-			//app.commentsListView.render();
 			return this;
 		},
 
