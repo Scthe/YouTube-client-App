@@ -23,13 +23,12 @@ define([
 			_.bindAll(this, 'renderVideo', 'resetVideoList', 'render',
 				'prevPage', 'nextPage', 'updatePaginationButtons');
 
-			this.videoList = new VideoList();
+			this.videoList = new VideoList(); // TODO rename to collection
 			this.videoList.on('add', this.renderVideo, this);
 			this.videoList.on('reset', this.resetVideoList, this);
 		},
 
 		render: function() {
-			var self = this;
 			// console.log('render');
 
 			this.$el.html(this.template());
@@ -38,12 +37,12 @@ define([
 				'prev': this.$el.find('#prev'),
 				'next': this.$el.find('#next')
 			};
-			this.videoList.each(self.renderVideo);
+			this.videoList.each(this.renderVideo);
 
 			return this;
 		},
 
-		renderVideo: function(video) {
+		renderVideo: function(video) { // TODO rename to renderItem
 			var view = new VideoListItemView({
 				model: video,
 				parent: this
@@ -51,7 +50,7 @@ define([
 			this.listEl.append(view.render().el);
 		},
 
-		resetVideoList: function() {
+		resetVideoList: function() { // TODO rename to resetList
 			if (this.listEl) { // TODO try to reuse views
 				this.listEl.html('');
 			}

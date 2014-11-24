@@ -1,8 +1,7 @@
 define([
-	'jquery',
 	'underscore',
 	'views/videoListView'
-], function($, _, VideoListView) {
+], function(_, VideoListView) {
 
 	'use strict';
 	/*global app*/

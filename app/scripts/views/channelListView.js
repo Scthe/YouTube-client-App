@@ -20,6 +20,7 @@ define([
 		initialize: function() {
 			_.bindAll(this, 'render', 'renderChannel', 'bindEventSources', 'previewChannel');
 
+			this.lastSearch = '';
 			this.collection.on('add', this.renderChannel, this);
 			this.render();
 
@@ -64,39 +65,33 @@ define([
 					}, {
 						validate: true
 					});
-				});
+				}); // TODO clear input
 
 			// model the event stream
 			var keysKeyStream = this.newChannelText
 				.asEventStream('keyup')
-				.debounce(PREVIEWDELAY);
-
-			var enterKeyStream = this.newChannelText
-				.asEventStream('keyup')
-				.filter(isEnter);
-
-			var eventStream = keysKeyStream.merge(enterKeyStream)
+				.debounce(PREVIEWDELAY)
 				.flatMapLatest(getText);
 
-			eventStream.onValue(this.previewChannel);
+			keysKeyStream.onValue(this.previewChannel);
 
 			function getText() {
 				return self.newChannelText.val();
 			}
 		},
 
-		previewChannel: function(ch) {
-			if (ch.trim().length < 1) {
-				return;
+		previewChannel: function(term) {
+			// do search
+			if (term.trim().length > 0 && this.lastSearch !== term) {
+				// console.log('preview:', term);
+				this.lastSearch = term;
+				app.router.navigate('search/channel/{0}'.fmt(term), {
+					trigger: true
+				});
 			}
-
-			console.log('preview:', ch);
 		}
 	});
 
 	return ChannelListView;
 
-	function isEnter(e) { // TODO same as in searchInputView
-		return e.keyCode === 13;
-	}
 });

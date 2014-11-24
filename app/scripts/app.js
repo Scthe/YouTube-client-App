@@ -42,7 +42,7 @@ define([
 
 		// create always visible views
 		app.searchView = new SearchInputView();
-		new ChannelListView({
+		app.channelListView = new ChannelListView({
 			collection: app.channelList
 		});
 

@@ -5,7 +5,8 @@ define([
 	'routes/home',
 	'routes/channel',
 	'routes/video',
-	'routes/search'
+	'routes/search',
+	'routes/search-channel'
 ], function($, _, Backbone) {
 
 	'use strict';
@@ -18,7 +19,8 @@ define([
 			'': 'home',
 			'video/:id': 'video',
 			'channel/:id': 'channel',
-			'search/:term': 'search'
+			'search/channel/:term': 'search-channel',
+			'search/video/:term': 'search'
 		}
 	});
 
