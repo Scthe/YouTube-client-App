@@ -38,9 +38,7 @@ define([
 				'prev': this.$el.find('#prev'),
 				'next': this.$el.find('#next')
 			};
-			this.videoList.each(function(e) {
-				self.renderVideo(e);
-			});
+			this.videoList.each(self.renderVideo);
 
 			return this;
 		},

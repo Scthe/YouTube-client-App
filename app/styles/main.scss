@@ -28,10 +28,13 @@ $flex-grid-break-3: 350px;	/* 1 cols*/
 #brand {
 	font-size: 20px;
 	line-height: $nav-bar-h;
-	text-align: center;
 }
 
 #view-title {
 	padding: 9px 25px;
 	width: inherit;
+}
+
+input[type="text"]:focus {
+  outline: none;
 }

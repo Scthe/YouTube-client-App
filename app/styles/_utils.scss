@@ -98,6 +98,10 @@ ul{
 	width: 25%;
 	height: auto;
 }
+.width-75{
+	width: 75%;
+	height: auto;
+}
 
 /* padding and margins */
 .no-padding{
@@ -121,4 +125,7 @@ ul{
 }
 .no-borders{
 	border-style: none;
+}
+.margin-bottom-small{
+	margin-bottom: 5px !important;
 }
