@@ -52,7 +52,7 @@ define(function() {
 			var request = yt.search.list(query);
 
 			request.execute(function(response) {
-				callback(response.result);
+				callback(searchTerm, response.result);
 			});
 		});
 	}

@@ -29,8 +29,13 @@ define([
 			app.setViewTitle('Searching: ' + term);
 
 			videoListView.render();
-			videoList.fetch_(term, videoListView.updatePaginationButtons);
+			videoList.fetch_(term, onSearchEnd);
 		});
+
+		function onSearchEnd(term, hasPrevious, hasNext) {
+			app.searchView.onSearchEnd(term);
+			videoListView.updatePaginationButtons(hasPrevious, hasNext);
+		}
 	}
 
 });

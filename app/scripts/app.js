@@ -34,7 +34,7 @@ define([
 		});
 
 		// create search view
-		new SearchInputView();
+		app.searchView = new SearchInputView();
 	}
 
 	function setContent(content) {

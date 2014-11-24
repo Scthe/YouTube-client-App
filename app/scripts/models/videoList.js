@@ -9,9 +9,7 @@ define([
 
 	'use strict';
 
-	var MAXRESULTS = 12,
-		seachLoading = $('#search-loading'), // TODO not here !
-		searchInputIcon = $('#search-input-icon');
+	var MAXRESULTS = 12;
 
 	var VideoList = Backbone.Collection.extend({
 
@@ -27,7 +25,6 @@ define([
 		fetch_: function(term, callback) {
 			if (term && this.term !== term) {
 				this.fetchCallback = callback;
-				seachLoading.show();
 
 				this.reset();
 				this.term = term;
@@ -59,7 +56,7 @@ define([
 			}
 		},
 
-		onSearchResults: function(result) {
+		onSearchResults: function(term, result) {
 			var self = this;
 			var items = result.items;
 			// console.log(items);
@@ -82,12 +79,10 @@ define([
 			});
 			//self.localStorage.save();
 
-			searchInputIcon.show();
-			seachLoading.hide();
-
 			if (this.fetchCallback) {
 				// TODO use FRP for this
 				this.fetchCallback(
+					term,
 					this.prevPageToken !== undefined,
 					this.nextPageToken !== undefined);
 				this.fetchCallback = undefined;
