@@ -1,13 +1,10 @@
 define({
-	initialize: function(router, channelListView) {
+	initialize: function(router) {
 		'use strict';
 		/*global app*/
 
 		router.on('route:home', function() {
 			console.log('routed to home');
-
-			// render left subscription panel
-			channelListView.render();
 
 			app.setViewTitle('Home');
 			app.setContent('home');

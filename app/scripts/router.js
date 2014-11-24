@@ -2,17 +2,16 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
-	'views/channelListView',
 	'routes/home',
 	'routes/channel',
 	'routes/video',
 	'routes/search'
-], function($, _, Backbone, ChannelListView) {
+], function($, _, Backbone) {
 
 	'use strict';
 
 	// parameters after first 5 are assumed to be routes modules
-	var routes = Array.prototype.slice.call(arguments, 4);
+	var routes = Array.prototype.slice.call(arguments, 3);
 
 	var Router = Backbone.Router.extend({
 		routes: {
@@ -30,12 +29,10 @@ define([
 	function initialize() {
 		console.log('router initialize');
 
-		var channelListView = new ChannelListView();
-
 		var router = new Router();
 
 		_.each(routes, function(e) {
-			e.initialize(router, channelListView);
+			e.initialize(router);
 		});
 
 		Backbone.history.start();

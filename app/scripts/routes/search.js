@@ -1,10 +1,8 @@
 define([
 	'jquery',
 	'underscore',
-	'views/channelListView',
-	'models/channelList',
 	'views/videoListView'
-], function($, _, ChannelListView, channelList, VideoListView) {
+], function($, _, VideoListView) {
 
 	'use strict';
 	/*global app*/
@@ -14,17 +12,13 @@ define([
 	};
 
 
-	function initialize(router, channelListView) {
+	function initialize(router) {
 
 		var videoListView = new VideoListView(),
 			videoList = videoListView.videoList;
 
 		router.on('route:search', function(term) {
 			console.log('search: \'{0}\''.fmt(term));
-
-			// left subscription panel
-			channelList.deselectAll();
-			channelListView.render(); // TODO not 'ChannelListView' ?
 
 			app.setViewTitle('Searching: ' + term);
 

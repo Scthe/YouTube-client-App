@@ -95,7 +95,7 @@ define([
 			this.prevPageToken = result.prevPageToken;
 			this.nextPageToken = result.nextPageToken;
 
-			// create items
+			// create items TODO use set
 			$.each(items, function(i, e) {
 				self.create({
 					youTubeId: e.id.videoId, // TODO when the search result is a channel this will be undefined

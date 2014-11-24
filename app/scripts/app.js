@@ -3,8 +3,10 @@ define([
 	'underscore',
 	'backbone',
 	'router',
-	'views/searchInputView'
-], function($, _, Backbone, Router, SearchInputView) {
+	'models/channelList',
+	'views/searchInputView',
+	'views/channelListView',
+], function($, _, Backbone, Router, ChannelList, SearchInputView, ChannelListView) {
 	'use strict';
 
 
@@ -33,8 +35,16 @@ define([
 			});
 		});
 
-		// create search view
+
+		// create global accessible models
+		app.channelList = new ChannelList();
+
+		// create always visible views
 		app.searchView = new SearchInputView();
+		new ChannelListView({
+			collection: app.channelList
+		});
+
 	}
 
 	function setContent(content) {

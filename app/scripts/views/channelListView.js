@@ -2,9 +2,8 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
-	'../models/channelList',
 	'views/channelListItemView'
-], function($, _, Backbone, channelList, ChannelView) {
+], function($, _, Backbone, ChannelView) {
 
 	'use strict';
 
@@ -12,22 +11,20 @@ define([
 		el: '#channels-panel',
 
 		initialize: function() {
-			channelList.on('add', this.onAdd, this);
-			channelList.fetch();
+			this.collection.on('add', this.onAdd, this);
+			this.collection.fetch();
 			//this.render();
 		},
 
 		render: function() {
 			this.$el.html('');
 			var that = this;
-			channelList.each(function(e) {
+			this.collection.each(function(e) {
 				that.onAdd(e);
 			});
 		},
 
 		onAdd: function(channel) {
-			// TODO sort A-Z ?
-			// TODO ensure only 1 is active at a time ?
 			var view = new ChannelView({
 				model: channel,
 				parent: this
@@ -37,5 +34,4 @@ define([
 	});
 
 	return ChannelListView;
-
 });

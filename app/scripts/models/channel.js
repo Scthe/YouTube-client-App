@@ -9,8 +9,8 @@ define([
 	var Channel = Backbone.Model.extend({
 		//urlRoot: '/'
 		defaults: {
-			name: 'Channel A',
-			videoCount: 3,
+			name: '',
+			videoCount: 0,
 			active: false
 		}
 	});

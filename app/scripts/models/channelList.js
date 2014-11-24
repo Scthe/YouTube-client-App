@@ -8,6 +8,9 @@ define([
 
 	'use strict';
 
+	// TODO sort A-Z ?
+	// TODO ensure only 1 is active at a time ?
+
 	var ChannelList = Backbone.Collection.extend({
 		model: Channel,
 
@@ -20,5 +23,5 @@ define([
 		}
 	});
 
-	return new ChannelList(); // TODO instantiate in app.js
+	return ChannelList;
 });
