@@ -12,7 +12,14 @@ define([
 			name: '',
 			videoCount: 0,
 			active: false
+		},
+
+		validate: function(attrs) {
+			if (!attrs.name || attrs.name.trim().length < 1) {
+				return 'Incorrect name';
+			}
 		}
+
 	});
 
 	return Channel;
