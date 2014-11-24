@@ -35,6 +35,7 @@ define([
 			});
 		});
 
+		window.localStorage.clear();
 
 		// create global accessible models
 		app.channelList = new ChannelList();

@@ -12,15 +12,14 @@ define([
 
 		initialize: function() {
 			this.collection.on('add', this.onAdd, this);
-			this.collection.fetch();
-			//this.render();
+			this.render();
 		},
 
 		render: function() {
+			var self = this;
 			this.$el.html('');
-			var that = this;
 			this.collection.each(function(e) {
-				that.onAdd(e);
+				self.onAdd(e);
 			});
 		},
 
