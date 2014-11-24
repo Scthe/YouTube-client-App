@@ -22,43 +22,62 @@ define([
 			_.bindAll(this, 'fetch_', 'onSearchResults', 'fetchNextPage', 'fetchPrevPage');
 			this.term = '';
 
-			this.changePage = function(token, callback) {
-				if (token) {
-					self.fetchCallback = callback;
+			this.invokeSearch = function(term, pageToken, callback) {
+				if (arguments.length === 2) {
+					// term and callback only
+					term = arguments[0];
+					callback = arguments[1];
+					pageToken = undefined;
+				} else if (arguments.length === 1) {
+					// callback only
+					term = self.term;
+					callback = arguments[0];
+					pageToken = undefined;
+				}
+				if (!term) {
+					term = self.term;
+				}
+
+				var sameTermAsBefore = self.term === term;
+				if (!sameTermAsBefore || (sameTermAsBefore && pageToken)) {
+					// 1st part of the condition: new search
+					// 2nd part of the condition: prev / next page
+					self.term = term;
 					self.reset();
-					ytService.search(self.term, token, MAXRESULTS, self.onSearchResults);
-				} else {
-					self.fetch_();
+					self.fetchCallback = callback;
+					ytService.search(self.term, pageToken, MAXRESULTS, self.onSearchResults);
+
+				} else if (callback) {
+					// keep old results & invoke callback
+					_.defer(callback, this.term,
+						this.prevPageToken !== undefined,
+						this.nextPageToken !== undefined);
 				}
 			};
 		},
 
 		fetch_: function(term, callback) {
-			term |= this.term;
-
-			if (this.term !== term) {
-				this.fetchCallback = callback;
-
-				this.reset();
-				this.term = term;
-
-				ytService.search(term, undefined, MAXRESULTS, this.onSearchResults);
-			} else if (callback) {
-				callback(this.term,
-					this.prevPageToken !== undefined,
-					this.nextPageToken !== undefined);
-			}
+			this.invokeSearch(term, callback);
 		},
 
 		fetchNextPage: function(callback) {
-			this.changePage(this.nextPageToken, callback);
+			this.invokeSearch(undefined, this.nextPageToken, function(_, p, n) {
+				callback(p, n);
+			});
 		},
 
 		fetchPrevPage: function(callback) {
-			this.changePage(this.prevPageToken, callback);
+			this.invokeSearch(undefined, this.prevPageToken, function(_, p, n) {
+				callback(p, n);
+			});
 		},
 
 		onSearchResults: function(term, result) {
+			// TODO use FRP for this
+			// .filter(term==this.term)
+			// setPageTokens + items.term
+			// create models
+			// callback
 			var self = this;
 			var items = result.items;
 			// console.log(items);
@@ -82,7 +101,6 @@ define([
 			//self.localStorage.save();
 
 			if (this.fetchCallback) {
-				// TODO use FRP for this
 				this.fetchCallback(
 					term,
 					this.prevPageToken !== undefined,

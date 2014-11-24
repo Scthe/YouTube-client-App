@@ -77,6 +77,7 @@ define([
 			setPageSelector('next', hasNext);
 
 			function setPageSelector(selector, activate) {
+				// console.log(selector, activate);
 				var $el = self.pageButtons[selector];
 				$el[activate ? 'addClass' : 'removeClass'](classes);
 			}
