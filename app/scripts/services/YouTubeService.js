@@ -1,6 +1,21 @@
-define(function() {
+define(['bacon'], function(Bacon) {
 
 	'use strict';
+
+	var apiCallBeforeAPIWasLoaded,
+		executeGoogleApiCall = function(f) {
+			'use strict';
+			apiCallBeforeAPIWasLoaded = f;
+		};
+
+	window.registerYouTubeApiHandler(function(YouTubeApiClient) {
+		executeGoogleApiCall = function(f) {
+			if (f !== undefined) {
+				f(YouTubeApiClient);
+			}
+		};
+		executeGoogleApiCall(apiCallBeforeAPIWasLoaded);
+	});
 
 	return {
 		search: search,
@@ -11,7 +26,7 @@ define(function() {
 	 * https://developers.google.com/youtube/v3/docs/videos
 	 */
 	function videoDetails(videoId, callback) {
-		window.executeGoogleApiCall(f);
+		executeGoogleApiCall(f);
 
 		function f(yt) {
 			var request = yt.videos.list({
@@ -48,13 +63,19 @@ define(function() {
 			query.pageToken = pageToken;
 		}
 
-		window.executeGoogleApiCall(function(yt) {
-			var request = yt.search.list(query);
+		executeGoogleApiCall(function(yt) {
+			var request = yt.search.list(query),
+				reqExec = request.execute.bind(request);
 
 			request.execute(function(response) {
 				callback(searchTerm, response.result);
 			});
+
+			// Bacon.fromCallback(request, request.execute).log();
+			// return Bacon.fromCallback(reqExec).log();
 		});
 	}
+
+
 
 });

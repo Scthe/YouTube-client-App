@@ -49,11 +49,16 @@
 
 	<script src="keys.js"></script>
 	<script>
-		var apiCallBeforeAPIWasLoaded;
+		var YouTubeApiHandler,
+			YouTubeApiClient;
 
-		window.executeGoogleApiCall = function(f) {
+		window.registerYouTubeApiHandler = function(f){
 			'use strict';
-			apiCallBeforeAPIWasLoaded = f;
+			if(YouTubeApiClient){
+				f(YouTubeApiClient);
+			} else {
+				YouTubeApiHandler = f;
+			}
 		};
 
 		function onGAPILoaded(){
@@ -62,12 +67,10 @@
 
 			gapi.client.setApiKey(API_KEY);
 			gapi.client.load('youtube', 'v3', function() {
-				window.executeGoogleApiCall = function(f) {
-					if(f !== undefined){
-						f(gapi.client.youtube);
-					}
-				};
-				window.executeGoogleApiCall(apiCallBeforeAPIWasLoaded);
+				YouTubeApiClient = gapi.client.youtube;
+				if(YouTubeApiHandler){
+					YouTubeApiHandler(YouTubeApiClient);
+				}
 			});
 		}
 

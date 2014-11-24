@@ -30,7 +30,7 @@ define([
 
 		render: function() {
 			var self = this;
-			console.log('render');
+			// console.log('render');
 
 			this.$el.html(this.template());
 			this.listEl = this.$el.find('#video-list');

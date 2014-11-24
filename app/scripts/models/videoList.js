@@ -18,42 +18,44 @@ define([
 		localStorage: new Store('backbone-videos'),
 
 		initialize: function() {
+			var self = this;
 			_.bindAll(this, 'fetch_', 'onSearchResults', 'fetchNextPage', 'fetchPrevPage');
 			this.term = '';
+
+			this.changePage = function(token, callback) {
+				if (token) {
+					self.fetchCallback = callback;
+					self.reset();
+					ytService.search(self.term, token, MAXRESULTS, self.onSearchResults);
+				} else {
+					self.fetch_();
+				}
+			};
 		},
 
 		fetch_: function(term, callback) {
-			if (term && this.term !== term) {
+			term |= this.term;
+
+			if (this.term !== term) {
 				this.fetchCallback = callback;
 
 				this.reset();
 				this.term = term;
 
 				ytService.search(term, undefined, MAXRESULTS, this.onSearchResults);
-			} else {
-				callback(this.prevPageToken !== undefined,
+			} else if (callback) {
+				callback(this.term,
+					this.prevPageToken !== undefined,
 					this.nextPageToken !== undefined);
 			}
 		},
 
 		fetchNextPage: function(callback) {
-			if (this.nextPageToken) {
-				this.fetchCallback = callback;
-				this.reset();
-				ytService.search(this.term, this.nextPageToken, MAXRESULTS, this.onSearchResults);
-			} else {
-				this.fetch_();
-			}
+			this.changePage(this.nextPageToken, callback);
 		},
 
 		fetchPrevPage: function(callback) {
-			if (this.prevPageToken) {
-				this.fetchCallback = callback;
-				this.reset();
-				ytService.search(this.term, this.prevPageToken, MAXRESULTS, this.onSearchResults);
-			} else {
-				this.fetch_();
-			}
+			this.changePage(this.prevPageToken, callback);
 		},
 
 		onSearchResults: function(term, result) {
