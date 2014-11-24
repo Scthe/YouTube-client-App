@@ -2,29 +2,17 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
-	'router'
-], function($, _, Backbone, Router) {
+	'router',
+	'views/searchInputView'
+], function($, _, Backbone, Router, SearchInputView) {
 	'use strict';
 
-	var settings = { // TODO separate setting into own file
-		_default: {
-			//'version':'0'
-			'debug': true,
-			'search_delay': 500
-		},
-
-		get: function(name) {
-			return settings._default[name];
-		}
-	};
 
 	var contentPanel = $('#main-panel-content'),
-		viewTitle = $('#view-title-text'),
-		searchInputIcon = $('#search-input-icon');
+		viewTitle = $('#view-title-text');
 
 
 	return {
-		config: settings,
 		initialize: initialize
 	};
 
@@ -38,7 +26,15 @@ define([
 		};
 		app.router = Router.initialize();
 
-		jQueryInit();
+		// add possibility to go to the main page
+		$('#brand').click(function() {
+			app.router.navigate('', {
+				trigger: true
+			});
+		});
+
+		// create search view
+		app.searchView = new SearchInputView();
 	}
 
 	function setContent(content) {
@@ -47,34 +43,6 @@ define([
 
 	function setViewTitle(str) {
 		viewTitle.html(str);
-	}
-
-	function jQueryInit() {
-		$('#brand').click(function() {
-			console.log('home');
-			app.router.navigate('', {
-				trigger: true
-			});
-		});
-
-		// TODO create search controller
-		var searchTimer = null;
-		$('#search-bar input').keyup(function() {
-			// hide normal search icon
-			if (searchInputIcon.is(':visible')) {
-				searchInputIcon.hide();
-			}
-
-			var term = $(this).val();
-			clearTimeout(searchTimer);
-			// wait some time before firing up the callback
-			searchTimer = setTimeout(function() {
-				// do search
-				app.router.navigate('search/' + term + '/1', {
-					trigger: true
-				});
-			}, settings.get('search_delay'));
-		});
 	}
 
 });

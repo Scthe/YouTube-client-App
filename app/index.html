@@ -10,8 +10,6 @@
 
 	<!-- Style sheets -->
 	<link rel="stylesheet" href="../styles/main.css" >
-
-	<script data-main="scripts/main" src='../bower_components/requirejs/require.js')></script>
 </head>
 
 <body class="page-background">
@@ -23,11 +21,7 @@
 		<span id="brand" class="activable decorated-text navigation-bar-left">YouTube</span>
 
 		<!-- search bar-->
-		<div id="search-bar" class="navigation-bar-right">
-			<input type="text" class="small-paddings-square no-margin fill-width" placeholder="Search..." />
-			<span id="search-input-icon" class="glyphicon glyphicon-search"></span>
-			<span id="search-loading">&nbsp;</span>
-		</div>
+		<div id="search-bar" class="navigation-bar-right"></div>
 	</div>
 
 	<div id="page-content">
@@ -55,11 +49,16 @@
 
 	<script src="keys.js"></script>
 	<script>
-		var apiCallBeforeAPIWasLoaded;
+		var YouTubeApiHandler,
+			YouTubeApiClient;
 
-		window.executeGoogleApiCall = function(f) {
+		window.registerYouTubeApiHandler = function(f){
 			'use strict';
-			apiCallBeforeAPIWasLoaded = f;
+			if(YouTubeApiClient){
+				f(YouTubeApiClient);
+			} else {
+				YouTubeApiHandler = f;
+			}
 		};
 
 		function onGAPILoaded(){
@@ -68,12 +67,10 @@
 
 			gapi.client.setApiKey(API_KEY);
 			gapi.client.load('youtube', 'v3', function() {
-				window.executeGoogleApiCall = function(f) {
-					if(f !== undefined){
-						f(gapi.client.youtube);
-					}
-				};
-				window.executeGoogleApiCall(apiCallBeforeAPIWasLoaded);
+				YouTubeApiClient = gapi.client.youtube;
+				if(YouTubeApiHandler){
+					YouTubeApiHandler(YouTubeApiClient);
+				}
 			});
 		}
 
@@ -87,6 +84,7 @@
 		  };
 	</script>
 	<script src="https://apis.google.com/js/client.js?onload=onGAPILoaded"></script>
+	<script data-main="scripts/main" src='../bower_components/requirejs/require.js')></script>
 
 </body>
 

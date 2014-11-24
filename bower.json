@@ -9,7 +9,8 @@
     "jQuery": "~2.1.1",
     "backbone.localstorage": "~1.1.13",
     "requirejs": "~2.1.15",
-    "requirejs-text": "~2.0.12"
+    "requirejs-text": "~2.0.12",
+    "bacon": "~0.7.32"
   },
   "appPath": "app"
 }

@@ -2,6 +2,20 @@ define(function() {
 
 	'use strict';
 
+	var apiCallBeforeAPIWasLoaded,
+		executeGoogleApiCall = function(f) {
+			apiCallBeforeAPIWasLoaded = f;
+		};
+
+	window.registerYouTubeApiHandler(function(YouTubeApiClient) {
+		executeGoogleApiCall = function(f) {
+			if (f !== undefined) {
+				f(YouTubeApiClient);
+			}
+		};
+		executeGoogleApiCall(apiCallBeforeAPIWasLoaded);
+	});
+
 	return {
 		search: search,
 		videoDetails: videoDetails
@@ -11,7 +25,7 @@ define(function() {
 	 * https://developers.google.com/youtube/v3/docs/videos
 	 */
 	function videoDetails(videoId, callback) {
-		window.executeGoogleApiCall(f);
+		executeGoogleApiCall(f);
 
 		function f(yt) {
 			var request = yt.videos.list({
@@ -48,13 +62,15 @@ define(function() {
 			query.pageToken = pageToken;
 		}
 
-		window.executeGoogleApiCall(function(yt) {
+		executeGoogleApiCall(function(yt) {
 			var request = yt.search.list(query);
 
 			request.execute(function(response) {
-				callback(response.result);
+				callback(searchTerm, response.result);
 			});
 		});
 	}
+
+
 
 });

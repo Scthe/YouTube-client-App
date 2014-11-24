@@ -19,7 +19,7 @@ define([
 			'': 'home',
 			'video/:id': 'video',
 			'channel/:id': 'channel',
-			'search/:term/:page': 'search'
+			'search/:term': 'search'
 		}
 	});
 

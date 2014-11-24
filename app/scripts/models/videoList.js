@@ -9,9 +9,7 @@ define([
 
 	'use strict';
 
-	var MAXRESULTS = 12,
-		seachLoading = $('#search-loading'),
-		searchInputIcon = $('#search-input-icon');
+	var MAXRESULTS = 12;
 
 	var VideoList = Backbone.Collection.extend({
 
@@ -20,40 +18,74 @@ define([
 		localStorage: new Store('backbone-videos'),
 
 		initialize: function() {
+			var self = this;
 			_.bindAll(this, 'fetch_', 'onSearchResults', 'fetchNextPage', 'fetchPrevPage');
+			this.term = '';
+
+			this.invokeSearch = function(term, pageToken, callback) {
+				if (arguments.length === 2) {
+					// term and callback only
+					term = arguments[0];
+					callback = arguments[1];
+					pageToken = undefined;
+				} else if (arguments.length === 1) {
+					// callback only
+					term = self.term;
+					callback = arguments[0];
+					pageToken = undefined;
+				}
+				if (!term) {
+					term = self.term;
+				}
+
+				var sameTermAsBefore = self.term === term;
+				if (!sameTermAsBefore || (sameTermAsBefore && pageToken)) {
+					// 1st part of the condition: new search
+					// 2nd part of the condition: prev / next page
+					self.term = term;
+					self.reset();
+					ytService.search(self.term, pageToken, MAXRESULTS, function(term, result) {
+						if (term !== self.term) { // TODO can use FRP and filter here
+							return;
+						}
+
+						// do post search operations
+						self.onSearchResults(term, result);
+
+						// invoke callback
+						if (callback) {
+							callback(term,
+								self.prevPageToken !== undefined,
+								self.nextPageToken !== undefined);
+						}
+					});
+
+				} else if (callback) {
+					// keep old results & invoke callback
+					_.defer(callback, self.term,
+						self.prevPageToken !== undefined,
+						self.nextPageToken !== undefined);
+				}
+			};
 		},
 
 		fetch_: function(term, callback) {
-			this.fetchCallback = callback;
-			seachLoading.show();
-
-			this.reset();
-			this.term = term;
-
-			ytService.search(term, undefined, MAXRESULTS, this.onSearchResults);
+			this.invokeSearch(term, callback);
 		},
 
 		fetchNextPage: function(callback) {
-			if (this.nextPageToken) {
-				this.fetchCallback = callback;
-				this.reset();
-				ytService.search(this.term, this.nextPageToken, MAXRESULTS, this.onSearchResults);
-			} else {
-				this.fetch_();
-			}
+			this.invokeSearch(undefined, this.nextPageToken, function(_, p, n) {
+				callback(p, n);
+			});
 		},
 
 		fetchPrevPage: function(callback) {
-			if (this.prevPageToken) {
-				this.fetchCallback = callback;
-				this.reset();
-				ytService.search(this.term, this.prevPageToken, MAXRESULTS, this.onSearchResults);
-			} else {
-				this.fetch_();
-			}
+			this.invokeSearch(undefined, this.prevPageToken, function(_, p, n) {
+				callback(p, n);
+			});
 		},
 
-		onSearchResults: function(result) {
+		onSearchResults: function(term, result) {
 			var self = this;
 			var items = result.items;
 			// console.log(items);
@@ -63,6 +95,7 @@ define([
 			this.prevPageToken = result.prevPageToken;
 			this.nextPageToken = result.nextPageToken;
 
+			// create items
 			$.each(items, function(i, e) {
 				self.create({
 					youTubeId: e.id.videoId, // TODO when the search result is a channel this will be undefined
@@ -75,14 +108,6 @@ define([
 				});
 			});
 			//self.localStorage.save();
-
-			searchInputIcon.show();
-			seachLoading.hide();
-
-			if (this.fetchCallback) {
-				this.fetchCallback(this.nextPageToken !== undefined);
-				this.fetchCallback = undefined;
-			}
 		}
 
 	});
