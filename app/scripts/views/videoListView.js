@@ -4,7 +4,7 @@ define([
 	'backbone',
 	'models/videoList',
 	'views/videoListItemView',
-	'text!templates/videoListView.tmpl.html'
+	'text!templates/paginatedListView.tmpl.html'
 ], function($, _, Backbone, VideoList, VideoListItemView, tmpl) {
 
 	'use strict';
@@ -20,37 +20,38 @@ define([
 		},
 
 		initialize: function() {
-			_.bindAll(this, 'renderVideo', 'resetVideoList', 'render',
+			_.bindAll(this, 'renderItem', 'resetList', 'render',
 				'prevPage', 'nextPage', 'updatePaginationButtons');
 
-			this.videoList = new VideoList(); // TODO rename to collection
-			this.videoList.on('add', this.renderVideo, this);
-			this.videoList.on('reset', this.resetVideoList, this);
+			this.collection = new VideoList();
+			this.collection.on('add', this.renderItem, this);
+			this.collection.on('reset', this.resetList, this);
 		},
 
 		render: function() {
 			// console.log('render');
 
 			this.$el.html(this.template());
-			this.listEl = this.$el.find('#video-list');
+			this.listEl = this.$el.find('#items-list');
+			this.listEl.addClass('flex-container');
 			this.pageButtons = {
 				'prev': this.$el.find('#prev'),
 				'next': this.$el.find('#next')
 			};
-			this.videoList.each(this.renderVideo);
+			this.collection.each(this.renderItem);
 
 			return this;
 		},
 
-		renderVideo: function(video) { // TODO rename to renderItem
+		renderItem: function(item) {
 			var view = new VideoListItemView({
-				model: video,
+				model: item,
 				parent: this
 			});
 			this.listEl.append(view.render().el);
 		},
 
-		resetVideoList: function() { // TODO rename to resetList
+		resetList: function() {
 			if (this.listEl) { // TODO try to reuse views
 				this.listEl.html('');
 			}
@@ -58,12 +59,12 @@ define([
 
 		prevPage: function() {
 			// console.log('prev-page');
-			this.videoList.fetchPrevPage(this.updatePaginationButtons);
+			this.collection.fetchPrevPage(this.updatePaginationButtons);
 		},
 
 		nextPage: function() {
 			// console.log('next-page');
-			this.videoList.fetchNextPage(this.updatePaginationButtons);
+			this.collection.fetchNextPage(this.updatePaginationButtons);
 		},
 
 		updatePaginationButtons: function(hasPrevious, hasNext) {

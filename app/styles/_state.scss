@@ -50,3 +50,16 @@
 .focusable-input.focus {
   border-bottom: solid 2px white;
 }
+
+:hover > .action-good{
+	color: #1D7FAC !important;
+}
+:hover > .action-bad{
+	color: #EB1F44 !important;
+}
+.action-good{
+	transition: color 0.2s;
+}
+.action-bad{
+	transition: color 0.2s;
+}

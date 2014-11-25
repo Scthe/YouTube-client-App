@@ -8,7 +8,7 @@ define([
 	'use strict';
 
 	var VideoListItemView = Backbone.View.extend({
-		tagName: 'article',
+		tagName: 'li',
 
 		className: 'card flex-grid',
 

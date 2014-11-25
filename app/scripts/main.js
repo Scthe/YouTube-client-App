@@ -5,6 +5,7 @@ require.config({
 		backbone: '/bower_components/backbone/backbone',
 		backboneLocalStorage: '/bower_components/backbone.localStorage/backbone.localStorage-min',
 		bacon: '/bower_components/bacon/dist/Bacon.min',
+		bootstrap: '/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap',
 
 		templates: '/templates',
 		models: 'models',
@@ -16,13 +17,16 @@ require.config({
 		'backbone': {
 			deps: ['jquery', 'underscore'],
 			exports: 'Backbone'
+		},
+		'bootstrap':{
+			deps: ['jquery'],
 		}
 	},
 	waitSeconds: 10
 
 });
 
-require(['jquery', 'bacon', 'app'], function( $, Bacon, App) {
+require(['jquery', 'bacon', 'app', 'bootstrap'], function( $, Bacon, App) {
 	'use strict';
 
 	// patch jQuery to allow to use with Bacon

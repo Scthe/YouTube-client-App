@@ -65,7 +65,8 @@ define([
 					}, {
 						validate: true
 					});
-				}); // TODO clear input
+					self.newChannelText.val('');
+				});
 
 			// model the event stream
 			var keysKeyStream = this.newChannelText

@@ -13,6 +13,36 @@
 
 }
 
+$even-row-bg: #eaeaea;
+.content-2-columns{
+	@media screen and (max-width: $flex-grid-break-2) {
+		width:100%;
+	}
+	@media screen and (min-width: $flex-grid-break-2) {
+		float:left !important;
+		width:50%;
+	}
+}
+@media screen and (min-width: $flex-grid-break-2) {
+	.content-2-columns:nth-child(2n+1){
+		/*border-right:1px solid red;*/
+		padding-right: 5px;
+	}
+	.content-2-columns:nth-child(4n+3){
+		background: $even-row-bg;
+	}
+	.content-2-columns:nth-child(4n+4){
+		background: $even-row-bg;
+	}
+}
+
+@media screen and (max-width: $flex-grid-break-2) {
+	.content-2-columns:nth-child(2n){
+		background: $even-row-bg;
+	}
+}
+
+
 #left-panel {
 	@media screen and (max-width: $content-break-2){
 		display:none;

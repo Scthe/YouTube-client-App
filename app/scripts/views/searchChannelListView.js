@@ -5,8 +5,9 @@ define([
   'underscore',
   'backbone',
   'models/channelList',
-  'text!templates/videoListView.tmpl.html' // TODO rename to pagination view
-], function($, _, Backbone, ChannelList, tmpl) {
+  'views/searchChannelListItemView',
+  'text!templates/paginatedListView.tmpl.html'
+], function($, _, Backbone, ChannelList, SearchChannelListItemView, tmpl) {
 
   'use strict';
   // TODO in 90% the same as video list view - create pagination view to inherit from
@@ -35,24 +36,26 @@ define([
       // console.log('render');
 
       this.$el.html(this.template());
-      this.listEl = this.$el.find('#video-list');
+      this.listEl = this.$el.find('#items-list');
+      this.listEl.addClass('clearfix');
       this.pageButtons = {
         'prev': this.$el.find('#prev'),
         'next': this.$el.find('#next')
       };
       this.collection.each(this.renderItem);
+      $('[data-toggle="tooltip"]').tooltip();
 
       return this;
     },
 
     renderItem: function(item) {
-      // var view = new VideoListItemView({
-      // model: video,
-      // parent: this
-      // });
-      // this.listEl.append(view.render().el);
-
-      this.listEl.append('<li>item: {0}</li>'.fmt(item.get('name')));
+      var view = new SearchChannelListItemView({
+        model: item,
+        parent: this
+      });
+      this.listEl.append(view.render().el);
+      // TODO possible error: if item added after render it will not show tooltip
+      // solution: find [tooltip] here !
     },
 
     resetList: function() {

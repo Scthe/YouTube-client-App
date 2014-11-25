@@ -11,6 +11,8 @@ define([
 		defaults: {
 			name: '',
 			videoCount: 0,
+			subscriptions: 0,
+			avatar:'images/img5.png',
 			active: false
 		},
 

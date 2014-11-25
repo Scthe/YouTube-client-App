@@ -14,7 +14,7 @@ define([
 	function initialize(router) {
 
 		var videoListView = new VideoListView(),
-			videoList = videoListView.videoList;
+			videoList = videoListView.collection;
 
 		router.on('route:search', function(term) {
 			console.log('search: \'{0}\''.fmt(term));
