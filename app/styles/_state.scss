@@ -51,10 +51,10 @@
   border-bottom: solid 2px white;
 }
 
-:hover > .action-good{
+.action-good:hover{
 	color: #1D7FAC !important;
 }
-:hover > .action-bad{
+.action-bad:hover{
 	color: #EB1F44 !important;
 }
 .action-good{

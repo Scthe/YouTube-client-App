@@ -6,7 +6,8 @@ define([
 	'models/channelList',
 	'views/searchInputView',
 	'views/channelListView',
-], function($, _, Backbone, Router, ChannelList, SearchInputView, ChannelListView) {
+	'services/favoriteChannelsService'
+], function($, _, Backbone, Router, ChannelList, SearchInputView, ChannelListView, FavoriteChannelsService) {
 	'use strict';
 
 
@@ -37,13 +38,10 @@ define([
 
 		window.localStorage.clear();
 
-		// create global accessible models
-		app.channelList = new ChannelList();
-
 		// create always visible views
 		app.searchView = new SearchInputView();
 		app.channelListView = new ChannelListView({
-			collection: app.channelList
+			collection: FavoriteChannelsService.collection
 		});
 
 	}

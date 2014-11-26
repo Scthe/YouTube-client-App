@@ -21,7 +21,9 @@ define([
 			_.bindAll(this, 'render', 'renderChannel', 'bindEventSources', 'previewChannel');
 
 			this.lastSearch = '';
-			this.collection.on('add', this.renderChannel, this);
+			this.collection.on('add', this.render, this);
+			this.collection.on('remove', this.render, this);
+			// this.collection.on('sort', this.render, this);
 			this.render();
 
 			this.collection.on('invalid', function() {

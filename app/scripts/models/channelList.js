@@ -23,8 +23,9 @@ define([
 			// create stub data TODO remove stub data
 			var xs = _.range(7)
 				.map(function(i) {
+					var ii = Math.floor(Math.random() * (10 - 1)) + 1;
 					return {
-						name: 'Channel ' + i,
+						name: 'Channel ' + ii,
 						videoCount: i
 					};
 				});
