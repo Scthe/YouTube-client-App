@@ -17,7 +17,7 @@ define(function() {
 	});
 
 	return {
-		search: search,
+		search: searchVideo,
 		videoDetails: videoDetails,
 		searchChannel: searchChannel
 	};
@@ -48,15 +48,23 @@ define(function() {
 	}
 
 
+	function searchVideo(searchTerm, pageToken, resultCount, callback) {
+		return search('video', searchTerm, pageToken, resultCount, callback);
+	}
+
+	function searchChannel(searchTerm, pageToken, resultCount, callback) {
+		return search('channel', searchTerm, pageToken, resultCount, callback);
+	}
+
 	/*
 	 * https://developers.google.com/youtube/v3/docs/search
 	 * https://developers.google.com/youtube/v3/docs/search/list
 	 */
-	function search(searchTerm, pageToken, resultCount, callback) {
+	function search(type, searchTerm, pageToken, resultCount, callback) {
 		var query = {
 			q: searchTerm,
 			part: 'snippet',
-			type: 'video',
+			type: type,
 			maxResults: resultCount
 		};
 		if (pageToken) {
@@ -71,27 +79,5 @@ define(function() {
 			});
 		});
 	}
-
-	function searchChannel(searchTerm, pageToken, resultCount, callback) { // TODO duplicate of search
-		var query = {
-			q: searchTerm,
-			part: 'snippet',
-			type: 'channel',
-			maxResults: resultCount
-		};
-		if (pageToken) {
-			query.pageToken = pageToken;
-		}
-
-		executeGoogleApiCall(function(yt) {
-			var request = yt.search.list(query);
-
-			request.execute(function(response) {
-				callback(searchTerm, response.result);
-			});
-		});
-	}
-
-
 
 });
