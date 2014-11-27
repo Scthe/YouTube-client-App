@@ -55,7 +55,6 @@ define([
 
 			// create items TODO use set
 			$.each(items, function(i, e) { // TODO move from here to the model
-				console.log(e)
 				self.create({
 					youTubeId: e.id.channelId,
 					name: e.snippet.title,

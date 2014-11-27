@@ -17,8 +17,6 @@ define([
 
 		router.on('route:search-channel', function(term) {
 			console.log('search-channel: \'{0}\''.fmt(term));
-			// app.channelList
-			// app.channelListView
 
 			app.setViewTitle('Searching for channel: ' + term);
 
