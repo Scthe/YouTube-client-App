@@ -18,7 +18,8 @@ define(function() {
 
 	return {
 		search: search,
-		videoDetails: videoDetails
+		videoDetails: videoDetails,
+		searchChannel: searchChannel
 	};
 
 	/*
@@ -56,6 +57,26 @@ define(function() {
 			q: searchTerm,
 			part: 'snippet',
 			type: 'video',
+			maxResults: resultCount
+		};
+		if (pageToken) {
+			query.pageToken = pageToken;
+		}
+
+		executeGoogleApiCall(function(yt) {
+			var request = yt.search.list(query);
+
+			request.execute(function(response) {
+				callback(searchTerm, response.result);
+			});
+		});
+	}
+
+	function searchChannel(searchTerm, pageToken, resultCount, callback) { // TODO duplicate of search
+		var query = {
+			q: searchTerm,
+			part: 'snippet',
+			type: 'channel',
 			maxResults: resultCount
 		};
 		if (pageToken) {

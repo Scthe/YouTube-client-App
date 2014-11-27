@@ -23,13 +23,12 @@ define([
 			app.setViewTitle('Searching for channel: ' + term);
 
 			searchChannelListView.render();
-			// searchChannelList.fetch_(term, onSearchEnd);
+			searchChannelList.fetch_(term, onSearchEnd);
 		});
 
-		// function onSearchEnd(term, hasPrevious, hasNext) {
-		// app.searchView.onSearchEnd(term);
-		// videoListView.updatePaginationButtons(hasPrevious, hasNext);
-		// }
+		function onSearchEnd(term, hasPrevious, hasNext) {
+			searchChannelListView.updatePaginationButtons(hasPrevious, hasNext);
+		}
 	}
 
 });

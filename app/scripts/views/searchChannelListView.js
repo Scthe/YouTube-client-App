@@ -32,7 +32,6 @@ define([
     },
 
     render: function() {
-      console.log('search channel render');
       // console.log('render');
 
       this.$el.html(this.template());

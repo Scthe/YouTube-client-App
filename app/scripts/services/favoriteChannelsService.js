@@ -1,16 +1,27 @@
 define([
+	'underscore',
 	'models/channelList'
-], function(ChannelList) {
+], function(_, ChannelList) {
 
 	'use strict';
 
 	var col = new ChannelList();
-	// col.comparator = 'name';
-	col.comparator = function(e) {
-		return e.get('name');
-	};
+	col.comparator = 'name';
 	col.sort();
 	// col.on('sort', onUpdate.bind(undefined, col));
+
+	// create stub data TODO remove stub data
+	var xs = _.range(7)
+		.map(function(i) {
+			var ii = Math.floor(Math.random() * (10 - 1)) + 1;
+			return {
+				name: 'Channel ' + ii,
+				videoCount: i
+			};
+		});
+	for (var i = 0; i < xs.length; i++) {
+		col.create(xs[i]);
+	}
 
 	return {
 		collection: col,
@@ -43,7 +54,7 @@ define([
 		}
 	}
 
-	function onUpdate(/*col*/) {
+	function onUpdate( /*col*/ ) {
 		/* jshint -W040 */
 		// TODO ensure only 1 is active at a time ?
 		// console.log('update !');

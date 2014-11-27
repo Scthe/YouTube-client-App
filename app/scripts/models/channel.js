@@ -9,10 +9,14 @@ define([
 	var Channel = Backbone.Model.extend({
 		//urlRoot: '/'
 		defaults: {
+			// youTube data
+			youTubeId: '',
 			name: '',
+			// media
+			avatar: '',
+			// details
 			videoCount: 0,
 			subscriptions: 0,
-			avatar:'images/img5.png',
 			active: false
 		},
 

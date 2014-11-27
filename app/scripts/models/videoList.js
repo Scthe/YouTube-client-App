@@ -18,69 +18,22 @@ define([
 		localStorage: new Store('backbone-videos'),
 
 		initialize: function() {
-			var self = this;
-			_.bindAll(this, 'fetch_', 'onSearchResults', 'fetchNextPage', 'fetchPrevPage');
+			_.bindAll(this, 'fetch_', 'onSearchResults', 'fetchNextPage', 'fetchPrevPage', '_invokeSearch');
 			this.term = '';
-
-			this.invokeSearch = function(term, pageToken, callback) {
-				if (arguments.length === 2) {
-					// term and callback only
-					term = arguments[0];
-					callback = arguments[1];
-					pageToken = undefined;
-				} else if (arguments.length === 1) {
-					// callback only
-					term = self.term;
-					callback = arguments[0];
-					pageToken = undefined;
-				}
-				if (!term) {
-					term = self.term;
-				}
-
-				var sameTermAsBefore = self.term === term;
-				if (!sameTermAsBefore || (sameTermAsBefore && pageToken)) {
-					// 1st part of the condition: new search
-					// 2nd part of the condition: prev / next page
-					self.term = term;
-					self.reset();
-					ytService.search(self.term, pageToken, MAXRESULTS, function(term, result) {
-						if (term !== self.term) { // TODO can use FRP and filter here
-							return;
-						}
-
-						// do post search operations
-						self.onSearchResults(term, result);
-
-						// invoke callback
-						if (callback) {
-							callback(term,
-								self.prevPageToken !== undefined,
-								self.nextPageToken !== undefined);
-						}
-					});
-
-				} else if (callback) {
-					// keep old results & invoke callback
-					_.defer(callback, self.term,
-						self.prevPageToken !== undefined,
-						self.nextPageToken !== undefined);
-				}
-			};
 		},
 
 		fetch_: function(term, callback) {
-			this.invokeSearch(term, callback);
+			this._invokeSearch(term, callback);
 		},
 
 		fetchNextPage: function(callback) {
-			this.invokeSearch(undefined, this.nextPageToken, function(_, p, n) {
+			this._invokeSearch(undefined, this.nextPageToken, function(_, p, n) {
 				callback(p, n);
 			});
 		},
 
 		fetchPrevPage: function(callback) {
-			this.invokeSearch(undefined, this.prevPageToken, function(_, p, n) {
+			this._invokeSearch(undefined, this.prevPageToken, function(_, p, n) {
 				callback(p, n);
 			});
 		},
@@ -96,9 +49,9 @@ define([
 			this.nextPageToken = result.nextPageToken;
 
 			// create items TODO use set
-			$.each(items, function(i, e) {
+			$.each(items, function(i, e) { // TODO move from here to the model
 				self.create({
-					youTubeId: e.id.videoId, // TODO when the search result is a channel this will be undefined
+					youTubeId: e.id.videoId,
 					title: e.snippet.title,
 					channelId: e.snippet.channelId,
 					channelTitle: e.snippet.channelTitle,
@@ -108,6 +61,53 @@ define([
 				});
 			});
 			//self.localStorage.save();
+		},
+
+		_invokeSearch: function(term, pageToken, callback) {
+			var self = this;
+			if (arguments.length === 2) {
+				// term and callback only
+				term = arguments[0];
+				callback = arguments[1];
+				pageToken = undefined;
+			} else if (arguments.length === 1) {
+				// callback only
+				term = this.term;
+				callback = arguments[0];
+				pageToken = undefined;
+			}
+			if (!term) {
+				term = this.term;
+			}
+
+			var sameTermAsBefore = this.term === term;
+			if (!sameTermAsBefore || (sameTermAsBefore && pageToken)) {
+				// 1st part of the condition: new search
+				// 2nd part of the condition: prev / next page
+				this.term = term;
+				this.reset();
+				ytService.search(this.term, pageToken, MAXRESULTS, function(term, result) {
+					if (term !== self.term) { // TODO can use FRP and filter here
+						return;
+					}
+
+					// do post search operations
+					self.onSearchResults(term, result);
+
+					// invoke callback
+					if (callback) {
+						callback(term,
+							self.prevPageToken !== undefined,
+							self.nextPageToken !== undefined);
+					}
+				});
+
+			} else if (callback) {
+				// keep old results & invoke callback
+				_.defer(callback, self.term,
+					self.prevPageToken !== undefined,
+					self.nextPageToken !== undefined);
+			}
 		}
 
 	});

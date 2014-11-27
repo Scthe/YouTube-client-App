@@ -10,8 +10,6 @@ define([
 
 	var PREVIEWDELAY = 500;
 
-	// TODO add remove channel button
-
 	var ChannelListView = Backbone.View.extend({
 		el: '#channels-panel',
 
