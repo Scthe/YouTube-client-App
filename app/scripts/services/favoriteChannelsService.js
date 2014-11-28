@@ -21,30 +21,28 @@ define([
 		remove: remove
 	};
 
-	function add(channelName) {
+	function add(channel) {
 		/* jshint -W040 */
 		// console.log('add: ' + channelName);
-		var obj = {
-				name: channelName
-			},
-			exists = this.collection.findWhere(obj);
+		var exists = this.collection.findWhere({
+			name: channel.get('name')
+		});
 		if (exists === undefined) {
-			this.collection.create(obj);
+			this.collection.create(channel);
 		}
 	}
 
-	function remove(channelName) {
+	function remove(channel) {
 		/* jshint -W040 */
 		// console.log('rem: ' + channelName);
-		var obj = {
-				name: channelName
-			},
-			os = this.collection.where(obj);
+		var os = this.collection.where({
+			name: channel.get('name')
+		});
 		if (os) {
 			this.collection.remove(os);
-			var ids = _.pluck(os, 'id');
 			// we have to do this by hand so that
 			// it will not remove the model from local storage
+			var ids = _.pluck(os, 'id');
 			col.localStorage.records = _.reject(col.localStorage.records, function(id) {
 				return _.contains(ids, id);
 			});

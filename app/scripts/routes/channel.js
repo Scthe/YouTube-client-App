@@ -23,7 +23,7 @@ define([
 
 			// set active channels
 			favoriteChannelsService.collection.each(function(e) {
-				e.set('active', e.get('id') === id); // TODO fix
+				e.set('active', e.get('id') === id);
 			});
 
 			// render left subscription panel
@@ -35,6 +35,7 @@ define([
 			// change view title TODO load from localstorage, do not wait for api call
 			// var m = channelList.get(id);
 			// app.setViewTitle('{0}\'s Channel'.fmt(m.get('name')));
+			app.setViewTitle('Ch: {0}'.fmt(id));
 
 			videoListView.render();
 			videoList.fetch_(id, onSearchEnd);

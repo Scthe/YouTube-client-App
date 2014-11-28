@@ -32,11 +32,11 @@ define([
     },
 
     addToFavorites: function() {
-      favoriteChannelsService.add(this.model.get('name'));
+      favoriteChannelsService.add(this.model);
     },
 
     removeFromFavorites: function() {
-      favoriteChannelsService.remove(this.model.get('name'));
+      favoriteChannelsService.remove(this.model);
     },
 
     goToChannel: function() {

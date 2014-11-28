@@ -59,13 +59,13 @@ define([
 				.asEventStream('click')
 				.map(getText)
 				.onValue(function(e) {
-					// console.log(e);
-					self.collection.add({
-						name: e
-					}, {
-						validate: true
-					});
-					self.newChannelText.val('');
+					// console.log(e); // TODO fast channel add by name
+					// self.collection.add({
+					// name: e
+					// }, {
+					// validate: true
+					// });
+					// self.newChannelText.val('');
 				});
 
 			// model the event stream

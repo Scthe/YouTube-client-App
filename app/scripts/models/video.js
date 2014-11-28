@@ -9,12 +9,10 @@ define([
 
 	var Video = Backbone.Model.extend({
 		defaults: {
-			// youTube data
-			youTubeId: '',
 			title: '',
 			channelId: '',
 			channelTitle: '',
-			publishedAt: '', // str date
+			publishedAt: '', // string date
 			// media
 			thumbnail: '',
 			embedLink: '',
@@ -43,7 +41,6 @@ define([
 
 		onVideoGetSuccess: function(e) {
 			/*jshint camelcase: false */
-			console.log(e)
 
 			this.set('title', e.snippet.title);
 			this.set('channelId', e.snippet.channelId);

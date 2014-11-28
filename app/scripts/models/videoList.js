@@ -26,7 +26,7 @@ define([
 
 		apiConverter: function(e) {
 			return {
-				youTubeId: e.id.videoId,
+				id: e.id.videoId,
 				title: e.snippet.title,
 				channelId: e.snippet.channelId,
 				channelTitle: e.snippet.channelTitle,

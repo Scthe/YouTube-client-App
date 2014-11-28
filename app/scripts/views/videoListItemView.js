@@ -31,14 +31,14 @@ define([
 
 		goToVideo: function() {
 			/*global app*/
-			app.router.navigate('video/{0}'.fmt(this.model.get('youTubeId')), {
+			app.router.navigate('video/{0}'.fmt(this.model.id), {
 				trigger: true
 			});
 		},
 
 		goToChannel: function() {
 			/*global app*/
-			app.router.navigate('channel/{0}'.fmt(this.model.get('id')), { // TODO use event bus with nicer urls
+			app.router.navigate('channel/{0}'.fmt(this.model.get('channelId')), { // TODO use event bus with nicer urls
 				trigger: true
 			});
 		}
