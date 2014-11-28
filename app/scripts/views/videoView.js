@@ -27,10 +27,6 @@ define([
 		initialize: function() {
 			_.bindAll(this, 'render', 'goToChannel');
 			// TODO use web component for video
-
-			// TODO better loading icon
-			var a = '<img src="../images/loaderb64.gif" class="block-center std-paddings width-25">';
-			this.$el.html(a);
 		},
 
 		render: function() {
