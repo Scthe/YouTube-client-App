@@ -17,7 +17,7 @@ define([
 
 		apiSearchFunction: 'searchChannel',
 
-		MAXRESULTS: 12,
+		MAXRESULTS: 4,
 
 		initialize: function() {
 			_.bindAll(this, 'apiConverter', 'deselectAll', 'initialize_');
@@ -32,7 +32,7 @@ define([
 
 		apiConverter: function(e) {
 			return {
-				youTubeId: e.id.channelId,
+				id: e.id.channelId,
 				name: e.snippet.title,
 				avatar: e.snippet.thumbnails['default'].url
 			};

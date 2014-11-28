@@ -9,8 +9,6 @@ define([
 	var Channel = Backbone.Model.extend({
 		//urlRoot: '/'
 		defaults: {
-			// youTube data
-			youTubeId: '',
 			name: '',
 			// media
 			avatar: '',

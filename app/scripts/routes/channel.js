@@ -23,7 +23,7 @@ define([
 
 			// set active channels
 			favoriteChannelsService.collection.each(function(e) {
-				e.set('active', e.get('youTubeId') === id); // TODO fix
+				e.set('active', e.get('id') === id); // TODO fix
 			});
 
 			// render left subscription panel

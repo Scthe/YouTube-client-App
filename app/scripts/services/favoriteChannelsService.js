@@ -8,17 +8,9 @@ define([
 	var col = new ChannelList();
 	col.comparator = 'name';
 	col.sort();
-	// col.on('sort', onUpdate.bind(undefined, col));
 
-	// create stub data TODO remove stub data
-	var xs = _.range(7)
-		.map(function(i) {
-			var ii = Math.floor(Math.random() * (10 - 1)) + 1;
-			return {
-				name: 'Channel ' + ii,
-				videoCount: i
-			};
-		});
+	// read local storage
+	var xs = col.localStorage.findAll();
 	for (var i = 0; i < xs.length; i++) {
 		col.create(xs[i]);
 	}
@@ -26,8 +18,7 @@ define([
 	return {
 		collection: col,
 		add: add,
-		remove: remove,
-		onUpdate: onUpdate
+		remove: remove
 	};
 
 	function add(channelName) {
@@ -48,16 +39,19 @@ define([
 		var obj = {
 				name: channelName
 			},
-			o = this.collection.findWhere(obj);
-		if (o !== undefined) {
-			this.collection.remove(o);
+			os = this.collection.where(obj);
+		if (os) {
+			this.collection.remove(os);
+			var ids = _.pluck(os, 'id');
+			// we have to do this by hand so that
+			// it will not remove the model from local storage
+			col.localStorage.records = _.reject(col.localStorage.records, function(id) {
+				return _.contains(ids, id);
+			});
+			col.localStorage.save();
 		}
 	}
 
-	function onUpdate( /*col*/ ) {
-		/* jshint -W040 */
-		// TODO ensure only 1 is active at a time ?
-		// console.log('update !');
-	}
+	// TODO ensure only 1 is active at a time ?
 
 });

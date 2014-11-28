@@ -18,8 +18,6 @@ define([
 	var VideoView = Backbone.View.extend({
 		el: '#main-panel-content',
 
-		// TODO after clicking on author should go to the channel view
-
 		template: _.template(tmpl),
 
 		events: {
