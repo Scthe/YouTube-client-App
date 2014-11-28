@@ -21,7 +21,6 @@ define([
 			this.lastSearch = '';
 			this.collection.on('add', this.render, this);
 			this.collection.on('remove', this.render, this);
-			// this.collection.on('sort', this.render, this);
 			this.render();
 
 			this.collection.on('invalid', function() {
@@ -53,20 +52,16 @@ define([
 		},
 
 		bindEventSources: function() {
-			var self = this;
+			var self = this,
+				clearInput = self.newChannelText.val.bind(self.newChannelText, '');
 
+
+			// new 
 			this.newChannelBtn
 				.asEventStream('click')
 				.map(getText)
-				.onValue(function(e) {
-					// console.log(e); // TODO fast channel add by name
-					// self.collection.add({
-					// name: e
-					// }, {
-					// validate: true
-					// });
-					// self.newChannelText.val('');
-				});
+				.doAction(clearInput)
+				.onValue(addObject);
 
 			// model the event stream
 			var keysKeyStream = this.newChannelText
@@ -78,6 +73,10 @@ define([
 
 			function getText() {
 				return self.newChannelText.val();
+			}
+
+			function addObject(name) {
+				Backbone.trigger('addFavoriteChannelByNameCmd', name);
 			}
 		},
 

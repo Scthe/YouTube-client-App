@@ -20,6 +20,7 @@ define(function() {
 		search: searchVideo,
 		getVideo: getVideo,
 		getChannel: getChannel,
+		getChannelVideos: getChannelVideos,
 		searchChannel: searchChannel
 	};
 
@@ -48,7 +49,13 @@ define(function() {
 
 	}
 
-	function getChannel(channelId, pageToken, resultCount, callback) {
+	function getChannel(name, callback) {
+		searchChannel(name, undefined, 1, function(_, r) {
+			callback(r.items[0]);
+		});
+	}
+
+	function getChannelVideos(channelId, pageToken, resultCount, callback) {
 		var query = {
 			type: 'video',
 			channelId: channelId,

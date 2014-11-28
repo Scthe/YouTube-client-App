@@ -16,7 +16,7 @@ define([
 
 		var videoListView = new VideoListView(),
 			videoList = videoListView.collection;
-		videoList.apiSearchFunction = 'getChannel';
+		videoList.apiSearchFunction = 'getChannelVideos';
 
 		router.on('route:channel', function(id) {
 			console.log('routed to channel \'' + id + '\'');

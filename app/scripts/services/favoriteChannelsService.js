@@ -1,7 +1,10 @@
 define([
 	'underscore',
-	'models/channelList'
-], function(_, ChannelList) {
+	'backbone',
+	'models/channel',
+	'models/channelList',
+	'services/YouTubeService'
+], function(_, Backbone, Channel, ChannelList, ytService) {
 
 	'use strict';
 
@@ -15,11 +18,25 @@ define([
 		col.create(xs[i]);
 	}
 
-	return {
+	var obj = {
 		collection: col,
 		add: add,
 		remove: remove
 	};
+
+	// add 
+	Backbone.on('addFavoriteChannelByNameCmd', function(name) {
+		ytService.getChannel(name, function(result) {
+			// console.log(result);
+			var o = col.apiConverter(result),
+				model = new Channel(o, {
+					validate: true
+				});
+			obj.add(model);
+		});
+	});
+
+	return obj;
 
 	function add(channel) {
 		/* jshint -W040 */
