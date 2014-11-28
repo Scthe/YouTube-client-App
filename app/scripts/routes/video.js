@@ -16,33 +16,43 @@ define([
 
 	function initialize(router) {
 
-		var videoView;
+		var videosStorage = new Store('backbone-videos'),
+			videoView = new VideoView();
 
 		router.on('route:video', function(id) {
 			console.log('routed to video \'{0}\''.fmt(id));
-			// TODO reuse data from video list f.e. title, channel etc.
-			// No need to wait for it to download again
 
-			app.setViewTitle(''); // TODO title and favicon
-
-			var video = new Video(id, onVideoGetSuccess, onVideoGetFail);
-			videoView = new VideoView({ // TODO remove this - read from local storage !
-				model: video
+			var m = videosStorage.find({
+				id: id
 			});
+			if (m) {
+				app.setViewTitle(m.name); // TODO set icon
+			} else {
+				app.setViewTitle('Getting video data..');
+				m = {
+					id: id,
+					get: function() {}
+				};
+			}
+			videoView.model = new Video(m);
 
-		});
-
-		function onVideoGetSuccess() {
-			app.setViewTitle(videoView.model.get('title'));
 			videoView.render();
-		}
+			videoView.model.fetch_(onVideoGetSuccess, onVideoGetFail);
 
-		function onVideoGetFail() {
-			app.setViewTitle('Error');
-			var text = 'For some reason this video could not be displayed';
-			var a = '<div class="alert alert-danger" role="alert">{0}</div>'.fmt(text);
-			videoView.$el.html(a);
-		}
+			function onVideoGetSuccess() {
+				app.setViewTitle(videoView.model.get('title'));
+				videoView.render();
+				// store
+				videosStorage.saveItem(m);
+			}
+
+			function onVideoGetFail() {
+				app.setViewTitle('Error');
+				var text = 'For some reason this video could not be displayed';
+				var a = '<div class="alert alert-danger" role="alert">{0}</div>'.fmt(text);
+				videoView.$el.html(a);
+			}
+		});
 
 	}
 

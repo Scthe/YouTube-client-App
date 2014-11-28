@@ -40,9 +40,13 @@ define([
 			this.nextPageToken = result.nextPageToken;
 
 			// TODO move from here to the models
-			this.set(_(items).map(self.apiConverter));
+			var objs = this.set(_(items).map(self.apiConverter));
 
-			//self.localStorage.save();
+			// store results
+			for (var i = 0; i < objs.length; i++) {
+				this.localStorage.saveItem(objs[i]);
+			}
+
 		},
 
 		_invokeSearch: function(term, pageToken, callback) {

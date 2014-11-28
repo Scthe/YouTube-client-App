@@ -34,10 +34,12 @@ define([
 		},
 
 		render: function() {
-			if (typeof(this.model.get('publishedAt')) !== undefined) {
+			if (this.model.get('publishedAt')) {
 				var d = new Date(this.model.get('publishedAt'));
 				var str = '{0} {1}, {2}'.fmt(months[d.getMonth()], d.getDate(), d.getFullYear());
 				this.model.set('_publishedAtViewable', str);
+			} else {
+				this.model.set('_publishedAtViewable', '');
 			}
 
 			this.$el.html(this.template(this.model.toJSON()));

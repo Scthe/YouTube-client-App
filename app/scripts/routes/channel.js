@@ -14,7 +14,8 @@ define([
 
 	function initialize(router) {
 
-		var videoListView = new VideoListView(),
+		var channelsStorage = new window.Store('backbone-channels'),
+			videoListView = new VideoListView(),
 			videoList = videoListView.collection;
 		videoList.apiSearchFunction = 'getChannelVideos';
 
@@ -31,11 +32,12 @@ define([
 				app.channelListView.render();
 			}
 
-			// TODO view title
-			// change view title TODO load from localstorage, do not wait for api call
-			// var m = channelList.get(id);
-			// app.setViewTitle('{0}\'s Channel'.fmt(m.get('name')));
-			app.setViewTitle('Ch: {0}'.fmt(id));
+			var m = channelsStorage.find({id:id});
+			if(m){
+				app.setViewTitle('Channel: {0}'.fmt(m.name));
+			}else{
+				app.setViewTitle('Getting channel data..'); // TODO should get channel name by separate api call
+			}
 
 			videoListView.render();
 			videoList.fetch_(id, onSearchEnd);
