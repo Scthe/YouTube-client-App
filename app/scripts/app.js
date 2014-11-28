@@ -12,33 +12,24 @@ define([
 
 
 	var contentPanel = $('#main-panel-content'),
-		viewTitle = $('#view-title-text');
-
+		viewTitle = $('#view-title-text'),
+		viewIcon = $('#view-title-icon');
 
 	return {
 		initialize: initialize
 	};
 
+
 	function initialize() {
 		/*global app*/
 		console.log('app initialize');
+		// window.localStorage.clear();
 
 		window.app = {
 			setContent: setContent,
 			setViewTitle: setViewTitle
 		};
 		app.router = Router.initialize();
-
-		// add possibility to go to the main page
-		$('#brand').click(function() {
-			app.router.navigate('', {
-				trigger: true
-			});
-		});
-
-		// window.localStorage.clear();
-
-
 
 		// create always visible views
 		new SearchInputView();
@@ -47,29 +38,41 @@ define([
 		});
 
 		// needed so that the favorite channels could become active when selected
-		app.router.on('route', function(name, args) {
-			// console.log('route |', name, '|', args)
-			if (name === 'channel') {
-				var id = args[0];
-				favoriteChannelsService.collection.each(function(e) {
-					e.set('active', e.get('id') === id);
-				});
-			} else {
-				favoriteChannelsService.collection.deselectAll();
-			}
+		app.router.on('route', checkIfIsChannelActive.bind(undefined, channelListView));
 
-			// rerender left subscription panel to show changes
-			channelListView.render();
+		// add possibility to go to the main page
+		$('#brand').click(function() {
+			app.router.navigate('', {
+				trigger: true
+			});
 		});
-
 	}
 
 	function setContent(content) {
 		contentPanel.html(content);
 	}
 
-	function setViewTitle(str) {
+	function setViewTitle(str, icon) {
 		viewTitle.html(str);
+		if (icon) {
+			var newClass = viewIcon.attr('class').replace(/glyphicon-\S+/, 'glyphicon-' + icon);
+			viewIcon.attr('class', newClass);
+		}
+	}
+
+	function checkIfIsChannelActive(channelListView, name, args) {
+		// console.log('route |', name, '|', args)
+		if (name === 'channel') {
+			var id = args[0];
+			favoriteChannelsService.collection.each(function(e) {
+				e.set('active', e.get('id') === id);
+			});
+		} else {
+			favoriteChannelsService.collection.deselectAll();
+		}
+
+		// rerender left subscription panel to show changes
+		channelListView.render();
 	}
 
 });

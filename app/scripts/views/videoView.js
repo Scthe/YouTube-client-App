@@ -20,6 +20,8 @@ define([
 
 		template: _.template(tmpl),
 
+		viewIcon: 'film',
+
 		events: {
 			'click #channel-name': 'goToChannel'
 		},

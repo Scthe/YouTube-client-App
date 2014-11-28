@@ -14,21 +14,21 @@ define([
 
 	function initialize(router) {
 
-		var videoListView = new VideoListView(),
-			videoList = videoListView.collection;
+		var view = new VideoListView(),
+			list = view.collection;
 
 		router.on('route:search', function(term) {
 			console.log('search: \'{0}\''.fmt(term));
 
-			app.setViewTitle('Searching: ' + term);
+			app.setViewTitle('Searching: ' + term, view.viewIcon);
 
-			videoListView.render();
-			videoList.fetch_(term, onSearchEnd);
+			view.render();
+			list.fetch_(term, onSearchEnd);
 		});
 
 		function onSearchEnd(term, hasPrevious, hasNext) {
 			Backbone.trigger('searchFinishedEvent', term);
-			videoListView.updatePaginationButtons(hasPrevious, hasNext);
+			view.updatePaginationButtons(hasPrevious, hasNext);
 		}
 	}
 

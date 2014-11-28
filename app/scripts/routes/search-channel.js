@@ -12,20 +12,20 @@ define([
 
 
 	function initialize(router) {
-		var searchChannelListView = new SearchChannelListView(),
-			searchChannelList = searchChannelListView.collection;
+		var view = new SearchChannelListView(),
+			list = view.collection;
 
 		router.on('route:search-channel', function(term) {
 			console.log('search-channel: \'{0}\''.fmt(term));
 
-			app.setViewTitle('Searching for channel: ' + term);
+			app.setViewTitle('Searching for channel: {0}'.fmt(term), view.viewIcon);
 
-			searchChannelListView.render();
-			searchChannelList.fetch_(term, onSearchEnd);
+			view.render();
+			list.fetch_(term, onSearchEnd);
 		});
 
 		function onSearchEnd(term, hasPrevious, hasNext) {
-			searchChannelListView.updatePaginationButtons(hasPrevious, hasNext);
+			view.updatePaginationButtons(hasPrevious, hasNext);
 		}
 	}
 

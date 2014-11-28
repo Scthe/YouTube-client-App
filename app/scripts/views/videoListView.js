@@ -14,6 +14,8 @@ define([
 
 		listElClass: 'flex-container',
 
+		viewIcon: 'search',
+
 		onInitialize: function() {
 			this.collection = new VideoList();
 		},

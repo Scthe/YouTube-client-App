@@ -14,9 +14,10 @@ define([
 	function initialize(router) {
 
 		var channelsStorage = new window.Store('backbone-channels'),
-			videoListView = new VideoListView(),
-			videoList = videoListView.collection;
-		videoList.apiSearchFunction = 'getChannelVideos';
+			view = new VideoListView(),
+			list = view.collection;
+		list.apiSearchFunction = 'getChannelVideos';
+		view.viewIcon = 'facetime-video';
 
 		router.on('route:channel', function(id) {
 			console.log('routed to channel \'' + id + '\'');
@@ -25,17 +26,18 @@ define([
 				id: id
 			});
 			if (m) {
-				app.setViewTitle('Channel: {0}'.fmt(m.name));
+				app.setViewTitle('Channel: {0}'.fmt(m.name), view.viewIcon);
 			} else {
-				app.setViewTitle('Getting channel data..'); // TODO should get channel name by separate api call
+				// TODO should get channel name by separate api call
+				app.setViewTitle('Getting channel data..', view.viewIcon);
 			}
 
-			videoListView.render();
-			videoList.fetch_(id, onSearchEnd);
+			view.render();
+			list.fetch_(id, onSearchEnd);
 		});
 
 		function onSearchEnd(term, hasPrevious, hasNext) {
-			videoListView.updatePaginationButtons(hasPrevious, hasNext);
+			view.updatePaginationButtons(hasPrevious, hasNext);
 		}
 	}
 

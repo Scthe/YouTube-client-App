@@ -16,6 +16,8 @@ define([
 
     listElClass: 'clearfix',
 
+    viewIcon: 'th',
+
     onInitialize: function() {
       this.collection = new ChannelList();
     },

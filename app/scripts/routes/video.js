@@ -7,7 +7,7 @@ define([
 ], function(_, videoList, ytService, Video, VideoView) {
 
 	'use strict';
-	/*global app*/
+	/*global app, Store*/
 
 	return {
 		initialize: initialize
@@ -17,7 +17,7 @@ define([
 	function initialize(router) {
 
 		var videosStorage = new Store('backbone-videos'),
-			videoView = new VideoView();
+			view = new VideoView();
 
 		router.on('route:video', function(id) {
 			console.log('routed to video \'{0}\''.fmt(id));
@@ -26,22 +26,22 @@ define([
 				id: id
 			});
 			if (m) {
-				app.setViewTitle(m.name); // TODO set icon
+				app.setViewTitle(m.name, view.viewIcon);
 			} else {
-				app.setViewTitle('Getting video data..');
+				app.setViewTitle('Fetching video data..', view.viewIcon);
 				m = {
 					id: id,
 					get: function() {}
 				};
 			}
-			videoView.model = new Video(m);
+			view.model = new Video(m);
 
-			videoView.render();
-			videoView.model.fetch_(onVideoGetSuccess, onVideoGetFail);
+			view.render();
+			view.model.fetch_(onVideoGetSuccess, onVideoGetFail);
 
 			function onVideoGetSuccess() {
-				app.setViewTitle(videoView.model.get('title'));
-				videoView.render();
+				app.setViewTitle(view.model.get('title'));
+				view.render();
 				// store
 				videosStorage.saveItem(m);
 			}
@@ -50,7 +50,7 @@ define([
 				app.setViewTitle('Error');
 				var text = 'For some reason this video could not be displayed';
 				var a = '<div class="alert alert-danger" role="alert">{0}</div>'.fmt(text);
-				videoView.$el.html(a);
+				view.$el.html(a);
 			}
 		});
 
