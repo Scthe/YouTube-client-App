@@ -67,7 +67,7 @@ define([
 			}
 
 			var sameTermAsBefore = this.term === term;
-			if (!sameTermAsBefore || (sameTermAsBefore && pageToken)) {
+			if (this.forceAllApiCalls || !sameTermAsBefore || (sameTermAsBefore && pageToken)) {
 				// 1st part of the condition: new search
 				// 2nd part of the condition: prev / next page
 				this.term = term;

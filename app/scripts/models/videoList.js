@@ -25,8 +25,9 @@ define([
 		},
 
 		apiConverter: function(e) {
+			var id = typeof e.id === 'object' ? e.id.videoId : e.id;
 			return {
-				id: e.id.videoId,
+				id: id,
 				title: e.snippet.title,
 				channelId: e.snippet.channelId,
 				channelTitle: e.snippet.channelTitle,

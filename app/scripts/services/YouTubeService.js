@@ -17,6 +17,7 @@ define(function() {
 	});
 
 	return {
+		popularVideos: popularVideos,
 		search: searchVideo,
 		getVideo: getVideo,
 		getChannel: getChannel,
@@ -76,13 +77,31 @@ define(function() {
 		});
 	}
 
+	function popularVideos(__, pageToken, resultCount, callback) {
+		var query = {
+			part: 'snippet',
+			maxResults: resultCount,
+			chart: 'mostPopular'
+		};
+		if (pageToken) {
+			query.pageToken = pageToken;
+		}
+
+		executeGoogleApiCall(function(yt) {
+			var request = yt.videos.list(query);
+
+			request.execute(function(response) {
+				callback('', response.result);
+			});
+		});
+	}
 
 	function searchVideo(searchTerm, pageToken, resultCount, callback) {
-		return search('video', searchTerm, pageToken, resultCount, callback);
+		search('video', searchTerm, pageToken, resultCount, callback);
 	}
 
 	function searchChannel(searchTerm, pageToken, resultCount, callback) {
-		return search('channel', searchTerm, pageToken, resultCount, callback);
+		search('channel', searchTerm, pageToken, resultCount, callback);
 	}
 
 	/*
