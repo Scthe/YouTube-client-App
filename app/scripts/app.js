@@ -38,6 +38,8 @@ define([
 
 		window.localStorage.clear();
 
+		// TODO use Backbone object as pub-sub
+
 		// create always visible views
 		app.searchView = new SearchInputView();
 		app.channelListView = new ChannelListView({
