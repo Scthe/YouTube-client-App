@@ -27,6 +27,8 @@ define([
 				'onSearchEnd', 'goToSearchPage');
 			this.lastSearch = '';
 			this.render();
+
+			Backbone.on('searchFinishedEvent', this.onSearchEnd);
 		},
 
 		render: function() {
@@ -77,7 +79,9 @@ define([
 
 		goToSearchPage: function(term) {
 			// do search
-			if (term.trim().length > 0 && this.lastSearch !== term) {
+			if (term.trim().length === 0) {
+				this.onSearchEnd(this.lastSearch);
+			} else if (this.lastSearch !== term) {
 				this.lastSearch = term;
 				app.router.navigate('search/video/{0}'.fmt(term), {
 					trigger: true

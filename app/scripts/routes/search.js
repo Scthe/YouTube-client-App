@@ -1,7 +1,8 @@
 define([
 	'underscore',
+	'backbone',
 	'views/videoListView'
-], function(_, VideoListView) {
+], function(_, Backbone, VideoListView) {
 
 	'use strict';
 	/*global app*/
@@ -26,7 +27,7 @@ define([
 		});
 
 		function onSearchEnd(term, hasPrevious, hasNext) {
-			app.searchView.onSearchEnd(term);
+			Backbone.trigger('searchFinishedEvent', term);
 			videoListView.updatePaginationButtons(hasPrevious, hasNext);
 		}
 	}

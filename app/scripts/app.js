@@ -41,7 +41,7 @@ define([
 		// TODO use Backbone object as pub-sub
 
 		// create always visible views
-		app.searchView = new SearchInputView();
+		new SearchInputView();
 		app.channelListView = new ChannelListView({
 			collection: FavoriteChannelsService.collection
 		});
