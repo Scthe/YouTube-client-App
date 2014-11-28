@@ -8,11 +8,12 @@ define([
 	'use strict';
 
 	var Video = Backbone.Model.extend({
+
 		defaults: {
 			title: '',
-			channelId: '',
+			channelId: '', // TODO change to channel object
 			channelTitle: '',
-			publishedAt: '', // string date
+			publishedAt: undefined, // string date
 			// media
 			thumbnail: '',
 			embedLink: '',
@@ -22,54 +23,55 @@ define([
 			description: '',
 			likeCount: 0,
 			dislikeCount: 0,
-			commentCount:0
+			commentCount: 0
 		},
-		initialize: function(youTubeId, successCallback, failCallback) {
-			_.bindAll(this, 'onVideoGetSuccess', 'onVideoGetFail');
 
-			if (typeof youTubeId === 'string') {
-				this.youTubeId = youTubeId;
-				this.successCallback = successCallback;
-				this.failCallback = failCallback;
+		initialize: function() {
+			_.bindAll(this, 'fetch_', 'readFromYouTubeAPIObject');
+		},
 
-				ytService.getVideo(youTubeId, {
-					success: this.onVideoGetSuccess,
-					failure: this.onVideoGetFail
-				});
+		fetch_: function(successCallback, failCallback) {
+			var self = this;
+
+			ytService.getVideo(this.id, {
+				success: onVideoGetSuccess,
+				failure: onVideoGetFail
+			});
+
+			function onVideoGetSuccess(e) {
+				self.readFromYouTubeAPIObject(e);
+				if (successCallback !== undefined) {
+					successCallback(self);
+				}
+			}
+
+			function onVideoGetFail() {
+				console.log('Could not get video: \'{0}\''.fmt(self.id));
+				if (failCallback !== undefined) {
+					failCallback(self.id);
+				}
 			}
 		},
 
-		onVideoGetSuccess: function(e) {
-			/*jshint camelcase: false */
-
+		readFromYouTubeAPIObject: function(e) {
 			this.set('title', e.snippet.title);
 			this.set('channelId', e.snippet.channelId);
 			this.set('channelTitle', e.snippet.channelTitle);
 			this.set('publishedAt', e.snippet.publishedAt);
 			this.set('thumbnail', e.snippet.thumbnails['default'].url);
-			this.set('embedLink', e.player.embedHtml);
-			this.set('views', e.statistics.viewCount);
-			this.set('duration', e.contentDetails.duration);
 			this.set('description', e.snippet.description);
-			this.set('likeCount', e.statistics.likeCount);
-			this.set('dislikeCount', e.statistics.dislikeCount);
-			this.set('commentCount', e.statistics.commentCount);
 
-			if (this.successCallback !== undefined) {
-				this.successCallback(this);
-
-				this.successCallback = undefined;
-				this.failCallback = undefined;
+			if (e.player) {
+				this.set('embedLink', e.player.embedHtml);
 			}
-		},
-
-		onVideoGetFail: function() {
-			console.log('Could not get video: \'{0}\''.fmt(this.youTubeId));
-			if (this.failCallback !== undefined) {
-				this.failCallback(this.youTubeId);
-
-				this.successCallback = undefined;
-				this.failCallback = undefined;
+			if (e.statistics) {
+				this.set('views', e.statistics.viewCount);
+				this.set('likeCount', e.statistics.likeCount);
+				this.set('dislikeCount', e.statistics.dislikeCount);
+				this.set('commentCount', e.statistics.commentCount);
+			}
+			if (e.contentDetails) {
+				this.set('duration', e.contentDetails.duration);
 			}
 		}
 

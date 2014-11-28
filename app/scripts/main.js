@@ -18,7 +18,7 @@ require.config({
 			deps: ['jquery', 'underscore'],
 			exports: 'Backbone'
 		},
-		'bootstrap':{
+		'bootstrap': {
 			deps: ['jquery'],
 		}
 	},
@@ -26,11 +26,35 @@ require.config({
 
 });
 
-require(['jquery', 'bacon', 'app', 'bootstrap'], function( $, Bacon, App) {
+require([
+	'jquery',
+	'underscore',
+	'backbone',
+	'bacon',
+	'backboneLocalStorage',
+	'app',
+	'bootstrap'
+], function($, _, Backbone, Bacon, BackboneLocalStorage, App) {
+
 	'use strict';
 
 	// patch jQuery to allow to use with Bacon
 	$.fn.asEventStream = Bacon.$.asEventStream;
-	
+
+	// patch BackboneLocalStorage to allow to store models without collections
+	// it would be much easier to just copy __proto__ but we are on a critical path here..
+	BackboneLocalStorage.prototype.saveItem = function(e) {
+		var collectionStub = {
+			records: [],
+			localStorage: this.localStorage,
+			_itemName: this._itemName,
+			name: this.name,
+			serializer: this.serializer,
+			find: _.identity,
+			save: _.identity
+		};
+		this.update.bind(collectionStub)(e);
+	};
+
 	App.initialize();
 });
