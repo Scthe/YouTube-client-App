@@ -1,8 +1,7 @@
 define([
 	'models/channelList',
-	'views/videoListView',
-	'services/favoriteChannelsService'
-], function(channelList, VideoListView, favoriteChannelsService) {
+	'views/videoListView'
+], function(channelList, VideoListView) {
 
 	'use strict';
 	/*global app*/
@@ -22,20 +21,12 @@ define([
 		router.on('route:channel', function(id) {
 			console.log('routed to channel \'' + id + '\'');
 
-			// set active channels
-			favoriteChannelsService.collection.each(function(e) {
-				e.set('active', e.get('id') === id);
+			var m = channelsStorage.find({
+				id: id
 			});
-
-			// render left subscription panel
-			if (app.channelListView) {
-				app.channelListView.render();
-			}
-
-			var m = channelsStorage.find({id:id});
-			if(m){
+			if (m) {
 				app.setViewTitle('Channel: {0}'.fmt(m.name));
-			}else{
+			} else {
 				app.setViewTitle('Getting channel data..'); // TODO should get channel name by separate api call
 			}
 

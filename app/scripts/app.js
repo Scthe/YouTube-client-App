@@ -7,7 +7,7 @@ define([
 	'views/searchInputView',
 	'views/channelListView',
 	'services/favoriteChannelsService'
-], function($, _, Backbone, Router, ChannelList, SearchInputView, ChannelListView, FavoriteChannelsService) {
+], function($, _, Backbone, Router, ChannelList, SearchInputView, ChannelListView, favoriteChannelsService) {
 	'use strict';
 
 
@@ -38,12 +38,28 @@ define([
 
 		// window.localStorage.clear();
 
-		// TODO use Backbone object as pub-sub
+
 
 		// create always visible views
 		new SearchInputView();
-		app.channelListView = new ChannelListView({
-			collection: FavoriteChannelsService.collection
+		var channelListView = new ChannelListView({
+			collection: favoriteChannelsService.collection
+		});
+
+		// needed so that the favorite channels could become active when selected
+		app.router.on('route', function(name, args) {
+			// console.log('route |', name, '|', args)
+			if (name === 'channel') {
+				var id = args[0];
+				favoriteChannelsService.collection.each(function(e) {
+					e.set('active', e.get('id') === id);
+				});
+			} else {
+				favoriteChannelsService.collection.deselectAll();
+			}
+
+			// rerender left subscription panel to show changes
+			channelListView.render();
 		});
 
 	}
