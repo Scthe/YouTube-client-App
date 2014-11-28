@@ -13,7 +13,8 @@ define([
 
     events: {
       'click .action-good': 'addToFavorites',
-      'click .action-bad': 'removeFromFavorites'
+      'click .action-bad': 'removeFromFavorites',
+      'click .id-channel': 'goToChannel'
     },
 
     className: 'clearfix content-2-columns list-item-medium margin-bottom-small',
@@ -21,7 +22,7 @@ define([
     template: _.template(tmpl),
 
     initialize: function() {
-      _.bindAll(this, 'render', 'addToFavorites', 'removeFromFavorites');
+      _.bindAll(this, 'render', 'addToFavorites', 'removeFromFavorites', 'goToChannel');
       this.render();
     },
 
@@ -36,6 +37,13 @@ define([
 
     removeFromFavorites: function() {
       favoriteChannelsService.remove(this.model.get('name'));
+    },
+
+    goToChannel: function() {
+      /*global app*/
+      app.router.navigate('channel/{0}'.fmt(this.model.get('youTubeId')), {
+        trigger: true
+      });
     }
 
   });

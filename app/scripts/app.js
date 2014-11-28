@@ -36,7 +36,7 @@ define([
 			});
 		});
 
-		window.localStorage.clear();
+		// window.localStorage.clear();
 
 		// TODO use Backbone object as pub-sub
 

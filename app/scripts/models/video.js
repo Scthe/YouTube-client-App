@@ -34,7 +34,7 @@ define([
 				this.successCallback = successCallback;
 				this.failCallback = failCallback;
 
-				ytService.videoDetails(youTubeId, {
+				ytService.getVideo(youTubeId, {
 					success: this.onVideoGetSuccess,
 					failure: this.onVideoGetFail
 				});

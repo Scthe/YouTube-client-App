@@ -22,8 +22,12 @@ define([
 
 		template: _.template(tmpl),
 
+		events: {
+			'click #channel-name': 'goToChannel'
+		},
+
 		initialize: function(youTubeId) {
-			_.bindAll(this, 'render', 'onVideoGetSuccess', 'onVideoGetFail');
+			_.bindAll(this, 'render', 'onVideoGetSuccess', 'onVideoGetFail', 'goToChannel');
 			// TODO use web component for video
 
 			// TODO better loading icon
@@ -56,6 +60,13 @@ define([
 			var text = 'For some reason this video could not be displayed';
 			var a = '<div class="alert alert-danger" role="alert">{0}</div>'.fmt(text);
 			this.$el.html(a);
+		},
+
+		goToChannel: function() {
+			/*global app*/
+			app.router.navigate('channel/{0}'.fmt(this.model.get('channelId')), {
+				trigger: true
+			});
 		}
 
 	});

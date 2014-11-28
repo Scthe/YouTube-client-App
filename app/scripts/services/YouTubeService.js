@@ -18,14 +18,15 @@ define(function() {
 
 	return {
 		search: searchVideo,
-		videoDetails: videoDetails,
+		getVideo: getVideo,
+		getChannel: getChannel,
 		searchChannel: searchChannel
 	};
 
 	/*
 	 * https://developers.google.com/youtube/v3/docs/videos
 	 */
-	function videoDetails(videoId, callback) {
+	function getVideo(videoId, callback) {
 		executeGoogleApiCall(f);
 
 		function f(yt) {
@@ -43,8 +44,29 @@ define(function() {
 					callback.failure(videoId);
 				}
 			});
-
 		}
+
+	}
+
+	function getChannel(channelId, pageToken, resultCount, callback) {
+		var query = {
+			type: 'video',
+			channelId: channelId,
+			part: 'snippet',
+			maxResults: resultCount,
+			order: 'viewCount'
+		};
+		if (pageToken) {
+			query.pageToken = pageToken;
+		}
+
+		executeGoogleApiCall(function(yt) {
+			var request = yt.search.list(query);
+
+			request.execute(function(response) {
+				callback(channelId, response.result);
+			});
+		});
 	}
 
 
@@ -62,9 +84,9 @@ define(function() {
 	 */
 	function search(type, searchTerm, pageToken, resultCount, callback) {
 		var query = {
+			type: type,
 			q: searchTerm,
 			part: 'snippet',
-			type: type,
 			maxResults: resultCount
 		};
 		if (pageToken) {

@@ -15,11 +15,12 @@ define([
 		template: _.template(tmpl),
 
 		events: {
-			'click .video-link': 'goToVideo'
+			'click .video-link': 'goToVideo',
+			'click .id-channel': 'goToChannel'
 		},
 
 		initialize: function() {
-			_.bindAll(this, 'render', 'goToVideo');
+			_.bindAll(this, 'render', 'goToVideo', 'goToChannel');
 			this.render();
 		},
 
@@ -33,7 +34,15 @@ define([
 			app.router.navigate('video/{0}'.fmt(this.model.get('youTubeId')), {
 				trigger: true
 			});
+		},
+
+		goToChannel: function() {
+			/*global app*/
+			app.router.navigate('channel/{0}'.fmt(this.model.get('youTubeId')), { // TODO use event bus with nicer urls
+				trigger: true
+			});
 		}
+
 	});
 
 	return VideoListItemView;
