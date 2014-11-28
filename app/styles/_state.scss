@@ -41,3 +41,25 @@
 .hoverable:hover {
 	opacity: 1;
 }
+
+.focusable-input{
+	border-bottom: 1px solid #d5d4d0;
+	transition: border 0.3s;
+}
+.focusable-input:focus,
+.focusable-input.focus {
+  border-bottom: solid 2px white;
+}
+
+.action-good:hover{
+	color: #1D7FAC !important;
+}
+.action-bad:hover{
+	color: #EB1F44 !important;
+}
+.action-good{
+	transition: color 0.2s;
+}
+.action-bad{
+	transition: color 0.2s;
+}

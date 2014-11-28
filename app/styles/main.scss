@@ -18,6 +18,8 @@ $flex-grid-break: 700px;	/* 3 cols*/
 $flex-grid-break-2: 550px;	/* 2 cols*/
 $flex-grid-break-3: 350px;	/* 1 cols*/
 
+$list-item-medium-height:50px;
+
 @import 'utils';
 @import 'layout';
 @import 'theme';
@@ -28,10 +30,13 @@ $flex-grid-break-3: 350px;	/* 1 cols*/
 #brand {
 	font-size: 20px;
 	line-height: $nav-bar-h;
-	text-align: center;
 }
 
 #view-title {
 	padding: 9px 25px;
 	width: inherit;
+}
+
+input[type="text"]:focus {
+  outline: none;
 }

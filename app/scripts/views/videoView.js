@@ -18,20 +18,19 @@ define([
 	var VideoView = Backbone.View.extend({
 		el: '#main-panel-content',
 
-		// TODO after clicking on author should go to the channel view
-
 		template: _.template(tmpl),
 
-		initialize: function(youTubeId) {
-			_.bindAll(this, 'render', 'onVideoGetSuccess', 'onVideoGetFail');
+		events: {
+			'click #channel-name': 'goToChannel'
+		},
+
+		initialize: function() {
+			_.bindAll(this, 'render', 'goToChannel');
 			// TODO use web component for video
 
 			// TODO better loading icon
 			var a = '<img src="../images/loaderb64.gif" class="block-center std-paddings width-25">';
 			this.$el.html(a);
-
-			// create model
-			this.model = new Video(youTubeId, this.onVideoGetSuccess, this.onVideoGetFail);
 		},
 
 		render: function() {
@@ -46,16 +45,11 @@ define([
 			return this;
 		},
 
-		onVideoGetSuccess: function() {
-			app.setViewTitle(this.model.get('title'));
-			this.render();
-		},
-
-		onVideoGetFail: function() {
-			app.setViewTitle('Error');
-			var text = 'For some reason this video could not be displayed';
-			var a = '<div class="alert alert-danger" role="alert">{0}</div>'.fmt(text);
-			this.$el.html(a);
+		goToChannel: function() {
+			/*global app*/
+			app.router.navigate('channel/{0}'.fmt(this.model.get('channelId')), {
+				trigger: true
+			});
 		}
 
 	});

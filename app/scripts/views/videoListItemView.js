@@ -8,18 +8,19 @@ define([
 	'use strict';
 
 	var VideoListItemView = Backbone.View.extend({
-		tagName: 'article',
+		tagName: 'li',
 
 		className: 'card flex-grid',
 
 		template: _.template(tmpl),
 
 		events: {
-			'click .video-link': 'goToVideo'
+			'click .video-link': 'goToVideo',
+			'click .id-channel': 'goToChannel'
 		},
 
 		initialize: function() {
-			_.bindAll(this, 'render', 'goToVideo');
+			_.bindAll(this, 'render', 'goToVideo', 'goToChannel');
 			this.render();
 		},
 
@@ -30,10 +31,18 @@ define([
 
 		goToVideo: function() {
 			/*global app*/
-			app.router.navigate('video/{0}'.fmt(this.model.get('youTubeId')), {
+			app.router.navigate('video/{0}'.fmt(this.model.id), {
+				trigger: true
+			});
+		},
+
+		goToChannel: function() {
+			/*global app*/
+			app.router.navigate('channel/{0}'.fmt(this.model.get('channelId')), { // TODO use event bus with nicer urls
 				trigger: true
 			});
 		}
+
 	});
 
 	return VideoListItemView;

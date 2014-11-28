@@ -77,9 +77,9 @@ define([
 
 		goToSearchPage: function(term) {
 			// do search
-			if (this.lastSearch !== term) {
+			if (term.trim().length > 0 && this.lastSearch !== term) {
 				this.lastSearch = term;
-				app.router.navigate('search/{0}'.fmt(term), {
+				app.router.navigate('search/video/{0}'.fmt(term), {
 					trigger: true
 				});
 			}

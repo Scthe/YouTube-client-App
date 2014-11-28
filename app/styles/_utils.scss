@@ -19,7 +19,6 @@ ul{
 
 /* text sizes */
 .text-normal {
-	font-family: 'Calibri', corbertregular;
 	font-size: 1.2em;
 }
 .text-small {
@@ -98,6 +97,23 @@ ul{
 	width: 25%;
 	height: auto;
 }
+.width-75{
+	width: 75%;
+	height: auto;
+}
+.min-w-20{
+	min-width: 20px;
+}
+.list-item-medium{
+	height:$list-item-medium-height;
+	line-height:$list-item-medium-height;
+}
+.list-item-medium-width{
+	width: $list-item-medium-height !important;
+	img {
+		width: $list-item-medium-height !important;
+	}
+}
 
 /* padding and margins */
 .no-padding{
@@ -110,6 +126,10 @@ ul{
 	padding-left: 5px;
 	padding-right: 5px;
 }
+.mid-padding-horizontal{
+	padding-left: 8px;
+	padding-right: 8px;
+}
 .std-paddings{
 	padding: 5px 15px;
 }
@@ -121,4 +141,7 @@ ul{
 }
 .no-borders{
 	border-style: none;
+}
+.margin-bottom-small{
+	margin-bottom: 5px !important;
 }

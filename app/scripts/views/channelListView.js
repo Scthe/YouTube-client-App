@@ -2,37 +2,93 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
-	'../models/channelList',
-	'views/channelListItemView'
-], function($, _, Backbone, channelList, ChannelView) {
+	'views/channelListItemView',
+	'text!templates/channelListView.tmpl.html'
+], function($, _, Backbone, ChannelView, tmpl) {
 
 	'use strict';
+
+	var PREVIEWDELAY = 500;
 
 	var ChannelListView = Backbone.View.extend({
 		el: '#channels-panel',
 
-		initialize: function() {
-			channelList.on('add', this.onAdd, this);
-			channelList.fetch();
-			//this.render();
-		},
+		template: _.template(tmpl),
 
-		render: function() {
-			this.$el.html('');
-			var that = this;
-			channelList.each(function(e) {
-				that.onAdd(e);
+		initialize: function() {
+			_.bindAll(this, 'render', 'renderChannel', 'bindEventSources', 'previewChannel');
+
+			this.lastSearch = '';
+			this.collection.on('add', this.render, this);
+			this.collection.on('remove', this.render, this);
+			this.render();
+
+			this.collection.on('invalid', function() {
+				console.error('New channel error: ', arguments[1]);
 			});
 		},
 
-		onAdd: function(channel) {
-			// TODO sort A-Z ?
-			// TODO ensure only 1 is active at a time ?
+		render: function() {
+			var self = this;
+
+			this.$el.html(this.template());
+			this.listEl = this.$el.find('#channel-list');
+			this.newChannelText = this.$el.find('#add-channel-text');
+			this.newChannelBtn = this.$el.find('#add-channel-btn');
+
+			// after creating views bind event handlers to them
+			this.bindEventSources();
+
+			// render items
+			this.collection.each(self.renderChannel);
+		},
+
+		renderChannel: function(channel) {
 			var view = new ChannelView({
 				model: channel,
 				parent: this
 			});
-			this.$el.append(view.render().el);
+			this.listEl.append(view.render().el);
+		},
+
+		bindEventSources: function() {
+			var self = this,
+				clearInput = self.newChannelText.val.bind(self.newChannelText, '');
+
+
+			// new 
+			this.newChannelBtn
+				.asEventStream('click')
+				.map(getText)
+				.doAction(clearInput)
+				.onValue(addObject);
+
+			// model the event stream
+			var keysKeyStream = this.newChannelText
+				.asEventStream('keyup')
+				.debounce(PREVIEWDELAY)
+				.flatMapLatest(getText);
+
+			keysKeyStream.onValue(this.previewChannel);
+
+			function getText() {
+				return self.newChannelText.val();
+			}
+
+			function addObject(name) {
+				Backbone.trigger('addFavoriteChannelByNameCmd', name);
+			}
+		},
+
+		previewChannel: function(term) {
+			// do search
+			if (term.trim().length > 0 && this.lastSearch !== term) {
+				// console.log('preview:', term);
+				this.lastSearch = term;
+				app.router.navigate('search/channel/{0}'.fmt(term), {
+					trigger: true
+				});
+			}
 		}
 	});
 

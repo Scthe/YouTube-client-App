@@ -17,14 +17,17 @@ define(function() {
 	});
 
 	return {
-		search: search,
-		videoDetails: videoDetails
+		search: searchVideo,
+		getVideo: getVideo,
+		getChannel: getChannel,
+		getChannelVideos: getChannelVideos,
+		searchChannel: searchChannel
 	};
 
 	/*
 	 * https://developers.google.com/youtube/v3/docs/videos
 	 */
-	function videoDetails(videoId, callback) {
+	function getVideo(videoId, callback) {
 		executeGoogleApiCall(f);
 
 		function f(yt) {
@@ -42,20 +45,55 @@ define(function() {
 					callback.failure(videoId);
 				}
 			});
-
 		}
+
 	}
 
+	function getChannel(name, callback) {
+		searchChannel(name, undefined, 1, function(_, r) {
+			callback(r.items[0]);
+		});
+	}
+
+	function getChannelVideos(channelId, pageToken, resultCount, callback) {
+		var query = {
+			type: 'video',
+			channelId: channelId,
+			part: 'snippet',
+			maxResults: resultCount,
+			order: 'viewCount'
+		};
+		if (pageToken) {
+			query.pageToken = pageToken;
+		}
+
+		executeGoogleApiCall(function(yt) {
+			var request = yt.search.list(query);
+
+			request.execute(function(response) {
+				callback(channelId, response.result);
+			});
+		});
+	}
+
+
+	function searchVideo(searchTerm, pageToken, resultCount, callback) {
+		return search('video', searchTerm, pageToken, resultCount, callback);
+	}
+
+	function searchChannel(searchTerm, pageToken, resultCount, callback) {
+		return search('channel', searchTerm, pageToken, resultCount, callback);
+	}
 
 	/*
 	 * https://developers.google.com/youtube/v3/docs/search
 	 * https://developers.google.com/youtube/v3/docs/search/list
 	 */
-	function search(searchTerm, pageToken, resultCount, callback) {
+	function search(type, searchTerm, pageToken, resultCount, callback) {
 		var query = {
+			type: type,
 			q: searchTerm,
 			part: 'snippet',
-			type: 'video',
 			maxResults: resultCount
 		};
 		if (pageToken) {
@@ -70,7 +108,5 @@ define(function() {
 			});
 		});
 	}
-
-
 
 });

@@ -3,8 +3,11 @@ define([
 	'underscore',
 	'backbone',
 	'router',
-	'views/searchInputView'
-], function($, _, Backbone, Router, SearchInputView) {
+	'models/channelList',
+	'views/searchInputView',
+	'views/channelListView',
+	'services/favoriteChannelsService'
+], function($, _, Backbone, Router, ChannelList, SearchInputView, ChannelListView, FavoriteChannelsService) {
 	'use strict';
 
 
@@ -33,8 +36,16 @@ define([
 			});
 		});
 
-		// create search view
+		// window.localStorage.clear();
+
+		// TODO use Backbone object as pub-sub
+
+		// create always visible views
 		app.searchView = new SearchInputView();
+		app.channelListView = new ChannelListView({
+			collection: FavoriteChannelsService.collection
+		});
+
 	}
 
 	function setContent(content) {
