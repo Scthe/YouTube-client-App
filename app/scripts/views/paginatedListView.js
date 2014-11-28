@@ -59,17 +59,20 @@ define([
 		},
 
 		updatePaginationButtons: function(hasPrevious, hasNext) {
-			var self = this,
+			var pageButtons = this.pageButtons,
 				classes = 'on-hover-link activable link-blue hover-underline';
 
-			setPageSelector('prev', hasPrevious);
-			setPageSelector('next', hasNext);
+			if (pageButtons) {
+				setPageSelector('prev', hasPrevious);
+				setPageSelector('next', hasNext);
+			}
 
 			function setPageSelector(selector, activate) {
 				// console.log(selector, activate);
-				var $el = self.pageButtons[selector];
+				var $el = pageButtons[selector];
 				$el[activate ? 'addClass' : 'removeClass'](classes);
 			}
+
 		}
 
 	});
