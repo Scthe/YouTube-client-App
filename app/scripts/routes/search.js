@@ -23,7 +23,7 @@ define([
 
 			app.setViewTitle('Searching: ' + term, view.viewIcon);
 
-			view.render();
+			app.setContent(view);
 			list.fetch_(term, onSearchEnd);
 		});
 

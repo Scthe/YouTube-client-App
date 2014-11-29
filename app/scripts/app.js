@@ -48,8 +48,8 @@ define([
 		});
 	}
 
-	function setContent(content) {
-		contentPanel.html(content);
+	function setContent(view) {
+		view.render();
 	}
 
 	function setViewTitle(str, icon) {

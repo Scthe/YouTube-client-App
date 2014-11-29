@@ -32,7 +32,7 @@ define([
 				app.setViewTitle('Getting channel data..', view.viewIcon);
 			}
 
-			view.render();
+			app.setContent(view);
 			list.fetch_(id, onSearchEnd);
 		});
 

@@ -37,7 +37,7 @@ define([
 			}
 			view.model = new Video(m);
 
-			view.render();
+			app.setContent(view);
 			view.model.fetch_(onVideoGetSuccess, onVideoGetFail);
 
 			function onVideoGetSuccess() {

@@ -19,7 +19,7 @@ define([
 
 			app.setViewTitle('Searching for channel: {0}'.fmt(term), view.viewIcon);
 
-			view.render();
+			app.setContent(view);
 			list.fetch_(term, onSearchEnd);
 		});
 

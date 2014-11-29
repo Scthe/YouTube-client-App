@@ -24,7 +24,7 @@ define([
 
 			app.setViewTitle('Home', view.viewIcon);
 
-			view.render();
+			app.setContent(view);
 			list.fetch_(undefined, onSearchEnd);
 		});
 
