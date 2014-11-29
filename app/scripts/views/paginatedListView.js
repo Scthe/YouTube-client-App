@@ -2,7 +2,7 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
-	'text!templates/paginatedListView.tmpl.html'
+	'text!templates/paginatedList.tmpl.html'
 ], function($, _, Backbone, tmpl) {
 
 	'use strict';

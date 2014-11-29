@@ -5,7 +5,7 @@ define([
   'underscore',
   'backbone',
   'text', // TODO why requirejs plugin is required here ?!
-  'text!templates/channelListItem.tmpl.html'
+  'text!templates/favoriteChannelListItem.tmpl.html'
 ], function($, _, Backbone,te, tmpl) {
 
   'use strict';

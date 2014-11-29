@@ -3,7 +3,7 @@ define([
 	'underscore',
 	'backbone',
 	'views/channelListItemView',
-	'text!templates/channelListView.tmpl.html'
+	'text!templates/favoriteChannelList.tmpl.html'
 ], function($, _, Backbone, ChannelView, tmpl) {
 
 	'use strict';

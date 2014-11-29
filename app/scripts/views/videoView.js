@@ -3,7 +3,7 @@ define([
 	'underscore',
 	'backbone',
 	'models/video',
-	'text!templates/videoView.tmpl.html'
+	'text!templates/videoDetails.tmpl.html'
 ], function($, _, Backbone, Video, tmpl) {
 
 	'use strict';

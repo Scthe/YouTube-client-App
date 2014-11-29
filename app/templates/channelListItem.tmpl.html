@@ -1,9 +1,23 @@
-<div class="hover-white-glow">
-	<!--TODO channel avatar, remove button-->
+<div class="pull-left list-item-medium-width">
+	<img src="<%= avatar %>" class="list-item-medium">
+</div>
+<div class="pull-left small-padding-horizontal">
+	<span class="id-channel on-hover-link activable link-blue hover-underline"><%= name %></span>
+</div>
 
-	<label><%= name %></label>
-
-	<p class="black-overlay" style="<%= videoCount > 0 ? "" : "visibility:hidden;" %>">
+<div class="pull-right mid-padding-horizontal activable action-bad">
+	<span class="min-w-20 glyphicon glyphicon-remove text-center text-normal" />
+</div>
+<div class="pull-right mid-padding-horizontal activable action-good">
+	<span class="min-w-20 glyphicon glyphicon-plus text-center text-normal" />
+</div>
+<div class="pull-right mid-padding-horizontal">
+	<span data-toggle="tooltip" data-placement="bottom" title="channel videos">
 		<%= videoCount %>
-	</p>
+	</span>
+</div>
+<div class="pull-right mid-padding-horizontal">
+	<span data-toggle="tooltip" data-placement="bottom" title="channel subscriptions">
+		<%= subscriptions %>
+	</span>
 </div>
