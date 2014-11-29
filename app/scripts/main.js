@@ -46,7 +46,9 @@ require([
 		if (this.onClose) {
 			this.onClose();
 		}
-		this.remove();
+		// this.remove(); // TODO not calling remove/empty may cause memory leak
+		// this.$el.empty();
+		// this.stopListening();
 		this.unbind();
 	};
 
