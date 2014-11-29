@@ -14,6 +14,7 @@ define(function() {
 			}
 		};
 		executeGoogleApiCall(apiCallBeforeAPIWasLoaded);
+		apiCallBeforeAPIWasLoaded = undefined;
 	});
 
 	return {

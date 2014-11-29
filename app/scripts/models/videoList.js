@@ -15,8 +15,6 @@ define([
 
 		localStorage: new Store('backbone-videos'),
 
-		apiSearchFunction: 'search',
-
 		MAXRESULTS: 12,
 
 		initialize: function() {

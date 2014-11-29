@@ -16,6 +16,7 @@ define([
 
 		var view = new VideoListView(),
 			list = view.collection;
+			list.apiSearchFunction = 'search';
 
 		router.on('route:search', function(term) {
 			console.log('search: \'{0}\''.fmt(term));

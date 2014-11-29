@@ -33,6 +33,7 @@ define([
 			var self = this;
 			var items = result.items;
 			// console.log(items);
+			// console.log(ytService[this.apiSearchFunction]);
 			console.log('Search returned with {0} elements'.fmt(items.length));
 
 			// store tokens
@@ -73,6 +74,7 @@ define([
 				// 2nd part of the condition: prev / next page
 				this.term = term;
 				this.reset();
+
 				ytService[this.apiSearchFunction](this.term, pageToken, this.MAXRESULTS, function(term, result) {
 					if (term !== self.term) { // TODO can use FRP and filter here
 						return;

@@ -14,6 +14,7 @@ define([
 	function initialize(router) {
 		var view = new VideoListView(),
 			list = view.collection;
+
 		list.forceAllApiCalls = true;
 		list.apiSearchFunction = 'popularVideos';
 		view.viewIcon = 'home';

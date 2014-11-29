@@ -29,13 +29,13 @@ define([
 			// console.log('render');
 
 			this.$el.html(this.template());
-			this.listEl = this.$el.find('#items-list');
+			this.listEl = this.$('#items-list');
 			if (this.listElClass) {
 				this.listEl.addClass(this.listElClass);
 			}
 			this.pageButtons = {
-				'prev': this.$el.find('#prev'),
-				'next': this.$el.find('#next')
+				'prev': this.$('#prev'),
+				'next': this.$('#next')
 			};
 			this.collection.each(this.renderItem);
 
