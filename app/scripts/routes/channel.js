@@ -4,7 +4,6 @@ define([
 ], function(channelList, VideoListView) {
 
 	'use strict';
-	/*global app*/
 
 	return {
 		initialize: initialize

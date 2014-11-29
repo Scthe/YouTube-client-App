@@ -21,7 +21,6 @@ define([
 
 
 	function initialize() {
-		/*global app*/
 		console.log('app initialize');
 		// window.localStorage.clear();
 

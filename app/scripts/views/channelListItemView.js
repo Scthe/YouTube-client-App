@@ -40,7 +40,6 @@ define([
     },
 
     goToChannel: function() {
-      /*global app*/
       app.router.navigate('channel/{0}'.fmt(this.model.get('id')), {
         trigger: true
       });

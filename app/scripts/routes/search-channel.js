@@ -3,7 +3,6 @@ define([
 ], function(SearchChannelListView) {
 
 	'use strict';
-	/*global app*/
 
 	return {
 		initialize: initialize

@@ -1,5 +1,3 @@
-/*jslint indent: 2 */
-
 define([
   'jquery',
   'underscore',
@@ -43,7 +41,6 @@ define([
     },
 
     selectItem: function() {
-      /*global app*/
       //console.log("click: "+this.model.get("name"));
       app.router.navigate('channel/' + this.model.id, {
         trigger: true

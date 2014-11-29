@@ -1,5 +1,3 @@
-/*jslint indent: 2 */
-
 define([
   'jquery',
   'underscore',

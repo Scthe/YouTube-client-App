@@ -7,7 +7,6 @@ define([
 ], function(_, videoList, ytService, Video, VideoView) {
 
 	'use strict';
-	/*global app, Store*/
 
 	return {
 		initialize: initialize

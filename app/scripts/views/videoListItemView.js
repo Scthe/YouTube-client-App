@@ -30,14 +30,12 @@ define([
 		},
 
 		goToVideo: function() {
-			/*global app*/
 			app.router.navigate('video/{0}'.fmt(this.model.id), {
 				trigger: true
 			});
 		},
 
 		goToChannel: function() {
-			/*global app*/
 			app.router.navigate('channel/{0}'.fmt(this.model.get('channelId')), {
 				trigger: true
 			});

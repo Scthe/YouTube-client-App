@@ -5,7 +5,6 @@ define([
 ], function(_, Backbone, VideoListView) {
 
 	'use strict';
-	/*global app*/
 
 	return {
 		initialize: initialize
