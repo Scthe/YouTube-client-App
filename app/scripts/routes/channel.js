@@ -13,14 +13,14 @@ define([
 
 	function initialize(router) {
 
-		var channelsStorage = new window.Store('backbone-channels'),
-			view = new VideoListView(),
-			list = view.collection;
-		list.apiSearchFunction = 'getChannelVideos';
-		view.viewIcon = 'facetime-video';
-
 		router.on('route:channel', function(id) {
 			console.log('routed to channel \'' + id + '\'');
+
+			var channelsStorage = new window.Store('backbone-channels'),
+				view = new VideoListView(),
+				list = view.collection;
+			list.apiSearchFunction = 'getChannelVideos';
+			view.viewIcon = 'facetime-video';
 
 			var m = channelsStorage.find({
 				id: id
@@ -32,13 +32,14 @@ define([
 				app.setViewTitle('Getting channel data..', view.viewIcon);
 			}
 
-			view.render();
+			app.setContent(view);
 			list.fetch_(id, onSearchEnd);
+
+			function onSearchEnd(term, hasPrevious, hasNext) {
+				view.updatePaginationButtons(hasPrevious, hasNext);
+			}
 		});
 
-		function onSearchEnd(term, hasPrevious, hasNext) {
-			view.updatePaginationButtons(hasPrevious, hasNext);
-		}
 	}
 
 });

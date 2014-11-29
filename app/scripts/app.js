@@ -48,8 +48,17 @@ define([
 		});
 	}
 
-	function setContent(content) {
-		contentPanel.html(content);
+	function setContent(view) {
+		/*jshint validthis: true */
+		if (this.currentView) {
+			this.currentView.close();
+		}
+
+		// console.log('>> render: ');
+
+		contentPanel.html(view.render().el);
+		this.currentView = view;
+		return view;
 	}
 
 	function setViewTitle(str, icon) {

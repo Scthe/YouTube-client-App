@@ -14,22 +14,24 @@ define([
 
 	function initialize(router) {
 
-		var view = new VideoListView(),
-			list = view.collection;
-
 		router.on('route:search', function(term) {
 			console.log('search: \'{0}\''.fmt(term));
 
+			var view = new VideoListView(),
+				list = view.collection;
+			list.apiSearchFunction = 'search';
+
 			app.setViewTitle('Searching: ' + term, view.viewIcon);
 
-			view.render();
+			app.setContent(view);
 			list.fetch_(term, onSearchEnd);
+
+			function onSearchEnd(term, hasPrevious, hasNext) {
+				Backbone.trigger('searchFinishedEvent', term);
+				view.updatePaginationButtons(hasPrevious, hasNext);
+			}
 		});
 
-		function onSearchEnd(term, hasPrevious, hasNext) {
-			Backbone.trigger('searchFinishedEvent', term);
-			view.updatePaginationButtons(hasPrevious, hasNext);
-		}
 	}
 
 });

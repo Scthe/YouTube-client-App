@@ -11,21 +11,24 @@ define([
 
 
 	function initialize(router) {
-		var view = new SearchChannelListView(),
-			list = view.collection;
 
 		router.on('route:search-channel', function(term) {
 			console.log('search-channel: \'{0}\''.fmt(term));
 
+			var view = new SearchChannelListView(),
+				list = view.collection;
+
 			app.setViewTitle('Searching for channel: {0}'.fmt(term), view.viewIcon);
 
-			view.render();
+			app.setContent(view);
 			list.fetch_(term, onSearchEnd);
+
+			function onSearchEnd(term, hasPrevious, hasNext) {
+				view.updatePaginationButtons(hasPrevious, hasNext);
+			}
 		});
 
-		function onSearchEnd(term, hasPrevious, hasNext) {
-			view.updatePaginationButtons(hasPrevious, hasNext);
-		}
+
 	}
 
 });

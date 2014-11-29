@@ -16,8 +16,6 @@ define([
 	];
 
 	var VideoView = Backbone.View.extend({
-		el: '#main-panel-content',
-
 		template: _.template(tmpl),
 
 		viewIcon: 'film',

@@ -17,32 +17,48 @@ define([
 		},
 
 		initialize: function() {
-			_.bindAll(this, 'renderItem', 'resetList', 'render',
+			_.bindAll(this, 'renderItem', '_renderItem', 'removeItemViews', 'resetList', 'render',
 				'prevPage', 'nextPage', 'updatePaginationButtons');
 
 			this.onInitialize();
-			this.collection.on('add', this.renderItem, this);
-			this.collection.on('reset', this.resetList, this);
+			this.listenTo(this.collection, 'add', this._renderItem);
+			this.listenTo(this.collection, 'reset', this.resetList);
 		},
 
 		render: function() {
 			// console.log('render');
 
 			this.$el.html(this.template());
-			this.listEl = this.$el.find('#items-list');
+			this.listEl = this.$('#items-list');
 			if (this.listElClass) {
 				this.listEl.addClass(this.listElClass);
 			}
 			this.pageButtons = {
-				'prev': this.$el.find('#prev'),
-				'next': this.$el.find('#next')
+				'prev': this.$('#prev'),
+				'next': this.$('#next')
 			};
-			this.collection.each(this.renderItem);
+			this.collection.each(this._renderItem);
 
 			return this;
 		},
 
+
+		onClose: function() {
+			this.removeItemViews();
+		},
+
+		_renderItem: function(e) {
+			var view = this.renderItem(e);
+			view.listenTo(this, 'clean_up', view.close);
+			this.listEl.append(view.el);
+		},
+
+		removeItemViews: function() {
+			this.trigger('clean_up');
+		},
+
 		resetList: function() {
+			this.removeItemViews();
 			if (this.listEl) { // TODO try to reuse views
 				this.listEl.html('');
 			}

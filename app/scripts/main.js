@@ -41,6 +41,15 @@ require([
 	// patch jQuery to allow to use with Bacon
 	$.fn.asEventStream = Bacon.$.asEventStream;
 
+	// allow Backbone view to close gracefully
+	Backbone.View.prototype.close = function() {
+		if (this.onClose) {
+			this.onClose();
+		}
+		this.remove();
+		this.unbind();
+	};
+
 	// patch BackboneLocalStorage to allow to store models without collections
 	// it would be much easier to just copy __proto__ but we are on a critical path here..
 	BackboneLocalStorage.prototype.saveItem = function(e) {

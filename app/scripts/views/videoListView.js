@@ -10,8 +10,6 @@ define([
 	'use strict';
 
 	var VideoListView = PaginatedListView.extend({
-		el: '#main-panel-content',
-
 		listElClass: 'flex-container',
 
 		viewIcon: 'search',
@@ -24,8 +22,8 @@ define([
 			var view = new VideoListItemView({
 				model: item,
 				parent: this
-			});
-			this.listEl.append(view.render().el);
+			}).render();
+			return view;
 		}
 
 	});

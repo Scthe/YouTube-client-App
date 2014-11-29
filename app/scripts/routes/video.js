@@ -16,28 +16,18 @@ define([
 
 	function initialize(router) {
 
-		var videosStorage = new Store('backbone-videos'),
-			view = new VideoView();
+		var videosStorage = new Store('backbone-videos');
 
 		router.on('route:video', function(id) {
 			console.log('routed to video \'{0}\''.fmt(id));
 
-			var m = videosStorage.find({
-				id: id
+			var view = new VideoView({
+				model: tryReadLocalObject(id, view)
 			});
-			if (m) {
-				app.setViewTitle(m.name, view.viewIcon);
-			} else {
-				console.log('video not found in cache');
-				app.setViewTitle('Fetching video data..', view.viewIcon);
-				m = {
-					id: id,
-					get: function() {}
-				};
-			}
-			view.model = new Video(m);
 
-			view.render();
+			app.setViewTitle(view.model.name, view.viewIcon);
+			app.setContent(view);
+
 			view.model.fetch_(onVideoGetSuccess, onVideoGetFail);
 
 			function onVideoGetSuccess() {
@@ -54,6 +44,22 @@ define([
 				view.$el.html(a);
 			}
 		});
+
+		function tryReadLocalObject(id) {
+			var m = videosStorage.find({
+				id: id
+			});
+
+			if (!m) {
+				console.log('video not found in cache');
+				m = {
+					id: id,
+					name: 'Fetching video data..'
+				};
+			}
+
+			return new Video(m);
+		}
 
 	}
 

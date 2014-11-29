@@ -12,8 +12,6 @@ define([
   'use strict';
 
   var SearchChannelView = PaginatedListView.extend({
-    el: '#main-panel-content',
-
     listElClass: 'clearfix',
 
     viewIcon: 'th',
@@ -24,11 +22,10 @@ define([
 
     renderItem: function(item) {
       var view = new SearchChannelListItemView({
-        model: item,
-        parent: this
+        model: item
       }).render();
-      this.listEl.append(view.el);
       view.$el.find('[data-toggle="tooltip"]').tooltip();
+      return view;
     }
 
   });
