@@ -12,25 +12,28 @@ define([
 	};
 
 	function initialize(router) {
-		var view = new VideoListView(),
-			list = view.collection;
-
-		list.forceAllApiCalls = true;
-		list.apiSearchFunction = 'popularVideos';
-		view.viewIcon = 'home';
 
 		router.on('route:home', function() {
 			console.log('routed to home');
+
+			var view = new VideoListView(),
+				list = view.collection;
+
+			list.forceAllApiCalls = true;
+			list.apiSearchFunction = 'popularVideos';
+			view.viewIcon = 'home';
 
 			app.setViewTitle('Home', view.viewIcon);
 
 			app.setContent(view);
 			list.fetch_(undefined, onSearchEnd);
+
+			function onSearchEnd(term, hasPrevious, hasNext) {
+				Backbone.trigger('searchFinishedEvent', term);
+				view.updatePaginationButtons(hasPrevious, hasNext);
+			}
 		});
 
-		function onSearchEnd(term, hasPrevious, hasNext) {
-			Backbone.trigger('searchFinishedEvent', term);
-			view.updatePaginationButtons(hasPrevious, hasNext);
-		}
+
 	}
 });
