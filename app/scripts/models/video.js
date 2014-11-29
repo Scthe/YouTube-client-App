@@ -26,8 +26,12 @@ define([
 			commentCount: 0
 		},
 
-		initialize: function() {
+		initialize: function(attrs, opt) {
 			_.bindAll(this, 'fetch_', 'readFromYouTubeAPIObject');
+
+			if (opt && opt.apiData) {
+				this.readFromYouTubeAPIObject(opt.apiData);
+			}
 		},
 
 		fetch_: function(successCallback, failCallback) {
@@ -54,6 +58,7 @@ define([
 		},
 
 		readFromYouTubeAPIObject: function(e) {
+			this.id = typeof e.id === 'object' ? e.id.videoId : e.id;
 			this.set('title', e.snippet.title);
 			this.set('channelId', e.snippet.channelId);
 			this.set('channelTitle', e.snippet.channelTitle);

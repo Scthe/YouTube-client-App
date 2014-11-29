@@ -53,6 +53,7 @@ require([
 			find: _.identity,
 			save: _.identity
 		};
+		e.attributes.id = e.id;
 		this.update.bind(collectionStub)(e);
 	};
 

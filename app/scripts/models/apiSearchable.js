@@ -39,13 +39,14 @@ define([
 			this.prevPageToken = result.prevPageToken;
 			this.nextPageToken = result.nextPageToken;
 
-			// TODO move from here to the models
-			var objs = this.set(_(items).map(self.apiConverter));
-
-			// store results
-			for (var i = 0; i < objs.length; i++) {
-				this.localStorage.saveItem(objs[i]);
-			}
+			var ModelClass = this.model;
+			_(items).each(function(e) {
+				var m = new ModelClass(undefined, {
+					apiData: e
+				});
+				self.localStorage.saveItem(m);
+				self.add(m); // hack to not call .store on whole collection
+			});
 
 		},
 

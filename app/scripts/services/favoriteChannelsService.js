@@ -28,11 +28,10 @@ define([
 	Backbone.on('addFavoriteChannelByNameCmd', function(name) {
 		ytService.getChannel(name, function(result) {
 			// console.log(result);
-			var o = col.apiConverter(result),
-				model = new Channel(o, {
-					validate: true
-				});
-			obj.add(model);
+			obj.add(new Channel(undefined, {
+				validate: false,
+				apiData: result
+			}));
 		});
 	});
 

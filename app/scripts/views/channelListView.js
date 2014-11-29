@@ -31,14 +31,20 @@ define([
 		render: function() {
 			var self = this;
 
-			this.$el.html(this.template());
-			this.listEl = this.$el.find('#channel-list');
-			this.newChannelText = this.$el.find('#add-channel-text');
-			this.newChannelBtn = this.$el.find('#add-channel-btn');
+			if (!this.viewCache) {
+				// we have to use view cache so that we do not recreate
+				// template again, which would reset the inputs
+				this.viewCache = this.template();
+				this.$el.html(this.viewCache);
+				this.listEl = this.$('#channel-list');
+				this.newChannelText = this.$('#add-channel-text');
+				this.newChannelBtn = this.$('#add-channel-btn');
 
-			// after creating views bind event handlers to them
-			this.bindEventSources();
-
+				// after creating views bind event handlers to them
+				this.bindEventSources();
+			} else {
+				this.listEl.html('');
+			}
 			// render items
 			this.collection.each(self.renderChannel);
 		},
@@ -53,7 +59,9 @@ define([
 
 		bindEventSources: function() {
 			var self = this,
-				clearInput = self.newChannelText.val.bind(self.newChannelText, '');
+				clearInput = function() {
+					self.newChannelText.val('');
+				};
 
 
 			// new 

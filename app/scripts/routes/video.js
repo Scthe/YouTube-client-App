@@ -28,6 +28,7 @@ define([
 			if (m) {
 				app.setViewTitle(m.name, view.viewIcon);
 			} else {
+				console.log('video not found in cache');
 				app.setViewTitle('Fetching video data..', view.viewIcon);
 				m = {
 					id: id,
@@ -43,7 +44,7 @@ define([
 				app.setViewTitle(view.model.get('title'));
 				view.render();
 				// store
-				videosStorage.saveItem(m);
+				videosStorage.saveItem(view.model);
 			}
 
 			function onVideoGetFail() {

@@ -20,7 +20,7 @@ define([
 		MAXRESULTS: 4,
 
 		initialize: function() {
-			_.bindAll(this, 'apiConverter', 'deselectAll', 'initialize_');
+			_.bindAll(this, 'deselectAll', 'initialize_');
 			this.initialize_();
 		},
 
@@ -28,14 +28,6 @@ define([
 			this.each(function(e) {
 				e.set('active', false);
 			});
-		},
-
-		apiConverter: function(e) {
-			return {
-				id: e.id.channelId,
-				name: e.snippet.title,
-				avatar: e.snippet.thumbnails['default'].url
-			};
 		}
 
 	});
