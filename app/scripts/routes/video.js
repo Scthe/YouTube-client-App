@@ -25,7 +25,9 @@ define([
 				model: tryReadLocalObject(id, view)
 			});
 
+			app.setViewTitle(view.model.name, view.viewIcon);
 			app.setContent(view);
+
 			view.model.fetch_(onVideoGetSuccess, onVideoGetFail);
 
 			function onVideoGetSuccess() {
@@ -43,22 +45,20 @@ define([
 			}
 		});
 
-		function tryReadLocalObject(id, view) {
+		function tryReadLocalObject(id) {
 			var m = videosStorage.find({
 				id: id
 			});
 
-			if (m) {
-				app.setViewTitle(m.name, view.viewIcon);
-			} else {
+			if (!m) {
 				console.log('video not found in cache');
-				app.setViewTitle('Fetching video data..', view.viewIcon);
 				m = {
-					id: id
+					id: id,
+					name: 'Fetching video data..'
 				};
 			}
 
-			return m;
+			return new Video(m);
 		}
 
 	}

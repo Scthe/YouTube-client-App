@@ -43,14 +43,13 @@ define([
 		},
 
 
-		remove: function() {
+		onClose: function() {
 			this.removeItemViews();
-			Backbone.View.prototype.remove.bind(this)();
 		},
 
 		_renderItem: function(e) {
 			var view = this.renderItem(e);
-			view.listenTo(this, 'clean_up', view.remove);
+			view.listenTo(this, 'clean_up', view.close);
 			this.listEl.append(view.el);
 		},
 

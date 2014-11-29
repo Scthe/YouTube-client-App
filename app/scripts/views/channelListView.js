@@ -12,8 +12,6 @@ define([
   'use strict';
 
   var SearchChannelView = PaginatedListView.extend({
-    el: '#main-panel-content',
-
     listElClass: 'clearfix',
 
     viewIcon: 'th',

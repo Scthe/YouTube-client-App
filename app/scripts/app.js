@@ -49,7 +49,16 @@ define([
 	}
 
 	function setContent(view) {
-		view.render();
+		/*jshint validthis: true */
+		if (this.currentView) {
+			view.close();
+		}
+
+		// console.log('>> render: ');
+
+		contentPanel.html(view.render().el);
+		this.currentView = view;
+		return view;
 	}
 
 	function setViewTitle(str, icon) {
