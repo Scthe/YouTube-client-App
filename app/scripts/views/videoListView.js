@@ -24,8 +24,8 @@ define([
 			var view = new VideoListItemView({
 				model: item,
 				parent: this
-			});
-			this.listEl.append(view.render().el);
+			}).render();
+			return view;
 		}
 
 	});

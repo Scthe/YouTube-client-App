@@ -24,11 +24,10 @@ define([
 
     renderItem: function(item) {
       var view = new SearchChannelListItemView({
-        model: item,
-        parent: this
+        model: item
       }).render();
-      this.listEl.append(view.el);
       view.$el.find('[data-toggle="tooltip"]').tooltip();
+      return view;
     }
 
   });
