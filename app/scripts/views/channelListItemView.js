@@ -1,57 +1,52 @@
-/*jslint indent: 2 */
-
 define([
   'jquery',
   'underscore',
   'backbone',
-  'text', // TODO why requirejs plugin is required here ?!
-  'text!templates/favoriteChannelListItem.tmpl.html'
-], function($, _, Backbone,te, tmpl) {
+  'services/favoriteChannelsService',
+  'text!templates/channelListItem.tmpl.html'
+], function($, _, Backbone, favoriteChannelsService, tmpl) {
 
   'use strict';
 
-  var ChannelView = Backbone.View.extend({
+  var SearchChannelListItemView = Backbone.View.extend({
     tagName: 'li',
 
-    className: 'state-button activable text-white',
+    events: {
+      'click .action-good': 'addToFavorites',
+      'click .action-bad': 'removeFromFavorites',
+      'click .id-channel': 'goToChannel'
+    },
+
+    className: 'clearfix content-2-columns list-item-medium margin-bottom-small',
 
     template: _.template(tmpl),
 
-    events: {
-      'click': 'selectItem'
-    },
-
-    initialize: function(options) {
-      this.className += this.model.get('active') ? ' active' : '';
+    initialize: function() {
+      _.bindAll(this, 'render', 'addToFavorites', 'removeFromFavorites', 'goToChannel');
       this.render();
-      this.parent = options.parent;
-      // as we are manipulating the className after _ensureElement we have
-      // recalculate the class attribute
-      // see more: http://stackoverflow.com/questions/18330877/set-dynamically-classname-on-backbone-view-render
-      this.$el.attr('class', _.result(this, 'className'));
     },
 
     render: function() {
-      // proceed with the render
       this.$el.html(this.template(this.model.toJSON()));
-      if (this.model.get('active')) {
-        $(this.el).addClass('active');
-      } else {
-        $(this.el).removeClass('active');
-      }
       return this;
     },
 
-    selectItem: function() {
+    addToFavorites: function() {
+      favoriteChannelsService.add(this.model);
+    },
+
+    removeFromFavorites: function() {
+      favoriteChannelsService.remove(this.model);
+    },
+
+    goToChannel: function() {
       /*global app*/
-      //console.log("click: "+this.model.get("name"));
-      app.router.navigate('channel/' + this.model.id, {
+      app.router.navigate('channel/{0}'.fmt(this.model.get('id')), {
         trigger: true
       });
     }
 
   });
 
-  return ChannelView;
-
+  return SearchChannelListItemView;
 });

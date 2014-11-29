@@ -1,7 +1,6 @@
 define([
-	'views/channelListView',
-	'views/searchChannelListView'
-], function(ChannelListView, SearchChannelListView) {
+	'views/channelListView'
+], function(SearchChannelListView) {
 
 	'use strict';
 	/*global app*/

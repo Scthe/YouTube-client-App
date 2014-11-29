@@ -5,7 +5,7 @@ define([
   'underscore',
   'backbone',
   'models/channelList',
-  'views/searchChannelListItemView',
+  'views/channelListItemView',
   'views/paginatedListView'
 ], function($, _, Backbone, ChannelList, SearchChannelListItemView, PaginatedListView) {
 

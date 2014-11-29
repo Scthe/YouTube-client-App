@@ -3,7 +3,7 @@ define([
 	'models/videoList',
 	'services/YouTubeService',
 	'models/video',
-	'views/videoView'
+	'views/videoDetailsView'
 ], function(_, videoList, ytService, Video, VideoView) {
 
 	'use strict';

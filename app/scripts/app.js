@@ -5,7 +5,7 @@ define([
 	'router',
 	'models/channelList',
 	'views/searchInputView',
-	'views/channelListView',
+	'views/favoriteChannelListView',
 	'services/favoriteChannelsService'
 ], function($, _, Backbone, Router, ChannelList, SearchInputView, ChannelListView, favoriteChannelsService) {
 	'use strict';
