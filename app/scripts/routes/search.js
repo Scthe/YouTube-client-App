@@ -26,9 +26,8 @@ define([
 			app.setContent(view);
 			list.fetch_(term, onSearchEnd);
 
-			function onSearchEnd(term, hasPrevious, hasNext) {
+			function onSearchEnd(term) {
 				Backbone.trigger('searchFinishedEvent', term);
-				view.updatePaginationButtons(hasPrevious, hasNext);
 			}
 		});
 

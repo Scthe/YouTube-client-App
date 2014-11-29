@@ -13,11 +13,12 @@ define([
 
 	function initialize(router) {
 
+		var channelsStorage = new window.Store('backbone-channels');
+
 		router.on('route:channel', function(id) {
 			console.log('routed to channel \'' + id + '\'');
 
-			var channelsStorage = new window.Store('backbone-channels'),
-				view = new VideoListView(),
+			var view = new VideoListView(),
 				list = view.collection;
 			list.apiSearchFunction = 'getChannelVideos';
 			view.viewIcon = 'facetime-video';
@@ -33,11 +34,7 @@ define([
 			}
 
 			app.setContent(view);
-			list.fetch_(id, onSearchEnd);
-
-			function onSearchEnd(term, hasPrevious, hasNext) {
-				view.updatePaginationButtons(hasPrevious, hasNext);
-			}
+			list.fetch_(id);
 		});
 
 	}

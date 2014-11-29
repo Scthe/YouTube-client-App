@@ -26,12 +26,7 @@ define([
 			app.setViewTitle('Home', view.viewIcon);
 
 			app.setContent(view);
-			list.fetch_(undefined, onSearchEnd);
-
-			function onSearchEnd(term, hasPrevious, hasNext) {
-				Backbone.trigger('searchFinishedEvent', term);
-				view.updatePaginationButtons(hasPrevious, hasNext);
-			}
+			list.fetch_();
 		});
 
 

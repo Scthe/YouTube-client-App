@@ -21,11 +21,7 @@ define([
 			app.setViewTitle('Searching for channel: {0}'.fmt(term), view.viewIcon);
 
 			app.setContent(view);
-			list.fetch_(term, onSearchEnd);
-
-			function onSearchEnd(term, hasPrevious, hasNext) {
-				view.updatePaginationButtons(hasPrevious, hasNext);
-			}
+			list.fetch_(term);
 		});
 
 

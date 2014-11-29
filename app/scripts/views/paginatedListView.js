@@ -23,6 +23,7 @@ define([
 			this.onInitialize();
 			this.listenTo(this.collection, 'add', this._renderItem);
 			this.listenTo(this.collection, 'reset', this.resetList);
+			this.listenTo(this.collection, 'search end', this.updatePaginationButtons);
 		},
 
 		render: function() {
@@ -66,15 +67,15 @@ define([
 
 		prevPage: function() {
 			// console.log('prev-page');
-			this.collection.fetchPrevPage(this.updatePaginationButtons);
+			this.collection.fetchPrevPage();
 		},
 
 		nextPage: function() {
 			// console.log('next-page');
-			this.collection.fetchNextPage(this.updatePaginationButtons);
+			this.collection.fetchNextPage();
 		},
 
-		updatePaginationButtons: function(hasPrevious, hasNext) {
+		updatePaginationButtons: function(__, hasPrevious, hasNext) {
 			var pageButtons = this.pageButtons,
 				classes = 'on-hover-link activable link-blue hover-underline';
 
