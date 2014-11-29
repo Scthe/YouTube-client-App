@@ -138,7 +138,7 @@ $even-row-bg: #eaeaea;
 }
 
 /* embedded YT video */
-#main-panel-content > iframe {
+#main-panel-content iframe {
 	/* effectively only usage is the embedded YT video */
 	
 	@media screen and (max-width: $video-to-fill-width) {
