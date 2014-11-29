@@ -12,8 +12,8 @@ define([
 		template: _.template(tmpl),
 
 		events: {
-			'click #prev.activable': 'prevPage',
-			'click #next.activable': 'nextPage'
+			'click #prev.act-as-link': 'prevPage',
+			'click #next.act-as-link': 'nextPage'
 		},
 
 		initialize: function() {
@@ -77,7 +77,7 @@ define([
 
 		updatePaginationButtons: function(__, hasPrevious, hasNext) {
 			var pageButtons = this.pageButtons,
-				classes = 'on-hover-link activable link-blue hover-underline';
+				classes = 'act-as-link';
 
 			if (pageButtons) {
 				setPageSelector('prev', hasPrevious);
