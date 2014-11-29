@@ -14,6 +14,7 @@ define([
 
 
 	function initialize(router) {
+		/*global app,Store*/
 
 		var videosStorage = new Store('backbone-videos');
 

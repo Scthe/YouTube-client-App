@@ -24,10 +24,11 @@ define([
 		console.log('app initialize');
 		// window.localStorage.clear();
 
-		window.app = {
+		var app = {
 			setContent: setContent,
 			setViewTitle: setViewTitle
 		};
+		window.app = app;
 		app.router = Router.initialize();
 
 		// create always visible views

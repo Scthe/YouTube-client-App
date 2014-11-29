@@ -13,6 +13,7 @@ define([
 	function initialize(router) {
 
 		router.on('route:home', function() {
+			/*global app*/
 			console.log('routed to home');
 
 			var view = new VideoListView(),

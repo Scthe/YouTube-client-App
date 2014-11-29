@@ -15,6 +15,7 @@ define([
 		var channelsStorage = new window.Store('backbone-channels');
 
 		router.on('route:channel', function(id) {
+			/*global app*/
 			console.log('routed to channel \'' + id + '\'');
 
 			var view = new VideoListView(),

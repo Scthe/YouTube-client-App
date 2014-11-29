@@ -6,6 +6,7 @@ define([
 ], function($, _, Backbone, tmpl) {
 
 	'use strict';
+	/*global app*/
 
 	var VideoListItemView = Backbone.View.extend({
 		tagName: 'li',

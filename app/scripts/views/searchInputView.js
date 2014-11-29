@@ -77,6 +77,7 @@ define([
 		},
 
 		goToSearchPage: function(term) {
+			/*global app*/
 			// do search
 			if (term.trim().length === 0) {
 				this.onSearchEnd(this.lastSearch);

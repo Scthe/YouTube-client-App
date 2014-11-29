@@ -12,6 +12,7 @@ define([
 	function initialize(router) {
 
 		router.on('route:search-channel', function(term) {
+			/*global app*/
 			console.log('search-channel: \'{0}\''.fmt(term));
 
 			var view = new SearchChannelListView(),
