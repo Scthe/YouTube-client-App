@@ -7,7 +7,6 @@ define([
 ], function(_, videoList, ytService, Video, VideoView) {
 
 	'use strict';
-	/*global app, Store*/
 
 	return {
 		initialize: initialize
@@ -15,6 +14,7 @@ define([
 
 
 	function initialize(router) {
+		/*global app,Store*/
 
 		var videosStorage = new Store('backbone-videos');
 

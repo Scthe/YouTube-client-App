@@ -89,6 +89,7 @@ define([
 		},
 
 		previewChannel: function(term) {
+			/*global app*/
 			// do search
 			if (term.trim().length > 0 && this.lastSearch !== term) {
 				// console.log('preview:', term);

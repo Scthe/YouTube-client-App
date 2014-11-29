@@ -38,7 +38,7 @@ define([
 	return obj;
 
 	function add(channel) {
-		/* jshint -W040 */
+		/*jshint validthis: true */
 		// console.log('add: ' + channelName);
 		var exists = this.collection.findWhere({
 			name: channel.get('name')
@@ -49,7 +49,7 @@ define([
 	}
 
 	function remove(channel) {
-		/* jshint -W040 */
+		/*jshint validthis: true */
 		// console.log('rem: ' + channelName);
 		var os = this.collection.where({
 			name: channel.get('name')

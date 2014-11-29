@@ -7,7 +7,6 @@ define([
 ], function($, _, Backbone, Video, tmpl) {
 
 	'use strict';
-	/*global app */
 
 	var months = ['January', 'February', 'March',
 		'April', 'May', 'June',

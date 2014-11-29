@@ -6,7 +6,6 @@ define([
 ], function($, _, Backbone, tmpl) {
 
 	'use strict';
-	/*global app */
 
 	// Search check list:
 	// * kick off search
@@ -78,6 +77,7 @@ define([
 		},
 
 		goToSearchPage: function(term) {
+			/*global app*/
 			// do search
 			if (term.trim().length === 0) {
 				this.onSearchEnd(this.lastSearch);

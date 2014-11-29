@@ -5,7 +5,6 @@ define([
 ], function(_, Backbone, VideoListView) {
 
 	'use strict';
-	/*global app*/
 
 	return {
 		initialize: initialize
@@ -14,6 +13,7 @@ define([
 	function initialize(router) {
 
 		router.on('route:home', function() {
+			/*global app*/
 			console.log('routed to home');
 
 			var view = new VideoListView(),

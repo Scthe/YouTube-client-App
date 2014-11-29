@@ -5,7 +5,6 @@ define([
 ], function(_, Backbone, VideoListView) {
 
 	'use strict';
-	/*global app*/
 
 	return {
 		initialize: initialize
@@ -15,6 +14,7 @@ define([
 	function initialize(router) {
 
 		router.on('route:search', function(term) {
+			/*global app*/
 			console.log('search: \'{0}\''.fmt(term));
 
 			var view = new VideoListView(),
