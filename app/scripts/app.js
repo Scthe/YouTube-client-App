@@ -51,7 +51,7 @@ define([
 	function setContent(view) {
 		/*jshint validthis: true */
 		if (this.currentView) {
-			view.close();
+			this.currentView.close();
 		}
 
 		// console.log('>> render: ');
