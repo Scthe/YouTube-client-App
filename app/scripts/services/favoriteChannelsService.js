@@ -66,6 +66,4 @@ define([
 		}
 	}
 
-	// TODO ensure only 1 is active at a time ?
-
 });

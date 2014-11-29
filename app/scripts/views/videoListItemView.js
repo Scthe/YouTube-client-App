@@ -38,7 +38,7 @@ define([
 
 		goToChannel: function() {
 			/*global app*/
-			app.router.navigate('channel/{0}'.fmt(this.model.get('channelId')), { // TODO use event bus with nicer urls
+			app.router.navigate('channel/{0}'.fmt(this.model.get('channelId')), {
 				trigger: true
 			});
 		}
